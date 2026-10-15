@@ -16,27 +16,37 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        body {
+        html, body {
+            width: 100%;
+            height: 100%;
             background-color: #070d18;
             color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        form#form1 {
             display: flex;
+            width: 100%;
             min-height: 100vh;
         }
 
         /* Sidebar Navigation */
         .sidebar {
             width: 240px;
+            min-width: 240px;
             background-color: #0b1320;
             border-right: 1px solid #1e293b;
             display: flex;
             flex-direction: column;
-            position: fixed;
             height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
             z-index: 100;
         }
 
         .brand-header {
-            padding: 20px;
+            padding: 18px 20px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -72,7 +82,7 @@
 
         .nav-list {
             list-style: none;
-            padding: 15px 10px;
+            padding: 12px 10px;
             flex-grow: 1;
             overflow-y: auto;
         }
@@ -81,7 +91,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 14px;
+            padding: 9px 12px;
             color: #94a3b8;
             text-decoration: none;
             font-size: 0.82rem;
@@ -104,17 +114,18 @@
         }
 
         .sidebar-footer {
-            padding: 15px 10px;
+            padding: 10px;
             border-top: 1px solid #1a2536;
         }
 
-        /* Main Content Wrapper */
+        /* Main Content Area Stretched to Full Width */
         .main-wrapper {
             margin-left: 240px;
+            width: calc(100% - 240px);
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            min-width: 0;
+            min-height: 100vh;
         }
 
         .top-header {
@@ -124,6 +135,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
             position: sticky;
             top: 0;
             z-index: 90;
@@ -153,7 +165,7 @@
             padding: 7px 12px 7px 32px;
             color: #f8fafc;
             font-size: 0.8rem;
-            width: 220px;
+            width: 240px;
             outline: none;
         }
 
@@ -176,7 +188,6 @@
             color: #94a3b8;
             cursor: pointer;
             font-size: 1rem;
-            position: relative;
         }
 
         .user-profile {
@@ -201,6 +212,14 @@
         .content-body {
             padding: 25px 30px;
             flex-grow: 1;
+            width: 100%;
+        }
+
+        /* Responsive Layout Overrides */
+        @media (max-width: 1100px) {
+            .sidebar { width: 70px; min-width: 70px; }
+            .brand-text, .nav-item a span:nth-child(2) { display: none; }
+            .main-wrapper { margin-left: 70px; width: calc(100% - 70px); }
         }
     </style>
 
@@ -220,27 +239,27 @@
             </div>
 
             <ul class="nav-list">
-                <li class="nav-item active"><a href="Default.aspx"><span>田</span> Dashboard</a></li>
-                <li class="nav-item"><a href="RegisterCase.aspx"><span>📄</span> Crime Cases</a></li>
-                <li class="nav-item"><a href="#"><span>🗺️</span> Crime Map</a></li>
-                <li class="nav-item"><a href="#"><span>📈</span> Analytics</a></li>
-                <li class="nav-item"><a href="#"><span>🔍</span> Investigation Workspace</a></li>
-                <li class="nav-item"><a href="PersonsDirectory.aspx"><span>👥</span> Persons</a></li>
-                <li class="nav-item"><a href="#"><span>🕸️</span> Network Analysis</a></li>
-                <li class="nav-item"><a href="#"><span>🖼️</span> Image Investigation</a></li>
-                <li class="nav-item"><a href="#"><span>📊</span> Risk & Anomaly Analysis</a></li>
-                <li class="nav-item"><a href="#"><span>🔔</span> Alerts</a></li>
-                <li class="nav-item"><a href="#"><span>🤖</span> AI Assistant</a></li>
-                <li class="nav-item"><a href="#"><span>📋</span> Reports</a></li>
-                <li class="nav-item"><a href="#"><span>☁️</span> Bulk Data Import</a></li>
-                <li class="nav-item"><a href="#"><span>👤</span> User Management</a></li>
-                <li class="nav-item"><a href="#"><span>⏱️</span> Audit Logs</a></li>
+                <li class="nav-item active"><a href="Default.aspx"><span>田</span> <span>Dashboard</span></a></li>
+                <li class="nav-item"><a href="RegisterCase.aspx"><span>📄</span> <span>Crime Cases</span></a></li>
+                <li class="nav-item"><a href="#"><span>🗺️</span> <span>Crime Map</span></a></li>
+                <li class="nav-item"><a href="#"><span>📈</span> <span>Analytics</span></a></li>
+                <li class="nav-item"><a href="#"><span>🔍</span> <span>Investigation Workspace</span></a></li>
+                <li class="nav-item"><a href="PersonsDirectory.aspx"><span>👥</span> <span>Persons</span></a></li>
+                <li class="nav-item"><a href="#"><span>🕸️</span> <span>Network Analysis</span></a></li>
+                <li class="nav-item"><a href="#"><span>🖼️</span> <span>Image Investigation</span></a></li>
+                <li class="nav-item"><a href="#"><span>📊</span> <span>Risk & Anomaly Analysis</span></a></li>
+                <li class="nav-item"><a href="#"><span>🔔</span> <span>Alerts</span></a></li>
+                <li class="nav-item"><a href="#"><span>🤖</span> <span>AI Assistant</span></a></li>
+                <li class="nav-item"><a href="#"><span>📋</span> <span>Reports</span></a></li>
+                <li class="nav-item"><a href="#"><span>☁️</span> <span>Bulk Data Import</span></a></li>
+                <li class="nav-item"><a href="#"><span>👤</span> <span>User Management</span></a></li>
+                <li class="nav-item"><a href="#"><span>⏱️</span> <span>Audit Logs</span></a></li>
             </ul>
 
             <div class="sidebar-footer">
                 <ul class="nav-list" style="padding:0;">
-                    <li class="nav-item"><a href="#"><span>⚙️</span> Settings</a></li>
-                    <li class="nav-item"><a href="#"><span>❓</span> Support</a></li>
+                    <li class="nav-item"><a href="#"><span>⚙️</span> <span>Settings</span></a></li>
+                    <li class="nav-item"><a href="#"><span>❓</span> <span>Support</span></a></li>
                 </ul>
             </div>
         </div>

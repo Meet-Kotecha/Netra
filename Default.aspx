@@ -5,8 +5,9 @@
         .page-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             margin-bottom: 20px;
+            width: 100%;
         }
 
         .page-title h2 {
@@ -25,7 +26,7 @@
             background-color: #0b1320;
             border: 1px solid #1e293b;
             color: #f8fafc;
-            padding: 8px 14px;
+            padding: 8px 16px;
             border-radius: 6px;
             font-size: 0.78rem;
             font-weight: 600;
@@ -40,12 +41,13 @@
             color: #38bdf8;
         }
 
-        /* KPI Metrics Row */
+        /* KPI Metrics Row Stretched Fluidly */
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 16px;
             margin-bottom: 20px;
+            width: 100%;
         }
 
         .kpi-card {
@@ -53,7 +55,7 @@
             border: 1px solid #1e293b;
             border-radius: 8px;
             padding: 16px 20px;
-            position: relative;
+            width: 100%;
         }
 
         .kpi-header {
@@ -94,11 +96,18 @@
         .sub-up { color: #38bdf8; }
         .sub-warn { color: #f59e0b; }
 
-        /* Main Grid Content */
+        /* Responsive Widescreen Main Layout Grid */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 2.2fr 1fr;
+            grid-template-columns: 2.3fr 1fr;
             gap: 20px;
+            width: 100%;
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .card-panel {
@@ -107,6 +116,7 @@
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 20px;
+            width: 100%;
         }
 
         .panel-header {
@@ -135,11 +145,10 @@
             outline: none;
         }
 
-        /* Chart Placeholder SVG */
+        /* Chart SVG Area */
         .chart-container {
             width: 100%;
-            height: 220px;
-            position: relative;
+            height: 230px;
         }
 
         /* High Risk Areas Table */
@@ -169,7 +178,6 @@
         }
 
         .score-critical { color: #ef4444; }
-        .score-high { color: #f97316; }
         .score-medium { color: #eab308; }
         .score-normal { color: #38bdf8; }
 
@@ -178,6 +186,13 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .donut-container {
@@ -260,7 +275,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!-- Page Top Row -->
+    <!-- Top Header Bar -->
     <div class="page-header">
         <div class="page-title">
             <h2>Intelligence Dashboard</h2>
@@ -269,7 +284,7 @@
         <button type="button" class="btn-export">📥 Export Report</button>
     </div>
 
-    <!-- KPI Row -->
+    <!-- Metric Cards -->
     <div class="kpi-grid">
         <div class="kpi-card">
             <div class="kpi-header">
@@ -308,7 +323,7 @@
         </div>
     </div>
 
-    <!-- Main Dashboard Grid -->
+    <!-- Main Fluid Dashboard Section -->
     <div class="dashboard-grid">
         <!-- Left Section -->
         <div>
