@@ -27,6 +27,9 @@ namespace Netra
             if (navAI != null) navAI.Attributes["class"] = "nav-item";
             if (navReports != null) navReports.Attributes["class"] = "nav-item";
             if (navImport != null) navImport.Attributes["class"] = "nav-item";
+            if (navUsers != null) navUsers.Attributes["class"] = "nav-item";
+            if (navAudit != null) navAudit.Attributes["class"] = "nav-item";
+            if (navSettings != null) navSettings.Attributes["class"] = "nav-item";
 
             // Route active-state matching
             if (rawPath.EndsWith("/") || rawPath.Contains("/default"))
@@ -80,6 +83,18 @@ namespace Netra
             else if (rawPath.Contains("/bulkdataimport"))
             {
                 if (navImport != null) navImport.Attributes["class"] = "nav-item active";
+            }
+            else if (rawPath.Contains("/usermanagement"))
+            {
+                if (navUsers != null) navUsers.Attributes["class"] = "nav-item active";
+            }
+            else if (rawPath.Contains("/auditlogs"))
+            {
+                if (navAudit != null) navAudit.Attributes["class"] = "nav-item active";
+            }
+            else if (rawPath.Contains("/settings") || rawPath.Contains("/securitysettings") || rawPath.Contains("/notificationsettings"))
+            {
+                if (navSettings != null) navSettings.Attributes["class"] = "nav-item active";
             }
         }
     }

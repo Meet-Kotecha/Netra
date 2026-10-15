@@ -302,7 +302,7 @@
                         <span class="search-icon">🔍</span>
                         <input type="text" placeholder="Global Search..." />
                     </div>
-                    <a href="Alerts.aspx" class="icon-btn" title="View Real-Time Alerts">🔔</a>
+                    <a href="NotificationSettings.aspx" class="icon-btn" title="Notification Settings">🔔</a>
                     <a href="SecuritySettings.aspx" class="icon-btn" title="Security Settings">🛡️</a>
                     <div class="user-profile" onclick="window.location.href='Settings.aspx';">
                         <div class="avatar" title="Rohan Siddhpura">RS</div>
