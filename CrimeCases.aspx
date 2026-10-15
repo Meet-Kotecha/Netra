@@ -285,7 +285,7 @@
         <a href="RegisterCase.aspx" class="btn-add-case">➕ Add New Case</a>
     </div>
 
-    <!-- Filter Toolbar with Client-Side Events -->
+    <!-- Filter Toolbar -->
     <div class="filter-toolbar">
         <div class="filter-row">
             <div class="filter-group search-group">
@@ -302,6 +302,9 @@
                     <option value="Narcotics Distribution">Narcotics Distribution</option>
                     <option value="Vehicle Theft">Vehicle Theft</option>
                     <option value="Smuggling">Smuggling</option>
+                    <option value="Identity Theft">Identity Theft</option>
+                    <option value="Ransomware">Ransomware</option>
+                    <option value="Armed Robbery">Armed Robbery</option>
                 </select>
             </div>
 
@@ -312,6 +315,7 @@
                     <option value="District 1">District 1</option>
                     <option value="District 2">District 2</option>
                     <option value="District 3">District 3</option>
+                    <option value="District 4">District 4</option>
                 </select>
             </div>
 
@@ -339,7 +343,7 @@
                 <span class="filter-label">DATE RANGE</span>
                 <div style="display:flex; gap:6px;">
                     <input type="text" class="filter-input" value="📅 Last 30 Days" readonly />
-                    <button type="button" class="btn-filter-icon" onclick="resetFilters()">🔄</button>
+                    <button type="button" class="btn-filter-icon" onclick="resetFilters()" title="Reset Filters">🔄</button>
                 </div>
             </div>
         </div>
@@ -417,6 +421,39 @@
                     <td><div class="investigator-cell"><div class="investigator-avatar">JR</div> J. Reyes</div></td>
                     <td><a href="#" style="color:#64748b; text-decoration:none;">•••</a></td>
                 </tr>
+                <tr class="case-row">
+                    <td><a href="#" class="case-id-link">C-24-8835</a></td>
+                    <td class="col-type">Ransomware</td>
+                    <td>2024-10-10</td>
+                    <td class="col-location">Central Healthcare Data Center</td>
+                    <td class="col-district">District 2</td>
+                    <td class="col-severity"><span class="badge-severity severity-critical">CRITICAL</span></td>
+                    <td class="col-status"><div class="status-pill"><span class="status-dot dot-active"></span> Active</div></td>
+                    <td><div class="investigator-cell"><div class="investigator-avatar">MK</div> M. Kovač</div></td>
+                    <td><a href="#" style="color:#64748b; text-decoration:none;">•••</a></td>
+                </tr>
+                <tr class="case-row">
+                    <td><a href="#" class="case-id-link">C-24-8828</a></td>
+                    <td class="col-type">Identity Theft</td>
+                    <td>2024-10-08</td>
+                    <td class="col-location">Metro Digital Kiosk, Terminal 2</td>
+                    <td class="col-district">District 4</td>
+                    <td class="col-severity"><span class="badge-severity severity-medium">MEDIUM</span></td>
+                    <td class="col-status"><div class="status-pill"><span class="status-dot dot-open"></span> Open</div></td>
+                    <td><div class="investigator-cell"><div class="investigator-avatar">AS</div> A. Silva</div></td>
+                    <td><a href="#" style="color:#64748b; text-decoration:none;">•••</a></td>
+                </tr>
+                <tr class="case-row">
+                    <td><a href="#" class="case-id-link">C-24-8819</a></td>
+                    <td class="col-type">Armed Robbery</td>
+                    <td>2024-10-05</td>
+                    <td class="col-location">Apex Jewelry Vault, Midtown</td>
+                    <td class="col-district">District 1</td>
+                    <td class="col-severity"><span class="badge-severity severity-high">HIGH</span></td>
+                    <td class="col-status"><div class="status-pill"><span class="status-dot dot-active"></span> Active</div></td>
+                    <td><div class="investigator-cell"><div class="investigator-avatar">JR</div> J. Reyes</div></td>
+                    <td><a href="#" style="color:#64748b; text-decoration:none;">•••</a></td>
+                </tr>
                 <!-- Dynamic No Results Message Row -->
                 <tr id="trNoData" style="display:none;">
                     <td colspan="9" class="no-data-row">⚠️ No matching cases found for your selected filters.</td>
@@ -426,7 +463,7 @@
 
         <!-- Footer Pagination -->
         <div class="table-footer">
-            <span id="lblCaseCounter">Showing 5 of 5 cases</span>
+            <span id="lblCaseCounter">Showing 8 of 8 cases</span>
             <div class="pagination-controls">
                 <button type="button" class="page-btn">❮</button>
                 <span style="color:#f8fafc; font-weight:600;">Page 1 of 1</span>
@@ -435,7 +472,7 @@
         </div>
     </div>
 
-    <!-- Client-Side Real-Time Filter Logic Script -->
+    <!-- Client-Side Real-Time Filter Script -->
     <script>
         function filterCasesTable() {
             const searchVal = document.getElementById("txtSearch").value.toLowerCase().trim();
@@ -446,6 +483,7 @@
 
             const rows = document.querySelectorAll(".case-row");
             let visibleCount = 0;
+            const totalCount = rows.length;
 
             rows.forEach(row => {
                 const rowText = row.innerText.toLowerCase();
@@ -468,9 +506,8 @@
                 }
             });
 
-            // Toggle No Data row
             document.getElementById("trNoData").style.display = (visibleCount === 0) ? "" : "none";
-            document.getElementById("lblCaseCounter").innerText = `Showing ${visibleCount} of 5 cases`;
+            document.getElementById("lblCaseCounter").innerText = `Showing ${visibleCount} of ${totalCount} cases`;
         }
 
         function resetFilters() {
