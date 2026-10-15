@@ -51,13 +51,31 @@ namespace Netra
         protected global::System.Web.UI.WebControls.TextBox txtIncidentDate;
 
         /// <summary>
-        /// rfvIncidentDate control.
+        /// rfvDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvIncidentDate;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDate;
+
+        /// <summary>
+        /// txtIncidentTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtIncidentTime;
+
+        /// <summary>
+        /// txtDateReported control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateReported;
 
         /// <summary>
         /// ddlSeverity control.
@@ -69,6 +87,60 @@ namespace Netra
         protected global::System.Web.UI.WebControls.DropDownList ddlSeverity;
 
         /// <summary>
+        /// ddlCaseStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCaseStatus;
+
+        /// <summary>
+        /// txtSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSummary;
+
+        /// <summary>
+        /// rfvSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSummary;
+
+        /// <summary>
+        /// txtInvestigator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtInvestigator;
+
+        /// <summary>
+        /// txtModus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtModus;
+
+        /// <summary>
+        /// txtNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNotes;
+
+        /// <summary>
         /// ddlDistrict control.
         /// </summary>
         /// <remarks>
@@ -78,76 +150,67 @@ namespace Netra
         protected global::System.Web.UI.WebControls.DropDownList ddlDistrict;
 
         /// <summary>
-        /// txtLatitude control.
+        /// txtStation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLatitude;
+        protected global::System.Web.UI.WebControls.TextBox txtStation;
 
         /// <summary>
-        /// rfvLat control.
+        /// txtAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLat;
+        protected global::System.Web.UI.WebControls.TextBox txtAddress;
 
         /// <summary>
-        /// rvLat control.
+        /// txtLat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator rvLat;
+        protected global::System.Web.UI.WebControls.TextBox txtLat;
 
         /// <summary>
-        /// txtLongitude control.
+        /// txtLng control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLongitude;
+        protected global::System.Web.UI.WebControls.TextBox txtLng;
 
         /// <summary>
-        /// rfvLng control.
+        /// txtVictim control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLng;
+        protected global::System.Web.UI.WebControls.TextBox txtVictim;
 
         /// <summary>
-        /// rvLng control.
+        /// txtSuspect control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator rvLng;
+        protected global::System.Web.UI.WebControls.TextBox txtSuspect;
 
         /// <summary>
-        /// fileEvidence control.
+        /// fileUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fileEvidence;
-
-        /// <summary>
-        /// btnRegister control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegister;
+        protected global::System.Web.UI.WebControls.FileUpload fileUpload;
 
         /// <summary>
         /// lblStatus control.
@@ -157,5 +220,23 @@ namespace Netra
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblStatus;
+
+        /// <summary>
+        /// btnSaveDraft control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveDraft;
+
+        /// <summary>
+        /// btnRegister control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegister;
     }
 }
