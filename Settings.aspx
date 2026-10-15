@@ -255,13 +255,13 @@
             <a href="SecuritySettings.aspx" class="settings-nav-item">
                 <span>🛡️</span> Security
             </a>
-            <a href="#" class="settings-nav-item" onclick="alert('Notification preferences panel coming soon.'); return false;">
+            <a href="NotificationSettings.aspx" class="settings-nav-item">
                 <span>🔔</span> Notifications
             </a>
-            <a href="#" class="settings-nav-item" onclick="alert('Appearance preferences panel coming soon.'); return false;">
+            <a href="#" class="settings-nav-item" onclick="alert('Appearance preferences coming soon.'); return false;">
                 <span>🎨</span> Appearance
             </a>
-            <a href="#" class="settings-nav-item" onclick="alert('System preferences panel coming soon.'); return false;">
+            <a href="#" class="settings-nav-item" onclick="alert('System preferences coming soon.'); return false;">
                 <span>💻</span> System Preferences
             </a>
         </div>
