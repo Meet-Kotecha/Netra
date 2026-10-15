@@ -302,9 +302,9 @@
                         <span class="search-icon">🔍</span>
                         <input type="text" placeholder="Global Search..." />
                     </div>
-                    <!-- Bell Icon linked directly to Notification Settings page -->
-                    <a href="NotificationSettings.aspx" class="icon-btn" title="Notification Settings">🔔</a>
-                    <!-- Shield Icon linked directly to Security Settings page -->
+                    <!-- Bell Icon redirects to Alerts.aspx -->
+                    <a href="Alerts.aspx" class="icon-btn" title="View Real-Time Alerts">🔔</a>
+                    <!-- Shield Icon redirects to SecuritySettings.aspx -->
                     <a href="SecuritySettings.aspx" class="icon-btn" title="Security Settings">🛡️</a>
                     <div class="user-profile" onclick="window.location.href='Settings.aspx';">
                         <div class="avatar" title="Rohan Siddhpura">RS</div>
