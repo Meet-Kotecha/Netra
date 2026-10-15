@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Reports & Intelligence Summaries" Language="C me" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Reports.aspx.cs" Inherits="Netra.Reports" %>
+﻿<%@ Page Title="Reports & Intelligence Summaries" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Reports.aspx.cs" Inherits="Netra.Reports" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -243,7 +243,7 @@
             color: #38bdf8;
         }
 
-        /* Generate Report Modal Backdrop */
+        /* Modal Backdrop */
         .modal-overlay {
             display: none;
             position: fixed;

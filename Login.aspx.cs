@@ -13,8 +13,22 @@ namespace Netra
         {
             if (Page.IsValid)
             {
-                // Successful login redirects to main dashboard
-                Response.Redirect("Default.aspx");
+                string username = txtUsername.Text.Trim();
+                string password = txtPassword.Text.Trim();
+
+                // Verification for Admin (Meet Kotecha)
+                if ((username.Equals("meet8kotecha@gmail.com", StringComparison.OrdinalIgnoreCase) ||
+                     username.Equals("Meet Kotecha", StringComparison.OrdinalIgnoreCase)) &&
+                     password == "Meet123")
+                {
+                    Session["User"] = "Meet Kotecha";
+                    Session["Role"] = "Admin";
+                    Response.Redirect("Default.aspx");
+                }
+                else
+                {
+                    lblLoginError.Text = "Access Denied: Invalid Admin Credentials.";
+                }
             }
         }
     }

@@ -129,7 +129,6 @@
 
         .btn-reset {
             width: 100%;
-            background-color: #00e5ff;
             background: linear-gradient(135deg, #00e5ff 0%, #00b8d4 100%);
             color: #080e18;
             border: none;
@@ -140,7 +139,7 @@
             letter-spacing: 1px;
             cursor: pointer;
             transition: opacity 0.2s;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .btn-reset:hover {
@@ -177,10 +176,11 @@
         }
 
         .status-msg {
-            color: #10b981;
             font-size: 0.8rem;
-            margin-top: 10px;
+            margin-bottom: 15px;
             display: block;
+            text-align: left;
+            line-height: 1.4;
         }
 
         .footer-badge {
@@ -208,7 +208,7 @@
 
             <!-- Header Text -->
             <div class="section-title">Forgot Password?</div>
-            <div class="section-desc">Enter your registered email address and we'll send you instructions to reset your password.</div>
+            <div class="section-desc">Enter your registered admin email address to receive direct login access.</div>
 
             <!-- Email Input -->
             <div class="form-group">
@@ -224,10 +224,11 @@
                     ErrorMessage="Enter a valid email address." CssClass="val-error" Display="Dynamic" />
             </div>
 
+            <!-- Status Label -->
+            <asp:Label ID="lblStatus" runat="server" CssClass="status-msg"></asp:Label>
+
             <!-- Submit Button -->
             <asp:Button ID="btnReset" runat="server" Text="SEND RESET LINK" CssClass="btn-reset" OnClick="btnReset_Click" />
-            
-            <asp:Label ID="lblStatus" runat="server" CssClass="status-msg"></asp:Label>
 
             <div class="divider"></div>
 

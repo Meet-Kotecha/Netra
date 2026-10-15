@@ -237,6 +237,9 @@
                 <label for="<%= chkRemember.ClientID %>">Remember me</label>
             </div>
 
+            <!-- Error Label -->
+            <asp:Label ID="lblLoginError" runat="server" CssClass="val-error" style="margin-bottom: 12px; text-align: center;"></asp:Label>
+
             <!-- Sign In Button -->
             <asp:Button ID="btnSignIn" runat="server" Text="SIGN IN ➔" CssClass="btn-signin" OnClick="btnSignIn_Click" />
 

@@ -121,6 +121,10 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Digvijay.jpeg" />
+    <Content Include="Images\Keval.jpeg" />
+    <Content Include="Images\Meet.jpeg" />
+    <Content Include="Images\Rohan.jpeg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -151,6 +155,20 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="RegisterCase.aspx" />
     <Content Include="PersonsDirectory.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="ForgotPassword.aspx" />
+    <Content Include="CrimeCases.aspx" />
+    <Content Include="CrimeMap.aspx" />
+    <Content Include="Analytics.aspx" />
+    <Content Include="InvestigationWorkspace.aspx" />
+    <Content Include="PersonProfile.aspx" />
+    <Content Include="NetworkAnalysis.aspx" />
+    <Content Include="ImageInvestigation.aspx" />
+    <Content Include="RiskAnalysis.aspx" />
+    <Content Include="Alerts.aspx" />
+    <Content Include="AIAssistant.aspx" />
+    <Content Include="Reports.aspx" />
+    <Content Include="BulkDataImport.aspx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -247,6 +265,104 @@
     </Compile>
     <Compile Include="PersonsDirectory.aspx.designer.cs">
       <DependentUpon>PersonsDirectory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CrimeCases.aspx.cs">
+      <DependentUpon>CrimeCases.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CrimeCases.aspx.designer.cs">
+      <DependentUpon>CrimeCases.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CrimeMap.aspx.cs">
+      <DependentUpon>CrimeMap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CrimeMap.aspx.designer.cs">
+      <DependentUpon>CrimeMap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analytics.aspx.cs">
+      <DependentUpon>Analytics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analytics.aspx.designer.cs">
+      <DependentUpon>Analytics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InvestigationWorkspace.aspx.cs">
+      <DependentUpon>InvestigationWorkspace.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InvestigationWorkspace.aspx.designer.cs">
+      <DependentUpon>InvestigationWorkspace.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PersonProfile.aspx.cs">
+      <DependentUpon>PersonProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PersonProfile.aspx.designer.cs">
+      <DependentUpon>PersonProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NetworkAnalysis.aspx.cs">
+      <DependentUpon>NetworkAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NetworkAnalysis.aspx.designer.cs">
+      <DependentUpon>NetworkAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ImageInvestigation.aspx.cs">
+      <DependentUpon>ImageInvestigation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ImageInvestigation.aspx.designer.cs">
+      <DependentUpon>ImageInvestigation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RiskAnalysis.aspx.cs">
+      <DependentUpon>RiskAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RiskAnalysis.aspx.designer.cs">
+      <DependentUpon>RiskAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Alerts.aspx.cs">
+      <DependentUpon>Alerts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Alerts.aspx.designer.cs">
+      <DependentUpon>Alerts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AIAssistant.aspx.cs">
+      <DependentUpon>AIAssistant.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AIAssistant.aspx.designer.cs">
+      <DependentUpon>AIAssistant.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports.aspx.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports.aspx.designer.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BulkDataImport.aspx.cs">
+      <DependentUpon>BulkDataImport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BulkDataImport.aspx.designer.cs">
+      <DependentUpon>BulkDataImport.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
