@@ -307,7 +307,7 @@
         <!-- Avatar Photo Box -->
         <div>
             <div class="avatar-box">
-                <img src="Keval.jpeg" alt="Keval Goswami Mugshot" />
+                <img src="Images/Keval.jpeg" alt="Keval Goswami Mugshot" />
                 <div class="avatar-confidential-tag">CONFIDENTIAL</div>
             </div>
             <div style="text-align: center; margin-top: 8px;">
