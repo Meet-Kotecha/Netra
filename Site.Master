@@ -261,7 +261,7 @@
                 <li id="navAnalytics" runat="server" class="nav-item"><a href="Analytics.aspx"><span>📈</span> <span>Analytics</span></a></li>
                 <li id="navWorkspace" runat="server" class="nav-item"><a href="InvestigationWorkspace.aspx"><span>🔍</span> <span>Investigation Workspace</span></a></li>
                 <li id="navPersons" runat="server" class="nav-item"><a href="PersonsDirectory.aspx"><span>👥</span> <span>Persons</span></a></li>
-                <li id="navNetwork" runat="server" class="nav-item"><a href="#"><span>🕸️</span> <span>Network Analysis</span></a></li>
+                <li id="navNetwork" runat="server" class="nav-item"><a href="NetworkAnalysis.aspx"><span>🕸️</span> <span>Network Analysis</span></a></li>
                 <li id="navImage" runat="server" class="nav-item"><a href="#"><span>🖼️</span> <span>Image Investigation</span></a></li>
                 <li id="navRisk" runat="server" class="nav-item"><a href="#"><span>📊</span> <span>Risk & Anomaly Analysis</span></a></li>
                 <li id="navAlerts" runat="server" class="nav-item"><a href="#"><span>🔔</span> <span>Alerts</span></a></li>
