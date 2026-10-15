@@ -233,9 +233,17 @@
         }
 
         @media (max-width: 1100px) {
-            .sidebar { width: 70px; min-width: 70px; }
-            .brand-text, .nav-item a span:nth-child(2) { display: none; }
-            .main-wrapper { margin-left: 70px; width: calc(100% - 70px); }
+            .sidebar {
+                width: 70px;
+                min-width: 70px;
+            }
+            .brand-text, .nav-item a span:nth-child(2) {
+                display: none;
+            }
+            .main-wrapper {
+                margin-left: 70px;
+                width: calc(100% - 70px);
+            }
         }
     </style>
 
@@ -264,7 +272,7 @@
                 <li id="navNetwork" runat="server" class="nav-item"><a href="NetworkAnalysis.aspx"><span>🕸️</span> <span>Network Analysis</span></a></li>
                 <li id="navImage" runat="server" class="nav-item"><a href="ImageInvestigation.aspx"><span>🖼️</span> <span>Image Investigation</span></a></li>
                 <li id="navRisk" runat="server" class="nav-item"><a href="RiskAnalysis.aspx"><span>📊</span> <span>Risk & Anomaly Analysis</span></a></li>
-                <li id="navAlerts" runat="server" class="nav-item"><a href="#"><span>🔔</span> <span>Alerts</span></a></li>
+                <li id="navAlerts" runat="server" class="nav-item"><a href="Alerts.aspx"><span>🔔</span> <span>Alerts</span></a></li>
                 <li id="navAI" runat="server" class="nav-item"><a href="#"><span>🤖</span> <span>AI Assistant</span></a></li>
                 <li id="navReports" runat="server" class="nav-item"><a href="#"><span>📋</span> <span>Reports</span></a></li>
                 <li id="navImport" runat="server" class="nav-item"><a href="#"><span>☁️</span> <span>Bulk Data Import</span></a></li>
@@ -293,7 +301,7 @@
                     <button type="button" class="icon-btn" title="Notifications">🔔</button>
                     <button type="button" class="icon-btn" title="Security Status">🛡️</button>
                     <div class="user-profile">
-                        <div class="avatar" title="Meet Kotecha (Admin)">MK</div>
+                        <div class="avatar" title="Digvijaysinh Vaghela">DV</div>
                     </div>
                 </div>
             </header>

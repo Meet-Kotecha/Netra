@@ -13,7 +13,7 @@ namespace Netra
         {
             string rawPath = Request.Url.AbsolutePath.ToLower();
 
-            // Clear active status from all navigation links
+            // Reset active status from all navigation links
             if (navDashboard != null) navDashboard.Attributes["class"] = "nav-item";
             if (navCrimeCases != null) navCrimeCases.Attributes["class"] = "nav-item";
             if (navCrimeMap != null) navCrimeMap.Attributes["class"] = "nav-item";
@@ -23,6 +23,7 @@ namespace Netra
             if (navNetwork != null) navNetwork.Attributes["class"] = "nav-item";
             if (navImage != null) navImage.Attributes["class"] = "nav-item";
             if (navRisk != null) navRisk.Attributes["class"] = "nav-item";
+            if (navAlerts != null) navAlerts.Attributes["class"] = "nav-item";
 
             // Dynamic route matching
             if (rawPath.EndsWith("/") || rawPath.Contains("/default"))
@@ -60,6 +61,10 @@ namespace Netra
             else if (rawPath.Contains("/riskanalysis"))
             {
                 if (navRisk != null) navRisk.Attributes["class"] = "nav-item active";
+            }
+            else if (rawPath.Contains("/alerts"))
+            {
+                if (navAlerts != null) navAlerts.Attributes["class"] = "nav-item active";
             }
         }
     }
