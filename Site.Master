@@ -257,7 +257,7 @@
             <ul class="nav-list">
                 <li id="navDashboard" runat="server" class="nav-item"><a href="Default.aspx"><span>田</span> <span>Dashboard</span></a></li>
                 <li id="navCrimeCases" runat="server" class="nav-item"><a href="CrimeCases.aspx"><span>📄</span> <span>Crime Cases</span></a></li>
-                <li id="navCrimeMap" runat="server" class="nav-item"><a href="#"><span>🗺️</span> <span>Crime Map</span></a></li>
+                <li id="navCrimeMap" runat="server" class="nav-item"><a href="CrimeMap.aspx"><span>🗺️</span> <span>Crime Map</span></a></li>
                 <li id="navAnalytics" runat="server" class="nav-item"><a href="#"><span>📈</span> <span>Analytics</span></a></li>
                 <li id="navWorkspace" runat="server" class="nav-item"><a href="#"><span>🔍</span> <span>Investigation Workspace</span></a></li>
                 <li id="navPersons" runat="server" class="nav-item"><a href="PersonsDirectory.aspx"><span>👥</span> <span>Persons</span></a></li>

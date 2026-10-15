@@ -11,22 +11,26 @@ namespace Netra
 
         private void SetActiveMenu()
         {
-            // Get raw absolute path in lower case
             string rawPath = Request.Url.AbsolutePath.ToLower();
 
-            // Clear active class from all items
-            navDashboard.Attributes["class"] = "nav-item";
-            navCrimeCases.Attributes["class"] = "nav-item";
+            // Reset active classes
+            if (navDashboard != null) navDashboard.Attributes["class"] = "nav-item";
+            if (navCrimeCases != null) navCrimeCases.Attributes["class"] = "nav-item";
+            if (navCrimeMap != null) navCrimeMap.Attributes["class"] = "nav-item";
             if (navPersons != null) navPersons.Attributes["class"] = "nav-item";
 
             // Dynamic route matching
-            if (rawPath.EndsWith("/") || rawPath.Contains("/default") || rawPath.Contains("/default.aspx"))
+            if (rawPath.EndsWith("/") || rawPath.Contains("/default"))
             {
-                navDashboard.Attributes["class"] = "nav-item active";
+                if (navDashboard != null) navDashboard.Attributes["class"] = "nav-item active";
             }
             else if (rawPath.Contains("/crimecases") || rawPath.Contains("/registercase"))
             {
-                navCrimeCases.Attributes["class"] = "nav-item active";
+                if (navCrimeCases != null) navCrimeCases.Attributes["class"] = "nav-item active";
+            }
+            else if (rawPath.Contains("/crimemap"))
+            {
+                if (navCrimeMap != null) navCrimeMap.Attributes["class"] = "nav-item active";
             }
             else if (rawPath.Contains("/personsdirectory"))
             {
