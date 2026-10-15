@@ -186,25 +186,28 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
+            z-index: 10;
         }
 
         .canvas-tool-btn {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             background-color: rgba(11, 19, 32, 0.9);
             border: 1px solid #1e293b;
             color: #cbd5e1;
-            border-radius: 4px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .canvas-tool-btn:hover {
             border-color: #00d2ff;
             color: #00d2ff;
+            background-color: #12283e;
         }
 
         .canvas-legend-bar {
@@ -219,6 +222,7 @@
             color: #64748b;
             display: flex;
             gap: 12px;
+            z-index: 10;
         }
 
         /* Selected Entity Right Panel */
@@ -368,11 +372,22 @@
             font-weight: 700;
             cursor: pointer;
             text-align: center;
+            transition: all 0.2s ease;
         }
 
         .btn-dark-sm:hover {
             border-color: #00d2ff;
             color: #00d2ff;
+            background-color: #12283e;
+        }
+
+        .node-interactive {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .node-interactive:hover {
+            filter: brightness(1.3);
         }
     </style>
 </asp:Content>
@@ -400,10 +415,10 @@
                 <!-- Entity Types -->
                 <div class="form-group-item">
                     <label class="form-label-sm">ENTITY TYPES</label>
-                    <label class="checkbox-item"><input type="checkbox" checked /> ⚪ Persons</label>
-                    <label class="checkbox-item"><input type="checkbox" checked /> 🔲 Cases</label>
-                    <label class="checkbox-item"><input type="checkbox" checked /> 🔺 Locations</label>
-                    <label class="checkbox-item"><input type="checkbox" /> 🏢 Organizations</label>
+                    <label class="checkbox-item"><input type="checkbox" id="chkPersons" checked onchange="toggleNodes()" /> ⚪ Persons</label>
+                    <label class="checkbox-item"><input type="checkbox" id="chkCases" checked onchange="toggleNodes()" /> 🔲 Cases</label>
+                    <label class="checkbox-item"><input type="checkbox" id="chkLocations" checked onchange="toggleNodes()" /> 🔺 Locations</label>
+                    <label class="checkbox-item"><input type="checkbox" id="chkOrgs" onchange="toggleNodes()" /> 🏢 Organizations</label>
                 </div>
 
                 <hr style="border: 0; border-top: 1px solid #1a2536; margin: 14px 0;" />
@@ -440,7 +455,7 @@
                 </div>
             </div>
 
-            <button type="button" class="btn-render-graph" onclick="alert('🔄 Re-rendering Link Graph for Focus Node...')">
+            <button type="button" class="btn-render-graph" onclick="renderGraph()">
                 🔄 Re-Render Graph
             </button>
         </div>
@@ -449,53 +464,59 @@
         <div class="graph-canvas-viewport">
             <!-- Canvas Tools -->
             <div class="canvas-tools-stack">
-                <div class="canvas-tool-btn" title="Zoom In" onclick="alert('Zoom In')">➕</div>
-                <div class="canvas-tool-btn" title="Zoom Out" onclick="alert('Zoom Out')">➖</div>
-                <div class="canvas-tool-btn" title="Reset View" onclick="alert('Reset Graph View')">🎯</div>
+                <button type="button" class="canvas-tool-btn" title="Zoom In" onclick="zoomGraph(1.2)">➕</button>
+                <button type="button" class="canvas-tool-btn" title="Zoom Out" onclick="zoomGraph(0.8)">➖</button>
+                <button type="button" class="canvas-tool-btn" title="Reset View" onclick="resetGraph()">🎯</button>
             </div>
 
             <!-- SVG Network Graph Render -->
-            <svg width="100%" height="100%" style="position:absolute; inset:0;">
+            <svg id="svgGraph" width="100%" height="100%" style="position:absolute; inset:0; transform-origin: center; transition: transform 0.3s ease;">
                 <defs>
                     <filter id="glowCyan"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
                 </defs>
 
                 <!-- Connection Links -->
-                <line x1="50%" y1="50%" x2="42%" y2="40%" stroke="#1e293b" stroke-width="1.5" />
-                <line x1="50%" y1="50%" x2="58%" y2="38%" stroke="#1e293b" stroke-width="1.5" />
-                <line x1="50%" y1="50%" x2="55%" y2="62%" stroke="#00d2ff" stroke-width="2" stroke-dasharray="4" />
-                <line x1="50%" y1="50%" x2="40%" y2="58%" stroke="#1e293b" stroke-width="1.5" />
-                <line x1="58%" y1="38%" x2="68%" y2="42%" stroke="#1e293b" stroke-width="1" />
-                <line x1="58%" y1="38%" x2="65%" y2="30%" stroke="#1e293b" stroke-width="1" />
-                <line x1="55%" y1="62%" x2="63%" y2="60%" stroke="#1e293b" stroke-width="1" />
-                <line x1="42%" y1="40%" x2="35%" y2="48%" stroke="#1e293b" stroke-width="1" />
+                <g id="grpLinks">
+                    <line x1="50%" y1="50%" x2="42%" y2="40%" stroke="#1e293b" stroke-width="1.5" />
+                    <line x1="50%" y1="50%" x2="58%" y2="38%" stroke="#1e293b" stroke-width="1.5" />
+                    <line x1="50%" y1="50%" x2="55%" y2="62%" stroke="#00d2ff" stroke-width="2" stroke-dasharray="4" />
+                    <line x1="50%" y1="50%" x2="40%" y2="58%" stroke="#1e293b" stroke-width="1.5" />
+                    <line x1="58%" y1="38%" x2="68%" y2="42%" stroke="#1e293b" stroke-width="1" />
+                    <line x1="58%" y1="38%" x2="65%" y2="30%" stroke="#1e293b" stroke-width="1" />
+                    <line x1="55%" y1="62%" x2="63%" y2="60%" stroke="#1e293b" stroke-width="1" />
+                    <line x1="42%" y1="40%" x2="35%" y2="48%" stroke="#1e293b" stroke-width="1" />
+                </g>
 
                 <!-- Nodes -->
                 <!-- Central Focus Node: Keval Goswami -->
-                <circle cx="50%" cy="50%" r="14" fill="#0b1320" stroke="#00d2ff" stroke-width="3" filter="url(#glowCyan)" />
-                <text x="50%" y="54%" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">Keval Goswami</text>
+                <g class="node-interactive" onclick="selectEntity('Keval Goswami', 'POI-992', '06-06-2006 (20y)', 'At Large', '0.84')">
+                    <circle cx="50%" cy="50%" r="14" fill="#0b1320" stroke="#00d2ff" stroke-width="3" filter="url(#glowCyan)" />
+                    <text x="50%" y="54%" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">Keval Goswami</text>
+                </g>
 
                 <!-- Connected Node 1: E. Rostova -->
-                <circle cx="58%" cy="38%" r="9" fill="#070d18" stroke="#38bdf8" stroke-width="2" />
-                <text x="58%" y="34%" fill="#cbd5e1" font-size="8" text-anchor="middle">E. Rostova</text>
+                <g class="node-interactive node-person" onclick="selectEntity('E. Rostova', 'POI-411', '12-04-1994 (32y)', 'Active Tracking', '0.62')">
+                    <circle cx="58%" cy="38%" r="9" fill="#070d18" stroke="#38bdf8" stroke-width="2" />
+                    <text x="58%" y="34%" fill="#cbd5e1" font-size="8" text-anchor="middle">E. Rostova</text>
+                </g>
 
                 <!-- Connected Node 2: Op. BLACKWOOD -->
-                <rect x="40%" y="38%" width="14" height="14" fill="#070d18" stroke="#ef4444" stroke-width="2" rx="2" />
-                <text x="42%" y="36%" fill="#cbd5e1" font-size="8" text-anchor="middle">Op. BLACKWOOD</text>
+                <g class="node-interactive node-case" onclick="selectEntity('Op. BLACKWOOD', 'CS-2023-A9', 'Case Created: 2023-01', 'Open', '0.91')">
+                    <rect x="40%" y="38%" width="14" height="14" fill="#070d18" stroke="#ef4444" stroke-width="2" rx="2" />
+                    <text x="42%" y="36%" fill="#cbd5e1" font-size="8" text-anchor="middle">Op. BLACKWOOD</text>
+                </g>
 
                 <!-- Connected Node 3: Safehouse Alpha -->
-                <polygon points="55%,60% 58%,65% 52%,65%" fill="#070d18" stroke="#f59e0b" stroke-width="2" />
-                <text x="55%" y="69%" fill="#cbd5e1" font-size="8" text-anchor="middle">Safehouse Alpha</text>
+                <g class="node-interactive node-location" onclick="selectEntity('Safehouse Alpha', 'LOC-882', 'Sector 4 Grid B', 'Under Surveillance', '0.45')">
+                    <polygon points="55%,60% 58%,65% 52%,65%" fill="#070d18" stroke="#f59e0b" stroke-width="2" />
+                    <text x="55%" y="69%" fill="#cbd5e1" font-size="8" text-anchor="middle">Safehouse Alpha</text>
+                </g>
 
                 <!-- Connected Node 4: M. Vance -->
-                <circle cx="40%" cy="58%" r="8" fill="#070d18" stroke="#38bdf8" stroke-width="2" />
-                <text x="40%" y="63%" fill="#cbd5e1" font-size="8" text-anchor="middle">M. Vance</text>
-
-                <!-- Outer Degree Nodes -->
-                <circle cx="68%" cy="42%" r="5" fill="#1e293b" />
-                <circle cx="65%" cy="30%" r="5" fill="#1e293b" />
-                <rect x="62%" y="58%" width="8" height="8" fill="#1e293b" />
-                <polygon points="35%,47% 37%,51% 33%,51%" fill="#1e293b" />
+                <g class="node-interactive node-person" onclick="selectEntity('Marcus Vance', 'POI-882', '08-11-1988 (38y)', 'In Custody', '0.38')">
+                    <circle cx="40%" cy="58%" r="8" fill="#070d18" stroke="#38bdf8" stroke-width="2" />
+                    <text x="40%" y="63%" fill="#cbd5e1" font-size="8" text-anchor="middle">M. Vance</text>
+                </g>
             </svg>
 
             <!-- Legend Bar -->
@@ -514,17 +535,17 @@
                 <!-- Entity Card Header -->
                 <div class="selected-entity-card">
                     <div class="entity-header-row">
-                        <div class="entity-icon-box">👤</div>
+                        <div class="entity-icon-box" id="entIcon">👤</div>
                         <div>
-                            <div class="entity-title-name">Keval Goswami ⏱️</div>
-                            <div class="entity-subtitle">POI-992 • HIGH PRIORITY</div>
+                            <div class="entity-title-name" id="entName">Keval Goswami ⏱️</div>
+                            <div class="entity-subtitle" id="entCode">POI-992 • HIGH PRIORITY</div>
                         </div>
                     </div>
 
                     <div class="entity-meta-list">
                         <div class="entity-meta-row">
-                            <span class="entity-meta-label">DOB</span>
-                            <span>06-06-2006 (20y)</span>
+                            <span class="entity-meta-label">DOB / Info</span>
+                            <span id="entDob">06-06-2006 (20y)</span>
                         </div>
                         <div class="entity-meta-row">
                             <span class="entity-meta-label">Nationality</span>
@@ -532,7 +553,7 @@
                         </div>
                         <div class="entity-meta-row">
                             <span class="entity-meta-label">Status</span>
-                            <span style="color:#ef4444; font-weight:700;">● At Large</span>
+                            <span id="entStatus" style="color:#ef4444; font-weight:700;">● At Large</span>
                         </div>
                         <div class="entity-meta-row" style="border:none;">
                             <span class="entity-meta-label">Known Assocs.</span>
@@ -555,7 +576,7 @@
 
                     <div style="display:flex; justify-content:space-between; font-size:0.7rem; font-weight:700; color:#cbd5e1;">
                         <span>Network Centrality</span>
-                        <span style="color:#00d2ff;">0.84</span>
+                        <span style="color:#00d2ff;" id="entCentrality">0.84</span>
                     </div>
                     <div class="risk-bar-container">
                         <div class="risk-bar-fill-cyan"></div>
@@ -580,14 +601,53 @@
 
             <!-- Bottom Action Buttons -->
             <div style="margin-top: 14px;">
-                <a href="PersonProfile.aspx" class="btn-cyan-full">
+                <button type="button" class="btn-cyan-full" onclick="window.location.href='PersonProfile.aspx';">
                     View Comprehensive Profile
-                </a>
+                </button>
                 <div class="btn-dual-row">
-                    <button type="button" class="btn-dark-sm" onclick="alert('Node Isolated')">Isolate Node</button>
-                    <button type="button" class="btn-dark-sm" onclick="alert('Expanding Network Links...')">Expand Links</button>
+                    <button type="button" class="btn-dark-sm" onclick="alert('Node Isolated in Workspace')">Isolate Node</button>
+                    <button type="button" class="btn-dark-sm" onclick="alert('Expanding 2nd level relationship links...')">Expand Links</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Interactive Graph Client Script -->
+    <script>
+        let currentScale = 1.0;
+
+        function zoomGraph(factor) {
+            currentScale *= factor;
+            document.getElementById("svgGraph").style.transform = `scale(${currentScale})`;
+        }
+
+        function resetGraph() {
+            currentScale = 1.0;
+            document.getElementById("svgGraph").style.transform = "scale(1.0)";
+        }
+
+        function renderGraph() {
+            const focus = document.getElementById("txtFocusNode").value;
+            alert(`🔄 Re-rendering Link Graph centered on '${focus}'...`);
+            resetGraph();
+        }
+
+        function selectEntity(name, code, dob, status, centrality) {
+            document.getElementById("entName").innerText = name + " ⏱️";
+            document.getElementById("entCode").innerText = code + " • HIGH PRIORITY";
+            document.getElementById("entDob").innerText = dob;
+            document.getElementById("entStatus").innerText = "● " + status;
+            document.getElementById("entCentrality").innerText = centrality;
+        }
+
+        function toggleNodes() {
+            const showPersons = document.getElementById("chkPersons").checked;
+            const showCases = document.getElementById("chkCases").checked;
+            const showLocations = document.getElementById("chkLocations").checked;
+
+            document.querySelectorAll(".node-person").forEach(el => el.style.display = showPersons ? "" : "none");
+            document.querySelectorAll(".node-case").forEach(el => el.style.display = showCases ? "" : "none");
+            document.querySelectorAll(".node-location").forEach(el => el.style.display = showLocations ? "" : "none");
+        }
+    </script>
 </asp:Content>
