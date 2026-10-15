@@ -255,8 +255,8 @@
             </div>
 
             <ul class="nav-list">
-                <li class="nav-item active"><a href="Default.aspx"><span>田</span> <span>Dashboard</span></a></li>
-                <li class="nav-item"><a href="RegisterCase.aspx"><span>📄</span> <span>Crime Cases</span></a></li>
+                <li class="nav-item"><a href="Default.aspx"><span>田</span> <span>Dashboard</span></a></li>
+                <li class="nav-item active"><a href="CrimeCases.aspx"><span>📄</span> <span>Crime Cases</span></a></li>
                 <li class="nav-item"><a href="#"><span>🗺️</span> <span>Crime Map</span></a></li>
                 <li class="nav-item"><a href="#"><span>📈</span> <span>Analytics</span></a></li>
                 <li class="nav-item"><a href="#"><span>🔍</span> <span>Investigation Workspace</span></a></li>
