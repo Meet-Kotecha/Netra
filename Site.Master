@@ -280,7 +280,7 @@
                 <li id="navAI" runat="server" class="nav-item"><a href="AIAssistant.aspx"><span>🤖</span> <span>AI Assistant</span></a></li>
                 <li id="navReports" runat="server" class="nav-item"><a href="Reports.aspx"><span>📋</span> <span>Reports</span></a></li>
                 <li id="navImport" runat="server" class="nav-item"><a href="BulkDataImport.aspx"><span>☁️</span> <span>Bulk Data Import</span></a></li>
-                <li id="navUsers" runat="server" class="nav-item"><a href="#"><span>👤</span> <span>User Management</span></a></li>
+                <li id="navUsers" runat="server" class="nav-item"><a href="UserManagement.aspx"><span>👤</span> <span>User Management</span></a></li>
                 <li id="navAudit" runat="server" class="nav-item"><a href="#"><span>⏱️</span> <span>Audit Logs</span></a></li>
             </ul>
 
