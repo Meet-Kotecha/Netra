@@ -1,4 +1,4 @@
-﻿-- NETRA Database Schema Design (Normalized to 3NF)
+﻿-- NETRA Relational Database Schema Design (Normalized to 3NF)
 
 CREATE TABLE Departments (
     DepartmentID INT IDENTITY(1,1) PRIMARY KEY,
