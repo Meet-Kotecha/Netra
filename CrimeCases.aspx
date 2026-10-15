@@ -265,6 +265,13 @@
         .page-btn:hover {
             color: #00d2ff;
         }
+
+        .no-data-row {
+            text-align: center;
+            color: #64748b;
+            padding: 25px !important;
+            font-size: 0.85rem;
+        }
     </style>
 </asp:Content>
 
@@ -278,53 +285,53 @@
         <a href="RegisterCase.aspx" class="btn-add-case">➕ Add New Case</a>
     </div>
 
-    <!-- Filter Toolbar -->
+    <!-- Filter Toolbar with Client-Side Events -->
     <div class="filter-toolbar">
         <div class="filter-row">
             <div class="filter-group search-group">
                 <span class="filter-label">SEARCH</span>
-                <input type="text" class="filter-input" placeholder="🔍 ID, Title, Suspect..." />
+                <input type="text" id="txtSearch" class="filter-input" placeholder="🔍 ID, Title, Location, Suspect..." onkeyup="filterCasesTable()" />
             </div>
 
             <div class="filter-group">
                 <span class="filter-label">CRIME TYPE</span>
-                <select class="filter-select">
-                    <option>All Types</option>
-                    <option>Cyber Espionage</option>
-                    <option>Financial Fraud</option>
-                    <option>Narcotics Distribution</option>
-                    <option>Vehicle Theft</option>
-                    <option>Smuggling</option>
+                <select id="ddlCrimeType" class="filter-select" onchange="filterCasesTable()">
+                    <option value="">All Types</option>
+                    <option value="Cyber Espionage">Cyber Espionage</option>
+                    <option value="Financial Fraud">Financial Fraud</option>
+                    <option value="Narcotics Distribution">Narcotics Distribution</option>
+                    <option value="Vehicle Theft">Vehicle Theft</option>
+                    <option value="Smuggling">Smuggling</option>
                 </select>
             </div>
 
             <div class="filter-group">
                 <span class="filter-label">DISTRICT</span>
-                <select class="filter-select">
-                    <option>All Districts</option>
-                    <option>District 1</option>
-                    <option>District 2</option>
-                    <option>District 3</option>
+                <select id="ddlDistrict" class="filter-select" onchange="filterCasesTable()">
+                    <option value="">All Districts</option>
+                    <option value="District 1">District 1</option>
+                    <option value="District 2">District 2</option>
+                    <option value="District 3">District 3</option>
                 </select>
             </div>
 
             <div class="filter-group">
                 <span class="filter-label">STATUS</span>
-                <select class="filter-select">
-                    <option>All</option>
-                    <option>Active</option>
-                    <option>Open</option>
-                    <option>Closed</option>
+                <select id="ddlStatus" class="filter-select" onchange="filterCasesTable()">
+                    <option value="">All</option>
+                    <option value="Active">Active</option>
+                    <option value="Open">Open</option>
+                    <option value="Closed">Closed</option>
                 </select>
             </div>
 
             <div class="filter-group">
                 <span class="filter-label">SEVERITY</span>
-                <select class="filter-select">
-                    <option>All</option>
-                    <option>Critical</option>
-                    <option>High</option>
-                    <option>Medium</option>
+                <select id="ddlSeverity" class="filter-select" onchange="filterCasesTable()">
+                    <option value="">All</option>
+                    <option value="CRITICAL">Critical</option>
+                    <option value="HIGH">High</option>
+                    <option value="MEDIUM">Medium</option>
                 </select>
             </div>
 
@@ -332,7 +339,7 @@
                 <span class="filter-label">DATE RANGE</span>
                 <div style="display:flex; gap:6px;">
                     <input type="text" class="filter-input" value="📅 Last 30 Days" readonly />
-                    <button type="button" class="btn-filter-icon">⚙️</button>
+                    <button type="button" class="btn-filter-icon" onclick="resetFilters()">🔄</button>
                 </div>
             </div>
         </div>
@@ -340,7 +347,7 @@
 
     <!-- Cases Data Table -->
     <div class="table-card">
-        <table class="cases-table">
+        <table class="cases-table" id="tblCases">
             <thead>
                 <tr>
                     <th>CASE ID</th>
@@ -355,72 +362,124 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr class="case-row">
                     <td><a href="#" class="case-id-link">C-24-8901</a></td>
-                    <td>Cyber Espionage</td>
+                    <td class="col-type">Cyber Espionage</td>
                     <td>2024-10-24</td>
-                    <td>Tech Hub Sector 4, Server Room</td>
-                    <td>District 1</td>
-                    <td><span class="badge-severity severity-critical">CRITICAL</span></td>
-                    <td><div class="status-pill"><span class="status-dot dot-active"></span> Active</div></td>
+                    <td class="col-location">Tech Hub Sector 4, Server Room</td>
+                    <td class="col-district">District 1</td>
+                    <td class="col-severity"><span class="badge-severity severity-critical">CRITICAL</span></td>
+                    <td class="col-status"><div class="status-pill"><span class="status-dot dot-active"></span> Active</div></td>
                     <td><div class="investigator-cell"><div class="investigator-avatar">AS</div> A. Silva</div></td>
                     <td><a href="#" style="color:#64748b; text-decoration:none;">•••</a></td>
                 </tr>
-                <tr>
+                <tr class="case-row">
                     <td><a href="#" class="case-id-link">C-24-8894</a></td>
-                    <td>Financial Fraud</td>
+                    <td class="col-type">Financial Fraud</td>
                     <td>2024-10-22</td>
-                    <td>Global Trade Bank, Main Branch</td>
-                    <td>District 2</td>
-                    <td><span class="badge-severity severity-high">HIGH</span></td>
-                    <td><div class="status-pill"><span class="status-dot dot-open"></span> Open</div></td>
+                    <td class="col-location">Global Trade Bank, Main Branch</td>
+                    <td class="col-district">District 2</td>
+                    <td class="col-severity"><span class="badge-severity severity-high">HIGH</span></td>
+                    <td class="col-status"><div class="status-pill"><span class="status-dot dot-open"></span> Open</div></td>
                     <td><div class="investigator-cell"><div class="investigator-avatar">MK</div> M. Kovač</div></td>
                     <td><a href="#" style="color:#64748b; text-decoration:none;">•••</a></td>
                 </tr>
-                <tr>
+                <tr class="case-row">
                     <td><a href="#" class="case-id-link">C-24-8870</a></td>
-                    <td>Narcotics Distribution</td>
+                    <td class="col-type">Narcotics Distribution</td>
                     <td>2024-10-18</td>
-                    <td>Port Authority, Warehouse 42</td>
-                    <td>District 3</td>
-                    <td><span class="badge-severity severity-high">HIGH</span></td>
-                    <td><div class="status-pill"><span class="status-dot dot-active"></span> Active</div></td>
+                    <td class="col-location">Port Authority, Warehouse 42</td>
+                    <td class="col-district">District 3</td>
+                    <td class="col-severity"><span class="badge-severity severity-high">HIGH</span></td>
+                    <td class="col-status"><div class="status-pill"><span class="status-dot dot-active"></span> Active</div></td>
                     <td><div class="investigator-cell"><div class="investigator-avatar">JR</div> J. Reyes</div></td>
                     <td><a href="#" style="color:#64748b; text-decoration:none;">•••</a></td>
                 </tr>
-                <tr>
+                <tr class="case-row">
                     <td><a href="#" class="case-id-link">C-24-8851</a></td>
-                    <td>Vehicle Theft</td>
+                    <td class="col-type">Vehicle Theft</td>
                     <td>2024-10-15</td>
-                    <td>Residential Block C, Underpass</td>
-                    <td>District 1</td>
-                    <td><span class="badge-severity severity-medium">MEDIUM</span></td>
-                    <td><div class="status-pill"><span class="status-dot dot-closed"></span> Closed</div></td>
+                    <td class="col-location">Residential Block C, Underpass</td>
+                    <td class="col-district">District 1</td>
+                    <td class="col-severity"><span class="badge-severity severity-medium">MEDIUM</span></td>
+                    <td class="col-status"><div class="status-pill"><span class="status-dot dot-closed"></span> Closed</div></td>
                     <td><div class="investigator-cell"><div class="investigator-avatar">AS</div> A. Silva</div></td>
                     <td><a href="#" style="color:#64748b; text-decoration:none;">•••</a></td>
                 </tr>
-                <tr>
+                <tr class="case-row">
                     <td><a href="#" class="case-id-link">C-24-8842</a></td>
-                    <td>Smuggling</td>
+                    <td class="col-type">Smuggling</td>
                     <td>2024-10-12</td>
-                    <td>Border Checkpoint Alpha</td>
-                    <td>District 3</td>
-                    <td><span class="badge-severity severity-critical">CRITICAL</span></td>
-                    <td><div class="status-pill"><span class="status-dot dot-active"></span> Active</div></td>
+                    <td class="col-location">Border Checkpoint Alpha</td>
+                    <td class="col-district">District 3</td>
+                    <td class="col-severity"><span class="badge-severity severity-critical">CRITICAL</span></td>
+                    <td class="col-status"><div class="status-pill"><span class="status-dot dot-active"></span> Active</div></td>
                     <td><div class="investigator-cell"><div class="investigator-avatar">JR</div> J. Reyes</div></td>
                     <td><a href="#" style="color:#64748b; text-decoration:none;">•••</a></td>
+                </tr>
+                <!-- Dynamic No Results Message Row -->
+                <tr id="trNoData" style="display:none;">
+                    <td colspan="9" class="no-data-row">⚠️ No matching cases found for your selected filters.</td>
                 </tr>
             </tbody>
         </table>
 
         <!-- Footer Pagination -->
         <div class="table-footer">
-            <span>Showing 1-5 of 1,248 cases</span>
+            <span id="lblCaseCounter">Showing 5 of 5 cases</span>
             <div class="pagination-controls">
                 <button type="button" class="page-btn">❮</button>
-                <span style="color:#f8fafc; font-weight:600;">Page 1 of 250</span>
+                <span style="color:#f8fafc; font-weight:600;">Page 1 of 1</span>
                 <button type="button" class="page-btn">❯</button>
             </div>
         </div>
     </div>
+
+    <!-- Client-Side Real-Time Filter Logic Script -->
+    <script>
+        function filterCasesTable() {
+            const searchVal = document.getElementById("txtSearch").value.toLowerCase().trim();
+            const crimeTypeVal = document.getElementById("ddlCrimeType").value.toLowerCase();
+            const districtVal = document.getElementById("ddlDistrict").value.toLowerCase();
+            const statusVal = document.getElementById("ddlStatus").value.toLowerCase();
+            const severityVal = document.getElementById("ddlSeverity").value.toLowerCase();
+
+            const rows = document.querySelectorAll(".case-row");
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const rowText = row.innerText.toLowerCase();
+                const crimeType = row.querySelector(".col-type").innerText.toLowerCase();
+                const district = row.querySelector(".col-district").innerText.toLowerCase();
+                const status = row.querySelector(".col-status").innerText.toLowerCase();
+                const severity = row.querySelector(".col-severity").innerText.toLowerCase();
+
+                const matchesSearch = searchVal === "" || rowText.includes(searchVal);
+                const matchesType = crimeTypeVal === "" || crimeType === crimeTypeVal;
+                const matchesDistrict = districtVal === "" || district === districtVal;
+                const matchesStatus = statusVal === "" || status.includes(statusVal);
+                const matchesSeverity = severityVal === "" || severity.includes(severityVal);
+
+                if (matchesSearch && matchesType && matchesDistrict && matchesStatus && matchesSeverity) {
+                    row.style.display = "";
+                    visibleCount++;
+                } else {
+                    row.style.display = "none";
+                }
+            });
+
+            // Toggle No Data row
+            document.getElementById("trNoData").style.display = (visibleCount === 0) ? "" : "none";
+            document.getElementById("lblCaseCounter").innerText = `Showing ${visibleCount} of 5 cases`;
+        }
+
+        function resetFilters() {
+            document.getElementById("txtSearch").value = "";
+            document.getElementById("ddlCrimeType").value = "";
+            document.getElementById("ddlDistrict").value = "";
+            document.getElementById("ddlStatus").value = "";
+            document.getElementById("ddlSeverity").value = "";
+            filterCasesTable();
+        }
+    </script>
 </asp:Content>
