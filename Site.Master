@@ -286,7 +286,7 @@
 
             <div class="sidebar-footer">
                 <ul class="nav-list" style="padding:0;">
-                    <li id="navSettings" runat="server" class="nav-item"><a href="#"><span>⚙️</span> <span>Settings</span></a></li>
+                    <li id="navSettings" runat="server" class="nav-item"><a href="Settings.aspx"><span>⚙️</span> <span>Settings</span></a></li>
                     <li id="navSupport" runat="server" class="nav-item"><a href="#"><span>❓</span> <span>Support</span></a></li>
                 </ul>
             </div>
@@ -304,7 +304,7 @@
                     </div>
                     <a href="Alerts.aspx" class="icon-btn" title="View Real-Time Alerts">🔔</a>
                     <button type="button" class="icon-btn" title="Security Status">🛡️</button>
-                    <div class="user-profile" onclick="window.location.href='PersonProfile.aspx';">
+                    <div class="user-profile" onclick="window.location.href='Settings.aspx';">
                         <div class="avatar" title="Rohan Siddhpura">RS</div>
                     </div>
                 </div>
