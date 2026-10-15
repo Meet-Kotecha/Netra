@@ -2,7 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        /* Top Page Header */
         .page-header-row {
             margin-bottom: 24px;
         }
@@ -33,7 +32,6 @@
             }
         }
 
-        /* Left Settings Navigation Card */
         .settings-nav-card {
             background-color: #0b1320;
             border: 1px solid #1e293b;
@@ -53,6 +51,7 @@
             cursor: pointer;
             margin-bottom: 4px;
             transition: all 0.2s ease;
+            text-decoration: none;
         }
 
         .settings-nav-item:hover {
@@ -67,7 +66,6 @@
             border-left: 3px solid #38bdf8;
         }
 
-        /* Right Panel Glass Card */
         .settings-content-card {
             background-color: #0b1320;
             border: 1px solid #1e293b;
@@ -87,7 +85,6 @@
             padding-bottom: 14px;
         }
 
-        /* Profile Picture Block */
         .avatar-upload-row {
             display: flex;
             align-items: center;
@@ -163,7 +160,6 @@
             color: #ef4444;
         }
 
-        /* Form Grid */
         .form-fields-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -213,7 +209,6 @@
             cursor: not-allowed;
         }
 
-        /* Save Actions Footer */
         .panel-footer-actions {
             display: flex;
             justify-content: flex-end;
@@ -254,21 +249,21 @@
     <div class="settings-grid">
         <!-- Left Navigation Panel -->
         <div class="settings-nav-card">
-            <div class="settings-nav-item active" onclick="switchTab(this, 'profileTab')">
+            <a href="Settings.aspx" class="settings-nav-item active">
                 <span>👤</span> Profile
-            </div>
-            <div class="settings-nav-item" onclick="switchTab(this, 'securityTab')">
+            </a>
+            <a href="SecuritySettings.aspx" class="settings-nav-item">
                 <span>🛡️</span> Security
-            </div>
-            <div class="settings-nav-item" onclick="switchTab(this, 'notificationsTab')">
+            </a>
+            <a href="#" class="settings-nav-item" onclick="alert('Notification preferences panel coming soon.'); return false;">
                 <span>🔔</span> Notifications
-            </div>
-            <div class="settings-nav-item" onclick="switchTab(this, 'appearanceTab')">
+            </a>
+            <a href="#" class="settings-nav-item" onclick="alert('Appearance preferences panel coming soon.'); return false;">
                 <span>🎨</span> Appearance
-            </div>
-            <div class="settings-nav-item" onclick="switchTab(this, 'systemTab')">
+            </a>
+            <a href="#" class="settings-nav-item" onclick="alert('System preferences panel coming soon.'); return false;">
                 <span>💻</span> System Preferences
-            </div>
+            </a>
         </div>
 
         <!-- Right Content Panel -->
@@ -328,13 +323,6 @@
 
     <!-- Client Script -->
     <script>
-        function switchTab(elem, tabName) {
-            document.querySelectorAll('.settings-nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            elem.classList.add('active');
-        }
-
         function previewNewAvatar(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
