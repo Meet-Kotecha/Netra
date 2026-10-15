@@ -22,6 +22,7 @@ namespace Netra
             if (navPersons != null) navPersons.Attributes["class"] = "nav-item";
             if (navNetwork != null) navNetwork.Attributes["class"] = "nav-item";
             if (navImage != null) navImage.Attributes["class"] = "nav-item";
+            if (navRisk != null) navRisk.Attributes["class"] = "nav-item";
 
             // Dynamic route matching
             if (rawPath.EndsWith("/") || rawPath.Contains("/default"))
@@ -55,6 +56,10 @@ namespace Netra
             else if (rawPath.Contains("/imageinvestigation"))
             {
                 if (navImage != null) navImage.Attributes["class"] = "nav-item active";
+            }
+            else if (rawPath.Contains("/riskanalysis"))
+            {
+                if (navRisk != null) navRisk.Attributes["class"] = "nav-item active";
             }
         }
     }
