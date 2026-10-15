@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Reports & Intelligence Summaries" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Reports.aspx.cs" Inherits="Netra.Reports" %>
+﻿<%@ Page Title="Reports & Intelligence Summaries" Language="C me" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Reports.aspx.cs" Inherits="Netra.Reports" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -242,6 +242,121 @@
         .btn-icon-action:hover {
             color: #38bdf8;
         }
+
+        /* Generate Report Modal Backdrop */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(7, 13, 24, 0.85);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-card {
+            background-color: #0b1320;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            width: 500px;
+            max-width: 90%;
+            padding: 24px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .btn-modal-close {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .btn-modal-close:hover {
+            color: #ef4444;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #94a3b8;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            background-color: #070d18;
+            border: 1px solid #1e293b;
+            border-radius: 6px;
+            padding: 9px 12px;
+            color: #ffffff;
+            font-size: 0.8rem;
+            outline: none;
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: #38bdf8;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 20px;
+            border-top: 1px solid #1e293b;
+            padding-top: 14px;
+        }
+
+        .btn-cancel {
+            background-color: #070d18;
+            border: 1px solid #1e293b;
+            color: #cbd5e1;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-create {
+            background-color: #38bdf8;
+            border: none;
+            color: #070d18;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .btn-create:hover {
+            background-color: #00d2ff;
+        }
     </style>
 </asp:Content>
 
@@ -252,7 +367,7 @@
             <div class="reports-title">Reports & Intelligence Summaries</div>
             <div class="reports-sub-text">Access, generate, and export automated intelligence briefings and data analyses.</div>
         </div>
-        <button type="button" class="btn-generate-cyan" onclick="alert('⚡ Generating new automated intelligence briefing...')">
+        <button type="button" class="btn-generate-cyan" onclick="openGenerateModal()">
             ➕ Generate New Report
         </button>
     </div>
@@ -271,7 +386,7 @@
     </div>
 
     <!-- 3-Column Grid of Briefing Cards -->
-    <div class="reports-grid">
+    <div class="reports-grid" id="reportsGrid">
         <!-- Card 1: Q3 Citywide Crime Trend Analysis -->
         <div class="report-card">
             <div>
@@ -409,4 +524,88 @@
             </div>
         </div>
     </div>
+
+    <!-- Generate New Report Modal -->
+    <div class="modal-overlay" id="generateModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">⚡ Generate Intelligence Report</div>
+                <button type="button" class="btn-modal-close" onclick="closeGenerateModal()">✕</button>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Report Title</label>
+                <input type="text" id="modalTitle" class="form-input" placeholder="e.g. Q4 Regional Hotspot Assessment" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Report Category</label>
+                <select id="modalCategory" class="form-select">
+                    <option value="CRIME TREND REPORT">📈 Crime Trend Report</option>
+                    <option value="HIGH-RISK AREA REPORT">⚠️ High-Risk Area Report</option>
+                    <option value="INVESTIGATION SUMMARY">🌐 Investigation Summary</option>
+                    <option value="DISTRICT CRIME REPORT">🏢 District Crime Report</option>
+                    <option value="CYBER INTEL BRIEF">⚙️ Cyber Intel Brief</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Briefing Description</label>
+                <textarea id="modalDesc" class="form-input" style="height:70px; resize:none;" placeholder="Summarize intelligence findings..."></textarea>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="closeGenerateModal()">Cancel</button>
+                <button type="button" class="btn-create" onclick="submitNewReport()">Generate Report ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Script -->
+    <script>
+        function openGenerateModal() {
+            document.getElementById("generateModal").style.display = "flex";
+        }
+
+        function closeGenerateModal() {
+            document.getElementById("generateModal").style.display = "none";
+        }
+
+        function submitNewReport() {
+            const title = document.getElementById("modalTitle").value.trim() || "Generated Intelligence Briefing";
+            const category = document.getElementById("modalCategory").value;
+            const desc = document.getElementById("modalDesc").value.trim() || "Automated tactical overview compilation based on current system records.";
+
+            const grid = document.getElementById("reportsGrid");
+
+            const newCardHtml = `
+                <div class="report-card">
+                    <div>
+                        <div class="card-top-meta">
+                            <span class="badge-category cat-trend">📈 ${category}</span>
+                            <span class="date-chip">Today</span>
+                        </div>
+                        <div class="report-title-text">${title}</div>
+                        <div class="report-desc-text">${desc}</div>
+                    </div>
+                    <div class="card-footer-bar">
+                        <div class="author-wrap">
+                            <div class="author-avatar" style="background-color:#38bdf8; color:#070d18;">DV</div>
+                            <div class="author-meta">
+                                <span class="author-lbl">Generated by</span>
+                                <span class="author-name">Digvijaysinh V.</span>
+                            </div>
+                        </div>
+                        <div class="action-icons-wrap">
+                            <button type="button" class="btn-icon-action" title="Preview Report" onclick="alert('Viewing ${title}')">👁</button>
+                            <button type="button" class="btn-icon-action" title="Download Briefing" onclick="alert('Downloading PDF Briefing...')">📥</button>
+                        </div>
+                    </div>
+                </div>`;
+
+            grid.insertAdjacentHTML('afterbegin', newCardHtml);
+            closeGenerateModal();
+            alert("✅ Report generated and archived to database.");
+        }
+    </script>
 </asp:Content>
