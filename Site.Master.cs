@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 
 namespace Netra
 {
@@ -7,33 +6,31 @@ namespace Netra
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                SetActiveMenu();
-            }
+            SetActiveMenu();
         }
 
         private void SetActiveMenu()
         {
-            string currentPage = Path.GetFileName(Request.Url.AbsolutePath).ToLower();
+            // Get raw absolute path in lower case
+            string rawPath = Request.Url.AbsolutePath.ToLower();
 
-            // Clear active class from all
+            // Clear active class from all items
             navDashboard.Attributes["class"] = "nav-item";
             navCrimeCases.Attributes["class"] = "nav-item";
-            navPersons.Attributes["class"] = "nav-item";
+            if (navPersons != null) navPersons.Attributes["class"] = "nav-item";
 
-            // Highlight current page
-            if (currentPage == "default.aspx" || string.IsNullOrEmpty(currentPage))
+            // Dynamic route matching
+            if (rawPath.EndsWith("/") || rawPath.Contains("/default") || rawPath.Contains("/default.aspx"))
             {
                 navDashboard.Attributes["class"] = "nav-item active";
             }
-            else if (currentPage == "crimecases.aspx" || currentPage == "registercase.aspx")
+            else if (rawPath.Contains("/crimecases") || rawPath.Contains("/registercase"))
             {
                 navCrimeCases.Attributes["class"] = "nav-item active";
             }
-            else if (currentPage == "personsdirectory.aspx")
+            else if (rawPath.Contains("/personsdirectory"))
             {
-                navPersons.Attributes["class"] = "nav-item active";
+                if (navPersons != null) navPersons.Attributes["class"] = "nav-item active";
             }
         }
     }
