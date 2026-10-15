@@ -99,7 +99,6 @@
             }
         }
 
-        /* Generic Dark Glass Cards */
         .ws-card {
             background-color: #0b1320;
             border: 1px solid #1e293b;
@@ -124,7 +123,6 @@
             line-height: 1.5;
         }
 
-        /* Victim Info Grid */
         .victim-row {
             display: flex;
             align-items: center;
@@ -158,7 +156,6 @@
             font-weight: 600;
         }
 
-        /* Incident Location Mini Map */
         .mini-map-container {
             width: 100%;
             height: 150px;
@@ -186,7 +183,6 @@
             box-shadow: 0 0 12px #00d2ff, 0 0 20px #00d2ff;
         }
 
-        /* Modus Operandi (M.O.) Tags Row */
         .mo-card {
             background-color: #0b1320;
             border: 1px solid #1e293b;
@@ -215,7 +211,6 @@
             gap: 6px;
         }
 
-        /* Investigation Notes & Timeline Middle Grid */
         .workspace-mid-grid {
             display: grid;
             grid-template-columns: 1fr 310px;
@@ -338,7 +333,6 @@
             color: #070d18;
         }
 
-        /* Right Persons & Timeline Sidebar */
         .sidebar-card {
             background-color: #0b1320;
             border: 1px solid #1e293b;
@@ -387,7 +381,6 @@
             color: #64748b;
         }
 
-        /* Timeline Items */
         .timeline-list {
             padding-left: 10px;
             border-left: 2px solid #1e293b;
@@ -424,7 +417,6 @@
             font-weight: 600;
         }
 
-        /* Bottom Evidence Gallery Panel */
         .evidence-card {
             background-color: #0b1320;
             border: 1px solid #1e293b;
@@ -533,7 +525,6 @@
 
     <!-- Top Grid Section (Case Overview, Victim Info, Location Map) -->
     <div class="workspace-top-grid">
-        <!-- 1. Case Overview -->
         <div class="ws-card">
             <div class="ws-card-header">
                 <span>📋 Case Overview</span>
@@ -545,7 +536,6 @@
             </div>
         </div>
 
-        <!-- 2. Victim Information -->
         <div class="ws-card">
             <div class="ws-card-header">
                 <span>👤 Victim Information</span>
@@ -567,7 +557,6 @@
             </div>
         </div>
 
-        <!-- 3. Incident Location Mini Map -->
         <div class="ws-card">
             <div class="ws-card-header">
                 <span>📍 Incident Location</span>
@@ -579,7 +568,7 @@
         </div>
     </div>
 
-    <!-- Modus Operandi (M.O.) Tags -->
+    <!-- Modus Operandi Tags -->
     <div class="mo-card">
         <div style="font-size:0.85rem; font-weight:700; color:#ffffff; display:flex; align-items:center; gap:8px;">
             ⚙️ Modus Operandi (M.O.)
@@ -592,9 +581,8 @@
         </div>
     </div>
 
-    <!-- Middle Grid Section (Notes & Sidebar Persons/Timeline) -->
+    <!-- Middle Grid Section (Notes & Persons/Timeline) -->
     <div class="workspace-mid-grid">
-        <!-- Left: Investigation Notes Stream -->
         <div class="notes-card">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
                 <div style="font-size:0.9rem; font-weight:700; color:#ffffff; display:flex; align-items:center; gap:8px;">
@@ -605,7 +593,6 @@
                 </div>
             </div>
 
-            <!-- Note 1 -->
             <div class="note-item">
                 <div class="note-avatar">AS</div>
                 <div class="note-content">
@@ -620,7 +607,6 @@
                 </div>
             </div>
 
-            <!-- Note 2 -->
             <div class="note-item">
                 <div class="note-avatar" style="background-color:#1e293b; color:#94a3b8;">SYS</div>
                 <div class="note-content">
@@ -634,16 +620,13 @@
                 </div>
             </div>
 
-            <!-- Input Note Box -->
             <div class="note-input-box">
                 <input type="text" id="txtNewNote" placeholder="Add a new note or update..." />
                 <button type="button" class="btn-send-note" onclick="addNote()">➤</button>
             </div>
         </div>
 
-        <!-- Right: Persons of Interest & Timeline -->
         <div>
-            <!-- Persons of Interest -->
             <div class="sidebar-card">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
                     <span style="font-size:0.85rem; font-weight:700; color:#ffffff;">👥 Persons of Interest</span>
@@ -669,7 +652,6 @@
                 </div>
             </div>
 
-            <!-- Timeline -->
             <div class="sidebar-card">
                 <div style="font-size:0.85rem; font-weight:700; color:#ffffff; margin-bottom:10px;">
                     📈 Timeline
