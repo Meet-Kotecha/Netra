@@ -261,7 +261,7 @@
             <a href="AppearanceSettings.aspx" class="settings-nav-item">
                 <span>🎨</span> Appearance
             </a>
-            <a href="#" class="settings-nav-item" onclick="alert('System Preferences panel coming soon.'); return false;">
+            <a href="SystemPreferences.aspx" class="settings-nav-item">
                 <span>💻</span> System Preferences
             </a>
         </div>
