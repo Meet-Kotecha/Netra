@@ -13,7 +13,6 @@ namespace Netra
         {
             string rawPath = Request.Url.AbsolutePath.ToLower();
 
-            // Reset active status from all navigation links
             if (navDashboard != null) navDashboard.Attributes["class"] = "nav-item";
             if (navCrimeCases != null) navCrimeCases.Attributes["class"] = "nav-item";
             if (navCrimeMap != null) navCrimeMap.Attributes["class"] = "nav-item";
@@ -24,8 +23,8 @@ namespace Netra
             if (navImage != null) navImage.Attributes["class"] = "nav-item";
             if (navRisk != null) navRisk.Attributes["class"] = "nav-item";
             if (navAlerts != null) navAlerts.Attributes["class"] = "nav-item";
+            if (navAI != null) navAI.Attributes["class"] = "nav-item";
 
-            // Dynamic route matching
             if (rawPath.EndsWith("/") || rawPath.Contains("/default"))
             {
                 if (navDashboard != null) navDashboard.Attributes["class"] = "nav-item active";
@@ -65,6 +64,10 @@ namespace Netra
             else if (rawPath.Contains("/alerts"))
             {
                 if (navAlerts != null) navAlerts.Attributes["class"] = "nav-item active";
+            }
+            else if (rawPath.Contains("/aiassistant"))
+            {
+                if (navAI != null) navAI.Attributes["class"] = "nav-item active";
             }
         }
     }

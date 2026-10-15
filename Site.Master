@@ -277,7 +277,7 @@
                 <li id="navImage" runat="server" class="nav-item"><a href="ImageInvestigation.aspx"><span>🖼️</span> <span>Image Investigation</span></a></li>
                 <li id="navRisk" runat="server" class="nav-item"><a href="RiskAnalysis.aspx"><span>📊</span> <span>Risk & Anomaly Analysis</span></a></li>
                 <li id="navAlerts" runat="server" class="nav-item"><a href="Alerts.aspx"><span>🔔</span> <span>Alerts</span></a></li>
-                <li id="navAI" runat="server" class="nav-item"><a href="#"><span>🤖</span> <span>AI Assistant</span></a></li>
+                <li id="navAI" runat="server" class="nav-item"><a href="AIAssistant.aspx"><span>🤖</span> <span>AI Assistant</span></a></li>
                 <li id="navReports" runat="server" class="nav-item"><a href="#"><span>📋</span> <span>Reports</span></a></li>
                 <li id="navImport" runat="server" class="nav-item"><a href="#"><span>☁️</span> <span>Bulk Data Import</span></a></li>
                 <li id="navUsers" runat="server" class="nav-item"><a href="#"><span>👤</span> <span>User Management</span></a></li>
@@ -302,11 +302,10 @@
                         <span class="search-icon">🔍</span>
                         <input type="text" placeholder="Global Search..." />
                     </div>
-                    <!-- Notification Bell Link to Alerts Page -->
                     <a href="Alerts.aspx" class="icon-btn" title="View Real-Time Alerts">🔔</a>
                     <button type="button" class="icon-btn" title="Security Status">🛡️</button>
                     <div class="user-profile" onclick="window.location.href='PersonProfile.aspx';">
-                        <div class="avatar" title="Digvijaysinh Vaghela">DV</div>
+                        <div class="avatar" title="Meet Kotecha (Admin)">MK</div>
                     </div>
                 </div>
             </header>
