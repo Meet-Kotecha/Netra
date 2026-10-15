@@ -1,44 +1,25 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Netra._Default" %>
+﻿<%@ Page Title="Intelligence Dashboard" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Netra._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <h2 style="margin-bottom: 5px;">Neural Threat Intelligence Dashboard</h2>
+    <p style="color:#94a3b8; margin-bottom:25px;">Real-time crime threat overview and active investigation metrics.</p>
 
-    <main>
-        <section class="row" aria-labelledby="aspnetTitle">
-            <h1 id="aspnetTitle">ASP.NET</h1>
-            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-            <p><a href="http://www.asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-        </section>
-
-        <div class="row">
-            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-                <h2 id="gettingStartedTitle">Getting started</h2>
-                <p>
-                    ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-                A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="librariesTitle">
-                <h2 id="librariesTitle">Get more libraries</h2>
-                <p>
-                    NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="hostingTitle">
-                <h2 id="hostingTitle">Web Hosting</h2>
-                <p>
-                    You can easily find a web hosting company that offers the right mix of features and price for your applications.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-                </p>
-            </section>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:20px;">
+        <div style="background-color:#1e293b; padding:20px; border-radius:8px; border:1px solid #334155;">
+            <span style="color:#94a3b8; font-size:0.85rem;">TOTAL CASES RECORDED</span>
+            <h1 style="color:#06b6d4; margin-top:10px;">1,248</h1>
         </div>
-    </main>
-
+        <div style="background-color:#1e293b; padding:20px; border-radius:8px; border:1px solid #334155;">
+            <span style="color:#94a3b8; font-size:0.85rem;">CRITICAL SEVERITY</span>
+            <h1 style="color:#ef4444; margin-top:10px;">42</h1>
+        </div>
+        <div style="background-color:#1e293b; padding:20px; border-radius:8px; border:1px solid #334155;">
+            <span style="color:#94a3b8; font-size:0.85rem;">IDENTIFIED SUSPECTS</span>
+            <h1 style="color:#f59e0b; margin-top:10px;">315</h1>
+        </div>
+        <div style="background-color:#1e293b; padding:20px; border-radius:8px; border:1px solid #334155;">
+            <span style="color:#94a3b8; font-size:0.85rem;">SYSTEM STATUS</span>
+            <h1 style="color:#10b981; margin-top:10px;">ONLINE</h1>
+        </div>
+    </div>
 </asp:Content>

@@ -1,132 +1,132 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Netra.Site" %>
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - NETRA Neural Threat Intelligence</title>
+    <title><%: Page.Title %> - NETRA Intelligence</title>
     
-    <!-- Dark Theme Styles -->
     <style>
-        :root {
-            --bg-dark: #0b1320;
-            --sidebar-bg: #0f172a;
-            --card-bg: #1e293b;
-            --accent-cyan: #06b6d4;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background-color: #0f172a;
+            color: #f8fafc;
             display: flex;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
         }
 
-        .wrapper { display: flex; width: 100%; height: 100%; }
-
-        /* Sidebar Layout */
+        /* Sidebar Navigation */
         .sidebar {
             width: 250px;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--border-color);
+            background-color: #1e293b;
+            border-right: 1px solid #334155;
+            padding: 20px 0;
             display: flex;
             flex-direction: column;
-            padding: 15px;
-            overflow-y: auto;
+            position: fixed;
+            height: 100vh;
         }
 
-        .brand-title {
-            font-size: 1.3rem;
+        .brand-header {
+            padding: 0 20px 20px 20px;
+            border-bottom: 1px solid #334155;
+            font-size: 1.4rem;
             font-weight: bold;
-            color: var(--accent-cyan);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #06b6d4;
+            letter-spacing: 1.5px;
         }
 
-        .nav-menu { list-style: none; padding: 0; margin: 0; }
-        .nav-item { margin-bottom: 4px; }
-        .nav-link {
-            display: block;
-            padding: 10px 12px;
-            color: var(--text-muted);
+        .nav-menu {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .nav-menu li a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #94a3b8;
             text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: all 0.2s ease;
         }
-        .nav-link:hover, .nav-link.active {
-            background-color: #1e293b;
-            color: var(--accent-cyan);
+
+        .nav-menu li a:hover {
+            background-color: #334155;
+            color: #06b6d4;
         }
 
-        /* Main Content Container */
-        .main-content {
-            flex: 1;
+        /* Main Area */
+        .main-wrapper {
+            margin-left: 250px;
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
-            overflow-y: auto;
         }
 
         .top-navbar {
-            height: 60px;
-            background-color: var(--sidebar-bg);
-            border-bottom: 1px solid var(--border-color);
+            background-color: #1e293b;
+            border-bottom: 1px solid #334155;
+            padding: 15px 30px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
+            align-items: center;
         }
 
-        .content-body { padding: 20px; flex: 1; }
+        .content-body {
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        .footer {
+            padding: 15px 30px;
+            border-top: 1px solid #334155;
+            color: #64748b;
+            font-size: 0.85rem;
+            text-align: center;
+        }
     </style>
-    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="wrapper">
-            <!-- Navigation Sidebar -->
-            <aside class="sidebar">
-                <div class="brand-title">👁 NETRA</div>
-                <ul class="nav-menu">
-                    <li class="nav-item"><a href="Dashboard.aspx" class="nav-link">Dashboard</a></li>
-                    <li class="nav-item"><a href="CrimeCases.aspx" class="nav-link">Crime Cases</a></li>
-                    <li class="nav-item"><a href="RegisterCase.aspx" class="nav-link">Register New Case</a></li>
-                    <li class="nav-item"><a href="CrimeMap.aspx" class="nav-link">Crime Map</a></li>
-                    <li class="nav-item"><a href="Analytics.aspx" class="nav-link">Analytics</a></li>
-                    <li class="nav-item"><a href="InvestigationWorkspace.aspx" class="nav-link">Investigation Workspace</a></li>
-                    <li class="nav-item"><a href="PersonsDirectory.aspx" class="nav-link">Persons & Suspects</a></li>
-                    <li class="nav-item"><a href="NetworkAnalysis.aspx" class="nav-link">Network Analysis</a></li>
-                    <li class="nav-item"><a href="ImageInvestigation.aspx" class="nav-link">Image Investigation</a></li>
-                    <li class="nav-item"><a href="RiskAnalysis.aspx" class="nav-link">Risk & Anomaly Analysis</a></li>
-                    <li class="nav-item"><a href="Alerts.aspx" class="nav-link">Alerts</a></li>
-                    <li class="nav-item"><a href="AIAssistant.aspx" class="nav-link">AI Assistant</a></li>
-                    <li class="nav-item"><a href="Reports.aspx" class="nav-link">Reports</a></li>
-                    <li class="nav-item"><a href="BulkImport.aspx" class="nav-link">Bulk Data Import</a></li>
-                    <li class="nav-item"><a href="UserManagement.aspx" class="nav-link">User Management</a></li>
-                    <li class="nav-item"><a href="AuditLogs.aspx" class="nav-link">Audit Logs</a></li>
-                    <li class="nav-item"><a href="Settings.aspx" class="nav-link">Settings</a></li>
-                    <li class="nav-item"><a href="Support.aspx" class="nav-link">Support</a></li>
-                </ul>
-            </aside>
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="brand-header">
+                🛡️ NETRA
+            </div>
+            <ul class="nav-menu">
+                <li><a href="Default.aspx">📊 Dashboard</a></li>
+                <li><a href="RegisterCase.aspx">📄 Register Crime Case</a></li>
+                <li><a href="PersonsDirectory.aspx">👥 Persons Directory</a></li>
+            </ul>
+        </div>
 
-            <!-- Main Content Area -->
-            <main class="main-content">
-                <header class="top-navbar">
-                    <div><strong>Neural Intelligence Unit</strong></div>
-                    <div>Analyst: <strong>A. Silva</strong> (Clearance Level 4)</div>
-                </header>
-                <div class="content-body">
-                    <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
-                </div>
-            </main>
+        <!-- Main Content Area -->
+        <div class="main-wrapper">
+            <header class="top-navbar">
+                <div><strong>Neural Threat Intelligence Unit</strong></div>
+                <div>Analyst: <strong>A. Silva</strong> (Clearance Level 4)</div>
+            </header>
+
+            <div class="content-body">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+
+            <footer class="footer">
+                &copy; <%: DateTime.Now.Year %> NETRA Intelligence Platform - Operational System
+            </footer>
         </div>
     </form>
 </body>
