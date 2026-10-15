@@ -6,7 +6,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             width: 100%;
         }
 
@@ -34,19 +34,22 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            transition: all 0.25s ease;
         }
 
         .btn-export:hover {
             border-color: #38bdf8;
             color: #38bdf8;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+            transform: translateY(-2px);
         }
 
-        /* KPI Metrics Row Stretched Fluidly */
+        /* Responsive & Interactive Metric Cards */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             width: 100%;
         }
 
@@ -54,8 +57,17 @@
             background-color: #0b1320;
             border: 1px solid #1e293b;
             border-radius: 8px;
-            padding: 16px 20px;
+            padding: 18px 20px;
             width: 100%;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card:hover {
+            border-color: #00d2ff;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 210, 255, 0.15);
         }
 
         .kpi-header {
@@ -75,11 +87,16 @@
 
         .kpi-icon {
             color: #64748b;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .kpi-card:hover .kpi-icon {
+            color: #00d2ff;
         }
 
         .kpi-value {
-            font-size: 1.8rem;
+            font-size: 1.85rem;
             font-weight: 800;
             color: #ffffff;
             line-height: 1.1;
@@ -96,7 +113,7 @@
         .sub-up { color: #38bdf8; }
         .sub-warn { color: #f59e0b; }
 
-        /* Responsive Widescreen Main Layout Grid */
+        /* Dashboard Responsive Panels */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 2.3fr 1fr;
@@ -117,6 +134,11 @@
             padding: 20px;
             margin-bottom: 20px;
             width: 100%;
+            transition: border-color 0.25s ease;
+        }
+
+        .card-panel:hover {
+            border-color: #334155;
         }
 
         .panel-header {
@@ -139,19 +161,25 @@
             background-color: #070d18;
             border: 1px solid #1e293b;
             color: #94a3b8;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 4px;
             font-size: 0.75rem;
             outline: none;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
         }
 
-        /* Chart SVG Area */
+        .filter-select:hover {
+            border-color: #00d2ff;
+        }
+
+        /* Chart SVG Canvas */
         .chart-container {
             width: 100%;
             height: 230px;
         }
 
-        /* High Risk Areas Table */
+        /* High Risk Table Hover Highlights */
         .risk-table {
             width: 100%;
             border-collapse: collapse;
@@ -166,8 +194,16 @@
             font-weight: 600;
         }
 
+        .risk-table tr {
+            transition: background-color 0.15s ease;
+        }
+
+        .risk-table tbody tr:hover {
+            background-color: #121e30;
+        }
+
         .risk-table td {
-            padding: 10px 0;
+            padding: 10px 8px;
             border-bottom: 1px solid #141f30;
             font-size: 0.8rem;
         }
@@ -181,7 +217,7 @@
         .score-medium { color: #eab308; }
         .score-normal { color: #38bdf8; }
 
-        /* Donut & Bar Bottom Row */
+        /* Donut & Bar Charts */
         .bottom-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -247,13 +283,36 @@
             border-radius: 50%;
         }
 
-        /* Alert Feed Items */
+        /* Interactive Bar Chart Bars */
+        .bar-col {
+            width: 15%;
+            background: #1e293b;
+            border-radius: 3px 3px 0 0;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .bar-col:hover {
+            background: #00d2ff !important;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+            transform: scaleY(1.05);
+        }
+
+        /* Alert Feed Hover Items */
         .alert-item {
             background-color: #070d18;
             border: 1px solid #1e293b;
             border-radius: 6px;
             padding: 12px;
             margin-bottom: 10px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .alert-item:hover {
+            border-color: #00d2ff;
+            transform: translateX(4px);
+            box-shadow: -3px 0 0 #00d2ff;
         }
 
         .alert-item h5 {
@@ -284,7 +343,7 @@
         <button type="button" class="btn-export">📥 Export Report</button>
     </div>
 
-    <!-- Metric Cards -->
+    <!-- Interactive Metric Cards -->
     <div class="kpi-grid">
         <div class="kpi-card">
             <div class="kpi-header">
@@ -323,9 +382,9 @@
         </div>
     </div>
 
-    <!-- Main Fluid Dashboard Section -->
+    <!-- Main Dashboard Workspace -->
     <div class="dashboard-grid">
-        <!-- Left Section -->
+        <!-- Left Column -->
         <div>
             <!-- Line Chart Section -->
             <div class="card-panel">
@@ -333,6 +392,8 @@
                     <div class="panel-title">📈 Crime Trend Analysis (YTD)</div>
                     <select class="filter-select">
                         <option>All Districts</option>
+                        <option>Sector 7G</option>
+                        <option>Industrial Park North</option>
                     </select>
                 </div>
                 <div class="chart-container">
@@ -369,17 +430,17 @@
                     </div>
                 </div>
 
-                <!-- District Bar Chart -->
+                <!-- Interactive Bar Chart -->
                 <div class="card-panel" style="margin-bottom:0;">
                     <div class="panel-header">
                         <div class="panel-title">District Comparison</div>
                     </div>
                     <div style="display:flex; justify-content:space-between; align-items:flex-end; height:140px; padding-top:20px;">
-                        <div style="width:15%; height:40%; background:#1e293b; border-radius:3px 3px 0 0;"></div>
-                        <div style="width:15%; height:70%; background:#1e293b; border-radius:3px 3px 0 0;"></div>
-                        <div style="width:15%; height:90%; background:#00d2ff; border-radius:3px 3px 0 0;"></div>
-                        <div style="width:15%; height:50%; background:#1e293b; border-radius:3px 3px 0 0;"></div>
-                        <div style="width:15%; height:30%; background:#1e293b; border-radius:3px 3px 0 0;"></div>
+                        <div class="bar-col" style="height:40%;"></div>
+                        <div class="bar-col" style="height:70%;"></div>
+                        <div class="bar-col" style="height:90%; background:#00d2ff;"></div>
+                        <div class="bar-col" style="height:50%;"></div>
+                        <div class="bar-col" style="height:30%;"></div>
                     </div>
                     <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:0.65rem; color:#64748b;">
                         <span>D1</span><span>D2</span><span>D3</span><span>D4</span><span>D5</span>
@@ -427,7 +488,7 @@
                 </table>
             </div>
 
-            <!-- Recent Alerts -->
+            <!-- Recent Alerts Feed -->
             <div class="card-panel">
                 <div class="panel-header">
                     <div class="panel-title">🔔 Recent Alerts</div>
