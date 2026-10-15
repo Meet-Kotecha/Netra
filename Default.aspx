@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="Intelligence Dashboard" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Netra._Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <!-- Load Chart.js CDN for interactive charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         .page-header {
             display: flex;
@@ -44,7 +47,7 @@
             transform: translateY(-2px);
         }
 
-        /* Responsive & Interactive Metric Cards */
+        /* Metric Cards */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -61,7 +64,6 @@
             width: 100%;
             transition: all 0.25s ease;
             position: relative;
-            overflow: hidden;
         }
 
         .kpi-card:hover {
@@ -113,7 +115,7 @@
         .sub-up { color: #38bdf8; }
         .sub-warn { color: #f59e0b; }
 
-        /* Dashboard Responsive Panels */
+        /* Dashboard Panels */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 2.3fr 1fr;
@@ -173,13 +175,57 @@
             border-color: #00d2ff;
         }
 
-        /* Chart SVG Canvas */
-        .chart-container {
+        /* Canvas Chart Containers */
+        .chart-box {
+            position: relative;
             width: 100%;
-            height: 230px;
+            height: 240px;
         }
 
-        /* High Risk Table Hover Highlights */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .donut-wrapper {
+            position: relative;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .donut-center-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .donut-center-text span {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            display: block;
+            line-height: 1;
+        }
+
+        .donut-center-text small {
+            font-size: 0.65rem;
+            color: #64748b;
+        }
+
+        /* High Risk Table Highlights */
         .risk-table {
             width: 100%;
             border-collapse: collapse;
@@ -216,87 +262,6 @@
         .score-critical { color: #ef4444; }
         .score-medium { color: #eab308; }
         .score-normal { color: #38bdf8; }
-
-        /* Donut & Bar Charts */
-        .bottom-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            .bottom-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .donut-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            height: 150px;
-        }
-
-        .donut-hole {
-            position: absolute;
-            width: 90px;
-            height: 90px;
-            background-color: #0b1320;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .donut-hole span {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #ffffff;
-        }
-
-        .donut-hole small {
-            font-size: 0.62rem;
-            color: #64748b;
-        }
-
-        .legend-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-top: 15px;
-            font-size: 0.72rem;
-            color: #94a3b8;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .legend-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        /* Interactive Bar Chart Bars */
-        .bar-col {
-            width: 15%;
-            background: #1e293b;
-            border-radius: 3px 3px 0 0;
-            transition: all 0.25s ease;
-            cursor: pointer;
-        }
-
-        .bar-col:hover {
-            background: #00d2ff !important;
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
-            transform: scaleY(1.05);
-        }
 
         /* Alert Feed Hover Items */
         .alert-item {
@@ -382,7 +347,7 @@
         </div>
     </div>
 
-    <!-- Main Dashboard Workspace -->
+    <!-- Main Interactive Dashboard Grid -->
     <div class="dashboard-grid">
         <!-- Left Column -->
         <div>
@@ -390,60 +355,41 @@
             <div class="card-panel">
                 <div class="panel-header">
                     <div class="panel-title">📈 Crime Trend Analysis (YTD)</div>
-                    <select class="filter-select">
-                        <option>All Districts</option>
-                        <option>Sector 7G</option>
-                        <option>Industrial Park North</option>
+                    <select id="ddlDistrictFilter" class="filter-select" onchange="updateLineChart()">
+                        <option value="All">All Districts</option>
+                        <option value="Sector 7G">Sector 7G</option>
+                        <option value="Industrial Park North">Industrial Park North</option>
+                        <option value="Downtown Metro">Downtown Metro</option>
                     </select>
                 </div>
-                <div class="chart-container">
-                    <svg width="100%" height="100%" viewBox="0 0 600 200" preserveAspectRatio="none">
-                        <path d="M 0 150 Q 50 130, 100 145 T 200 80 T 300 100 T 400 50 T 500 80 T 600 120" fill="none" stroke="#00d2ff" stroke-width="4" />
-                        <circle cx="200" cy="80" r="5" fill="#00d2ff" />
-                        <circle cx="400" cy="50" r="5" fill="#00d2ff" />
-                    </svg>
+                <div class="chart-box">
+                    <canvas id="lineChart"></canvas>
                 </div>
             </div>
 
-            <!-- Bottom Row Panels -->
+            <!-- Bottom Row Charts -->
             <div class="bottom-grid">
                 <!-- Donut Chart -->
                 <div class="card-panel" style="margin-bottom:0;">
                     <div class="panel-header">
                         <div class="panel-title">Distribution by Type</div>
                     </div>
-                    <div class="donut-container">
-                        <svg width="130" height="130" viewBox="0 0 36 36">
-                            <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#1e293b" stroke-width="4" />
-                            <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 15 20" fill="none" stroke="#00d2ff" stroke-width="4" />
-                        </svg>
-                        <div class="donut-hole">
-                            <span>1,842</span>
+                    <div class="donut-wrapper">
+                        <canvas id="donutChart"></canvas>
+                        <div class="donut-center-text">
+                            <span id="lblDonutTotal">1,842</span>
                             <small>Active</small>
                         </div>
                     </div>
-                    <div class="legend-grid">
-                        <div class="legend-item"><div class="legend-dot" style="background:#00d2ff;"></div> Cyber (42%)</div>
-                        <div class="legend-item"><div class="legend-dot" style="background:#38bdf8;"></div> Financial (35%)</div>
-                        <div class="legend-item"><div class="legend-dot" style="background:#0284c7;"></div> Narcotics (15%)</div>
-                        <div class="legend-item"><div class="legend-dot" style="background:#64748b;"></div> Other (8%)</div>
-                    </div>
                 </div>
 
-                <!-- Interactive Bar Chart -->
+                <!-- Bar Chart -->
                 <div class="card-panel" style="margin-bottom:0;">
                     <div class="panel-header">
                         <div class="panel-title">District Comparison</div>
                     </div>
-                    <div style="display:flex; justify-content:space-between; align-items:flex-end; height:140px; padding-top:20px;">
-                        <div class="bar-col" style="height:40%;"></div>
-                        <div class="bar-col" style="height:70%;"></div>
-                        <div class="bar-col" style="height:90%; background:#00d2ff;"></div>
-                        <div class="bar-col" style="height:50%;"></div>
-                        <div class="bar-col" style="height:30%;"></div>
-                    </div>
-                    <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:0.65rem; color:#64748b;">
-                        <span>D1</span><span>D2</span><span>D3</span><span>D4</span><span>D5</span>
+                    <div class="chart-box" style="height:180px;">
+                        <canvas id="barChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -451,7 +397,7 @@
 
         <!-- Right Side Panel -->
         <div>
-            <!-- High Risk Areas -->
+            <!-- High Risk Areas Table -->
             <div class="card-panel">
                 <div class="panel-header">
                     <div class="panel-title">🛡️ High-Risk Areas</div>
@@ -488,7 +434,7 @@
                 </table>
             </div>
 
-            <!-- Recent Alerts Feed -->
+            <!-- Recent Alerts -->
             <div class="card-panel">
                 <div class="panel-header">
                     <div class="panel-title">🔔 Recent Alerts</div>
@@ -512,4 +458,152 @@
             </div>
         </div>
     </div>
+
+    <!-- Chart.js Initialization Script -->
+    <script>
+        let lineChartInstance, donutChartInstance, barChartInstance;
+
+        const lineDataSets = {
+            "All": [800, 920, 1100, 950, 1400, 1200, 1650, 1450, 1850, 1100, 600, 950],
+            "Sector 7G": [300, 450, 520, 480, 600, 580, 720, 690, 810, 500, 310, 420],
+            "Industrial Park North": [200, 280, 310, 270, 420, 390, 510, 480, 590, 380, 180, 290],
+            "Downtown Metro": [300, 190, 270, 200, 360, 230, 420, 280, 450, 220, 110, 240]
+        };
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // 1. Line Chart
+            const ctxLine = document.getElementById('lineChart').getContext('2d');
+            const lineGradient = ctxLine.createLinearGradient(0, 0, 0, 240);
+            lineGradient.addColorStop(0, 'rgba(0, 210, 255, 0.35)');
+            lineGradient.addColorStop(1, 'rgba(0, 210, 255, 0.0)');
+
+            lineChartInstance = new Chart(ctxLine, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Incidents Reported',
+                        data: lineDataSets["All"],
+                        borderColor: '#00d2ff',
+                        borderWidth: 3,
+                        backgroundColor: lineGradient,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#00d2ff',
+                        pointBorderColor: '#0b1320',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 7,
+                        pointHoverBackgroundColor: '#ffffff',
+                        pointHoverBorderColor: '#00d2ff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#070d18',
+                            borderColor: '#00d2ff',
+                            borderWidth: 1,
+                            titleColor: '#ffffff',
+                            bodyColor: '#38bdf8',
+                            displayColors: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#64748b', font: { size: 10 } }
+                        },
+                        y: {
+                            grid: { color: '#1e293b' },
+                            ticks: { color: '#64748b', font: { size: 10 } }
+                        }
+                    }
+                }
+            });
+
+            // 2. Donut Chart
+            const ctxDonut = document.getElementById('donutChart').getContext('2d');
+            donutChartInstance = new Chart(ctxDonut, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Cyber (42%)', 'Financial (35%)', 'Narcotics (15%)', 'Other (8%)'],
+                    datasets: [{
+                        data: [773, 645, 276, 148],
+                        backgroundColor: ['#00d2ff', '#38bdf8', '#0284c7', '#334155'],
+                        borderColor: '#0b1320',
+                        borderWidth: 3,
+                        hoverOffset: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '72%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { color: '#94a3b8', font: { size: 10 }, boxWidth: 10 }
+                        },
+                        tooltip: {
+                            backgroundColor: '#070d18',
+                            borderColor: '#00d2ff',
+                            borderWidth: 1,
+                            titleColor: '#ffffff',
+                            bodyColor: '#38bdf8'
+                        }
+                    }
+                }
+            });
+
+            // 3. Bar Chart
+            const ctxBar = document.getElementById('barChart').getContext('2d');
+            barChartInstance = new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: ['D1', 'D2', 'D3', 'D4', 'D5'],
+                    datasets: [{
+                        label: 'Cases',
+                        data: [420, 680, 950, 510, 310],
+                        backgroundColor: ['#1e293b', '#1e293b', '#00d2ff', '#1e293b', '#1e293b'],
+                        borderRadius: 4,
+                        hoverBackgroundColor: '#38bdf8'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#070d18',
+                            borderColor: '#00d2ff',
+                            borderWidth: 1,
+                            titleColor: '#ffffff',
+                            bodyColor: '#38bdf8',
+                            displayColors: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#64748b', font: { size: 10 } }
+                        },
+                        y: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+
+        function updateLineChart() {
+            const selected = document.getElementById("ddlDistrictFilter").value;
+            lineChartInstance.data.datasets[0].data = lineDataSets[selected] || lineDataSets["All"];
+            lineChartInstance.update();
+        }
+    </script>
 </asp:Content>
