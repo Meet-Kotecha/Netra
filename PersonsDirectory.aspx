@@ -152,6 +152,16 @@
             color: #ffffff;
         }
 
+        .profile-name a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .profile-name a:hover {
+            color: #00d2ff;
+        }
+
         .profile-dob {
             font-size: 0.68rem;
             color: #64748b;
@@ -254,7 +264,7 @@
         <div class="page-title">
             <h2>Persons & Suspects</h2>
         </div>
-        <button type="button" class="btn-add-person" onclick="alert('➕ Add New Person record portal initialized.')">+ Add Person</button>
+        <a href="PersonProfile.aspx" class="btn-add-person">+ Add Person</a>
     </div>
 
     <!-- Filter Bar -->
@@ -299,7 +309,35 @@
                         <div class="profile-cell">
                             <div class="profile-avatar">🧔</div>
                             <div>
-                                <div class="profile-name col-name">Volkov, Dmitri</div>
+                                <div class="profile-name col-name">
+                                    <a href="PersonProfile.aspx">Keval Goswami</a>
+                                </div>
+                                <div class="profile-dob">DOB: 2006-06-06</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="col-id" style="font-family: monospace; color:#38bdf8;">PR-1042-89</td>
+                    <td class="col-type"><span class="badge-type type-suspect">SUSPECT</span></td>
+                    <td>
+                        <div class="case-tag-list">
+                            <span class="case-tag">#OP-2023-A9</span>
+                            <span class="case-tag">#OP-2022-C4</span>
+                        </div>
+                    </td>
+                    <td style="font-size:0.72rem; color:#cbd5e1;">📍 Safehouse Alpha; Sector 4</td>
+                    <td style="font-size:0.72rem; color:#64748b;">2023-10-24 14:32Z</td>
+                    <td><a href="PersonProfile.aspx" style="color:#00d2ff; text-decoration:none; font-weight:700;">View ➔</a></td>
+                </tr>
+
+                <!-- Person 2 -->
+                <tr class="person-row">
+                    <td>
+                        <div class="profile-cell">
+                            <div class="profile-avatar">🧔</div>
+                            <div>
+                                <div class="profile-name col-name">
+                                    <a href="PersonProfile.aspx">Volkov, Dmitri</a>
+                                </div>
                                 <div class="profile-dob">DOB: 1982-04-12</div>
                             </div>
                         </div>
@@ -314,16 +352,18 @@
                     </td>
                     <td style="font-size:0.72rem; color:#cbd5e1;">📍 Prague, CZ; Vienna, AT</td>
                     <td style="font-size:0.72rem; color:#64748b;">2023-10-24 14:32Z</td>
-                    <td><a href="#" style="color:#64748b; text-decoration:none;">•••</a></td>
+                    <td><a href="PersonProfile.aspx" style="color:#00d2ff; text-decoration:none; font-weight:700;">View ➔</a></td>
                 </tr>
 
-                <!-- Person 2 -->
+                <!-- Person 3 -->
                 <tr class="person-row">
                     <td>
                         <div class="profile-cell">
                             <div class="profile-avatar" style="background-color:#1e293b; color:#94a3b8;">❓</div>
                             <div>
-                                <div class="profile-name col-name">Unknown (Alias: 'Ghost')</div>
+                                <div class="profile-name col-name">
+                                    <a href="PersonProfile.aspx">Unknown (Alias: 'Ghost')</a>
+                                </div>
                                 <div class="profile-dob">DOB: Unknown</div>
                             </div>
                         </div>
@@ -337,16 +377,18 @@
                     </td>
                     <td style="font-size:0.72rem; color:#cbd5e1;">📍 Digital Footprint Only</td>
                     <td style="font-size:0.72rem; color:#64748b;">2023-10-22 09:15Z</td>
-                    <td><a href="#" style="color:#64748b; text-decoration:none;">•••</a></td>
+                    <td><a href="PersonProfile.aspx" style="color:#00d2ff; text-decoration:none; font-weight:700;">View ➔</a></td>
                 </tr>
 
-                <!-- Person 3 -->
+                <!-- Person 4 -->
                 <tr class="person-row">
                     <td>
                         <div class="profile-cell">
                             <div class="profile-avatar">👩</div>
                             <div>
-                                <div class="profile-name col-name">Chen, Elena</div>
+                                <div class="profile-name col-name">
+                                    <a href="PersonProfile.aspx">Chen, Elena</a>
+                                </div>
                                 <div class="profile-dob">DOB: 1990-11-03</div>
                             </div>
                         </div>
@@ -360,7 +402,7 @@
                     </td>
                     <td style="font-size:0.72rem; color:#cbd5e1;">📍 London, UK</td>
                     <td style="font-size:0.72rem; color:#64748b;">2023-10-20 11:45Z</td>
-                    <td><a href="#" style="color:#64748b; text-decoration:none;">•••</a></td>
+                    <td><a href="PersonProfile.aspx" style="color:#00d2ff; text-decoration:none; font-weight:700;">View ➔</a></td>
                 </tr>
 
                 <tr id="trNoPersons" style="display:none;">
@@ -371,10 +413,10 @@
 
         <!-- Table Footer -->
         <div class="table-footer">
-            <span id="lblEntityCounter">Showing 1-3 of 1,248 Entities</span>
+            <span id="lblEntityCounter">Showing 1-4 of 1,248 Entities</span>
             <div class="pagination-controls">
                 <button type="button" class="page-btn">❮</button>
-                <span style="color:#f8fafc; font-weight:600;">Page 1 of 416</span>
+                <span style="color:#f8fafc; font-weight:600;">Page 1 of 312</span>
                 <button type="button" class="page-btn">❯</button>
             </div>
         </div>
