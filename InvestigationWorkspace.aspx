@@ -246,6 +246,17 @@
             margin-bottom: 14px;
             outline: none;
         }
+
+        .person-detail-badge {
+            background: rgba(0,210,255,0.15);
+            color: #00d2ff;
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
     </style>
 </asp:Content>
 
@@ -268,7 +279,7 @@
         </div>
     </div>
 
-    <!-- AI Analysis Report Box (Dynamically Rendered) -->
+    <!-- AI Analysis Report Box -->
     <div id="aiAnalysisResult" style="display:none; background:#0b1320; border:1px solid #00d2ff; padding:16px; border-radius:8px; margin-bottom:20px;">
         <div style="font-size:0.85rem; font-weight:800; color:#00d2ff; margin-bottom:6px;">🤖 NEURAL INTELLIGENCE CASE ANALYSIS REPORT</div>
         <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.5;">
@@ -311,7 +322,7 @@
                 </div>
             </div>
 
-            <!-- Investigation Notes with Filter Dropdown -->
+            <!-- Investigation Notes -->
             <div class="glass-panel">
                 <div class="panel-header-row">
                     <div class="panel-title">💬 Investigation Notes</div>
@@ -364,33 +375,33 @@
                 <div id="locationMap"></div>
             </div>
 
-            <!-- Persons of Interest with Direct Profile Routing -->
+            <!-- Persons of Interest with Modal Quick-View -->
             <div class="glass-panel">
                 <div class="panel-header-row">
                     <div class="panel-title">👥 Persons of Interest</div>
                     <span style="font-size:0.68rem; color:#38bdf8; font-weight:800;">2 Identified</span>
                 </div>
 
-                <div class="person-card-item" onclick="window.location.href='PersonProfile.aspx?id=1';">
+                <div class="person-card-item" onclick="openPersonDetails('Marcus Vane', 'Router - Known Modder', 'Primary Suspect', 'Signal Relay Hardware Modding, Signal Interception')">
                     <div>
                         <div style="font-size:0.78rem; font-weight:800; color:#fff;">Marcus Vane</div>
                         <div style="font-size:0.68rem; color:#64748b;">Alias: Router - Known Modder</div>
                     </div>
-                    <span style="color:#00d2ff;">›</span>
+                    <span style="color:#00d2ff;">👁️</span>
                 </div>
 
-                <div class="person-card-item" onclick="window.location.href='PersonProfile.aspx?id=2';">
+                <div class="person-card-item" onclick="openPersonDetails('Unidentified Subject', 'Spotted on CCTV cam #442', 'Associate', 'Driver of dark sedan following stolen vehicle')">
                     <div>
                         <div style="font-size:0.78rem; font-weight:800; color:#fff;">Unidentified Subject</div>
                         <div style="font-size:0.68rem; color:#64748b;">Spotted on CCTV cam #442</div>
                     </div>
-                    <span style="color:#00d2ff;">›</span>
+                    <span style="color:#00d2ff;">👁️</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Evidence Gallery Section with Upload Switcher -->
+    <!-- Evidence Gallery Section -->
     <div class="glass-panel">
         <div class="panel-header-row">
             <div style="display:flex; gap:16px;">
@@ -409,6 +420,24 @@
             <div id="boxAddEvidence" class="add-evidence-box" onclick="openUploadModal()">
                 <span style="font-size:1.4rem;">🖼️</span>
                 <span>Add Evidence</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Person Details Modal -->
+    <div id="modalPerson" class="modal-overlay">
+        <div class="modal-box">
+            <div class="person-detail-badge" id="lblPersonRole">Primary Suspect</div>
+            <div class="modal-title" id="lblPersonName">Marcus Vane</div>
+            <div style="font-size:0.75rem; color:#64748b; margin-bottom:12px;" id="lblPersonAlias">Alias: Router</div>
+            
+            <div style="background:#070d18; border:1px solid #1e293b; border-radius:6px; padding:12px; font-size:0.75rem; color:#cbd5e1; margin-bottom:16px;" id="lblPersonNotes">
+                Known modder specializing in vehicle transponder signal relay attacks.
+            </div>
+
+            <div style="display:flex; justify-content:space-between; gap:10px;">
+                <button type="button" class="btn-workspace-dark" onclick="closePersonModal()">Close</button>
+                <button type="button" class="btn-workspace-cyan" onclick="window.location.href='PersonsDirectory.aspx';">Open Full Directory →</button>
             </div>
         </div>
     </div>
@@ -437,7 +466,6 @@
         </div>
     </div>
 
-    <!-- Interactive Client Scripts -->
     <script>
         function runCaseAnalysis() {
             document.getElementById('aiAnalysisResult').style.display = 'block';
@@ -475,6 +503,18 @@
             }
         }
 
+        function openPersonDetails(name, alias, role, notes) {
+            document.getElementById('lblPersonName').innerText = name;
+            document.getElementById('lblPersonAlias').innerText = alias;
+            document.getElementById('lblPersonRole').innerText = role;
+            document.getElementById('lblPersonNotes').innerText = notes;
+            document.getElementById('modalPerson').style.display = 'flex';
+        }
+
+        function closePersonModal() {
+            document.getElementById('modalPerson').style.display = 'none';
+        }
+
         function openNoteModal() { document.getElementById('modalNote').style.display = 'flex'; }
         function closeNoteModal() { document.getElementById('modalNote').style.display = 'none'; }
 
@@ -500,7 +540,6 @@
         function closeUploadModal() { document.getElementById('modalUpload').style.display = 'none'; }
 
         function uploadEvidenceLocal() {
-            const gallery = document.getElementById('galleryView');
             const newCard = `
                 <div class="evidence-card">
                     <img src="Images/Meet.jpeg" class="evidence-img" alt="Uploaded Evidence" />
@@ -521,7 +560,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Leaflet Map Initialization for Grand Plaza Sector 4
+            // Standard CartoDB Dark Tiles
             const map = L.map('locationMap', { zoomControl: false }).setView([12.9716, 77.5946], 13);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
             L.circleMarker([12.9716, 77.5946], { color: '#00d2ff', radius: 8, fillOpacity: 0.8 }).addTo(map);
