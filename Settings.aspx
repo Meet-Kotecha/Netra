@@ -49,17 +49,26 @@
             border-left: 3px solid #00d2ff;
         }
 
-        .nav-item.logout-tab {
+        .logout-btn-link {
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
             color: #f87171;
             margin-top: 12px;
             border-top: 1px solid #1e293b;
-            padding-top: 14px;
+            padding: 14px 14px 10px 14px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .nav-item.logout-tab:hover {
+        .logout-btn-link:hover {
             background-color: rgba(239, 68, 68, 0.1);
             color: #ef4444;
-            border-left: 3px solid #ef4444;
         }
 
         .profile-header {
@@ -148,13 +157,15 @@
                 <div class="nav-item">🛡 Security</div>
                 <div class="nav-item">🔔 Notifications</div>
                 <div class="nav-item">🎨 Appearance</div>
-                <div class="nav-item logout-tab" onclick="performLogout()">🚪 Session Logout</div>
+                <asp:Button ID="btnLogout" runat="server" Text="🚪 Session Logout" CssClass="logout-btn-link" OnClick="btnLogout_Click" OnClientClick="return confirm('Are you sure you want to log out?');" />
             </div>
         </div>
 
         <!-- Settings Content Body -->
         <div class="glass-panel">
             <div style="font-size:0.95rem; font-weight:800; color:#fff; margin-bottom:16px;">👤 Profile Information</div>
+
+            <asp:Label ID="lblStatusMessage" runat="server" ForeColor="#10b981" Font-Bold="true" Font-Size="Small" Visible="false" Style="display:block; margin-bottom:12px;"></asp:Label>
 
             <div class="profile-header">
                 <img src="Images/Meet.jpeg" class="profile-avatar" alt="Meet Kotecha" onerror="this.onerror=null; this.src='Images/Meet.jpeg';" />
@@ -171,11 +182,11 @@
             <div class="form-grid">
                 <div class="form-group">
                     <label class="form-label">FULL NAME</label>
-                    <input type="text" class="form-input" value="Meet Kotecha" />
+                    <asp:TextBox ID="txtFullName" runat="server" CssClass="form-input"></asp:TextBox>
                 </div>
                 <div class="form-group">
                     <label class="form-label">EMAIL ADDRESS</label>
-                    <input type="email" class="form-input" value="mkotecha581@rku.ac.in" />
+                    <asp:TextBox ID="txtEmailAddress" runat="server" CssClass="form-input"></asp:TextBox>
                 </div>
                 <div class="form-group">
                     <label class="form-label">ROLE</label>
@@ -188,16 +199,8 @@
             </div>
 
             <div style="display:flex; justify-content:flex-end; gap:10px; border-top:1px solid #1e293b; padding-top:16px;">
-                <button type="button" class="btn-cyan" onclick="alert('Profile Settings Saved Successfully.')">💾 Save Changes</button>
+                <asp:Button ID="btnSaveChanges" runat="server" Text="💾 Save Changes" CssClass="btn-cyan" OnClick="btnSaveChanges_Click" />
             </div>
         </div>
     </div>
-
-    <script>
-        function performLogout() {
-            if (confirm("Are you sure you want to log out of NETRA Intelligence Platform?")) {
-                window.location.href = "Login.aspx";
-            }
-        }
-    </script>
 </asp:Content>
