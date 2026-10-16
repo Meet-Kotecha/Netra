@@ -185,7 +185,7 @@
                 <tr class="person-row" data-name="digvijaysinh vaghela" data-type="SUSPECT">
                     <td>
                         <div class="person-profile-cell">
-                            <img src="Images/Meet.jpeg" class="person-thumb" alt="Digvijaysinh Vaghela" />
+                            <img src="images/digvijaysinh.jpg" class="person-thumb" alt="Digvijaysinh Vaghela" onerror="this.src='Images/Meet.jpeg';" />
                             <div>
                                 <div style="font-weight: 800; color: #fff;">Digvijaysinh Vaghela</div>
                                 <div style="font-size: 0.68rem; color: #64748b;">DOB: 2002-09-14</div>
@@ -204,7 +204,7 @@
                 <tr class="person-row" data-name="rohan siddhpura" data-type="POI">
                     <td>
                         <div class="person-profile-cell">
-                            <img src="Images/Meet.jpeg" class="person-thumb" alt="Rohan Siddhpura" />
+                            <img src="images/rohan.jpg" class="person-thumb" alt="Rohan Siddhpura" onerror="this.src='Images/Meet.jpeg';" />
                             <div>
                                 <div style="font-weight: 800; color: #fff;">Rohan Siddhpura</div>
                                 <div style="font-size: 0.68rem; color: #64748b;">DOB: 2001-03-22</div>
@@ -223,7 +223,7 @@
                 <tr class="person-row" data-name="meet kotecha" data-type="POI">
                     <td>
                         <div class="person-profile-cell">
-                            <img src="Images/Meet.jpeg" class="person-thumb" alt="Meet Kotecha" />
+                            <img src="images/meet.jpeg" class="person-thumb" alt="Meet Kotecha" onerror="this.src='Images/Meet.jpeg';" />
                             <div>
                                 <div style="font-weight: 800; color: #fff;">Meet Kotecha</div>
                                 <div style="font-size: 0.68rem; color: #64748b;">DOB: 2003-11-05</div>
@@ -242,7 +242,7 @@
                 <tr class="person-row" data-name="keval goswami" data-type="SUSPECT">
                     <td>
                         <div class="person-profile-cell">
-                            <img src="Images/Meet.jpeg" class="person-thumb" alt="Keval Goswami" />
+                            <img src="images/keval.jpg" class="person-thumb" alt="Keval Goswami" onerror="this.src='Images/Meet.jpeg';" />
                             <div>
                                 <div style="font-weight: 800; color: #fff;">Keval Goswami</div>
                                 <div style="font-size: 0.68rem; color: #64748b;">DOB: 2006-06-06</div>

@@ -174,7 +174,7 @@
                 
                 <div style="position:relative;">
                     <span style="position:absolute; top:8px; left:8px; background:rgba(7,13,24,0.8); border:1px solid #1e293b; color:#38bdf8; font-size:0.6rem; font-weight:800; padding:2px 6px; border-radius:4px;">SRC: EXT-CAM-89</span>
-                    <img id="imgPreview" src="Images/Meet.jpeg" class="preview-box" alt="EXT-CAM-89 Frame" />
+                    <img id="imgPreview" src="images/meet.jpeg" class="preview-box" alt="EXT-CAM-89 Frame" onerror="this.src='Images/Meet.jpeg';" />
                 </div>
 
                 <button type="button" class="btn-search-cyan">
@@ -206,8 +206,9 @@
                 </div>
 
                 <div class="matches-grid">
+                    <!-- Digvijaysinh Vaghela -->
                     <div class="candidate-card">
-                        <img src="Images/Meet.jpeg" class="candidate-thumb" alt="Digvijaysinh Vaghela" />
+                        <img src="images/digvijaysinh.jpg" class="candidate-thumb" alt="Digvijaysinh Vaghela" onerror="this.src='Images/Meet.jpeg';" />
                         <div>
                             <div class="confidence-badge">✓ 98%</div>
                             <div class="candidate-name">Digvijaysinh Vaghela</div>
@@ -221,8 +222,9 @@
                         </div>
                     </div>
 
+                    <!-- Rohan Siddhpura -->
                     <div class="candidate-card">
-                        <img src="Images/Meet.jpeg" class="candidate-thumb" alt="Rohan Siddhpura" />
+                        <img src="images/rohan.jpg" class="candidate-thumb" alt="Rohan Siddhpura" onerror="this.src='Images/Meet.jpeg';" />
                         <div>
                             <div class="confidence-badge" style="border-color:#38bdf8; color:#38bdf8;">91%</div>
                             <div class="candidate-name">Rohan Siddhpura</div>
@@ -236,8 +238,9 @@
                         </div>
                     </div>
 
+                    <!-- Meet Kotecha -->
                     <div class="candidate-card">
-                        <img src="Images/Meet.jpeg" class="candidate-thumb" alt="Meet Kotecha" />
+                        <img src="images/meet.jpeg" class="candidate-thumb" alt="Meet Kotecha" onerror="this.src='Images/Meet.jpeg';" />
                         <div>
                             <div class="confidence-badge" style="border-color:#38bdf8; color:#38bdf8;">88%</div>
                             <div class="candidate-name">Meet Kotecha</div>
@@ -251,8 +254,9 @@
                         </div>
                     </div>
 
+                    <!-- Keval Goswami -->
                     <div class="candidate-card">
-                        <img src="Images/Meet.jpeg" class="candidate-thumb" alt="Keval Goswami" />
+                        <img src="images/keval.jpg" class="candidate-thumb" alt="Keval Goswami" onerror="this.src='Images/Meet.jpeg';" />
                         <div>
                             <div class="confidence-badge" style="border-color:#38bdf8; color:#38bdf8;">85%</div>
                             <div class="candidate-name">Keval Goswami</div>
