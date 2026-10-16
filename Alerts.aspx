@@ -5,21 +5,14 @@
         .page-header-row {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             margin-bottom: 20px;
         }
 
-        .page-title-text {
-            font-size: 1.35rem;
+        .page-title {
+            font-size: 1.4rem;
             font-weight: 800;
             color: #ffffff;
-            line-height: 1.2;
-        }
-
-        .page-sub-text {
-            font-size: 0.78rem;
-            color: #64748b;
-            margin-top: 4px;
         }
 
         .header-actions {
@@ -27,110 +20,67 @@
             gap: 10px;
         }
 
-        .btn-action-dark {
+        .btn-outline {
             background-color: #0b1320;
             border: 1px solid #1e293b;
             color: #cbd5e1;
-            padding: 8px 16px;
+            padding: 9px 16px;
             border-radius: 6px;
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             font-weight: 700;
             cursor: pointer;
-            display: flex;
+            transition: all 0.2s ease;
+            display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: all 0.2s ease;
         }
 
-        .btn-action-dark:hover {
+        .btn-outline:hover {
             border-color: #00d2ff;
             color: #00d2ff;
         }
 
-        .btn-action-cyan {
+        .btn-cyan {
             background-color: #00d2ff;
-            border: none;
             color: #070d18;
-            padding: 8px 16px;
+            border: none;
+            padding: 9px 18px;
             border-radius: 6px;
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             font-weight: 800;
             cursor: pointer;
-            display: flex;
+            transition: all 0.2s ease;
+            display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: all 0.2s ease;
         }
 
-        .btn-action-cyan:hover {
-            opacity: 0.9;
+        .btn-cyan:hover {
             box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
         }
 
-        /* KPI Cards Grid Header */
-        .kpi-grid-header {
+        .summary-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
             margin-bottom: 20px;
         }
 
-        @media (max-width: 1024px) {
-            .kpi-grid-header { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        .kpi-card {
+        .summary-card {
             background-color: #0b1320;
             border: 1px solid #1e293b;
             border-radius: 8px;
             padding: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
         }
 
-        .kpi-title-row {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.65rem;
-            font-weight: 800;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-        }
-
-        .kpi-val-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-top: 10px;
-        }
-
-        .kpi-num {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #ffffff;
-            line-height: 1;
-        }
-
-        .kpi-trend-tag {
-            font-size: 0.7rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* Filter Toolbar */
-        .filter-toolbar {
+        .filter-bar-container {
             background-color: #0b1320;
             border: 1px solid #1e293b;
             border-radius: 8px;
-            padding: 12px 16px;
+            padding: 14px 18px;
             margin-bottom: 20px;
             display: flex;
-            gap: 12px;
+            gap: 14px;
             align-items: center;
             flex-wrap: wrap;
         }
@@ -143,7 +93,7 @@
 
         .filter-label {
             font-size: 0.62rem;
-            font-weight: 700;
+            font-weight: 800;
             color: #64748b;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -153,346 +103,322 @@
             background-color: #070d18;
             border: 1px solid #1e293b;
             border-radius: 6px;
-            padding: 6px 10px;
-            color: #f8fafc;
+            padding: 8px 12px;
+            color: #ffffff;
             font-size: 0.78rem;
             outline: none;
-            min-width: 130px;
             cursor: pointer;
-        }
-
-        .filter-select:focus { border-color: #00d2ff; }
-
-        /* Alert Stream Item Cards */
-        .alert-stream-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
         }
 
         .alert-card {
             background-color: #0b1320;
             border: 1px solid #1e293b;
             border-radius: 8px;
-            padding: 16px 20px;
+            padding: 18px;
+            margin-bottom: 16px;
             display: flex;
             gap: 16px;
             position: relative;
-            transition: transform 0.15s ease, border-color 0.15s ease;
+            transition: all 0.2s ease;
         }
 
-        .alert-card:hover { transform: translateY(-2px); }
-
-        .alert-card-critical { border-left: 4px solid #ef4444; }
-        .alert-card-high { border-left: 4px solid #00d2ff; }
-        .alert-card-medium { border-left: 4px solid #64748b; }
+        .alert-card.critical { border-left: 4px solid #ef4444; }
+        .alert-card.high { border-left: 4px solid #00d2ff; }
+        .alert-card.medium { border-left: 4px solid #64748b; }
 
         .alert-icon-box {
-            width: 36px;
-            height: 36px;
-            border-radius: 6px;
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.2rem;
             flex-shrink: 0;
         }
 
-        .icon-box-critical { background-color: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
-        .icon-box-high { background-color: rgba(0, 210, 255, 0.15); color: #00d2ff; border: 1px solid rgba(0, 210, 255, 0.3); }
-        .icon-box-medium { background-color: rgba(100, 116, 139, 0.15); color: #94a3b8; border: 1px solid rgba(100, 116, 139, 0.3); }
+        .critical .alert-icon-box { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+        .high .alert-icon-box { background: rgba(0, 210, 255, 0.15); color: #38bdf8; }
+        .medium .alert-icon-box { background: rgba(100, 116, 139, 0.15); color: #cbd5e1; }
 
-        .alert-main-body {
-            flex-grow: 1;
-        }
+        .alert-body { flex-grow: 1; }
 
-        .alert-header-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 6px;
-        }
-
-        .badge-severity {
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 0.6rem;
+        .badge-sev {
+            font-size: 0.65rem;
             font-weight: 800;
-            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 4px;
             letter-spacing: 0.5px;
         }
 
-        .badge-sev-critical { background-color: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); }
-        .badge-sev-high { background-color: rgba(0, 210, 255, 0.2); color: #00d2ff; border: 1px solid rgba(0, 210, 255, 0.4); }
-        .badge-sev-medium { background-color: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid rgba(100, 116, 139, 0.4); }
+        .badge-sev.critical { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+        .badge-sev.high { background: rgba(0, 210, 255, 0.2); color: #38bdf8; border: 1px solid rgba(0, 210, 255, 0.4); }
+        .badge-sev.medium { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.4); }
 
-        .alert-time-text { font-size: 0.68rem; color: #64748b; font-family: monospace; }
-
-        .alert-title-text {
-            font-size: 0.92rem;
+        .alert-title {
+            font-size: 0.95rem;
             font-weight: 800;
             color: #ffffff;
-            margin-bottom: 6px;
+            margin: 6px 0;
         }
 
-        .alert-desc-text {
-            font-size: 0.75rem;
-            color: #cbd5e1;
-            line-height: 1.4;
+        .alert-desc {
+            font-size: 0.78rem;
+            color: #94a3b8;
             margin-bottom: 12px;
+            line-height: 1.4;
         }
 
-        .alert-meta-bar {
+        .alert-meta {
             display: flex;
             gap: 24px;
-            border-top: 1px solid #141f30;
-            padding-top: 10px;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
+            color: #64748b;
         }
 
-        .meta-item-label { color: #64748b; font-weight: 700; margin-bottom: 2px; }
-        .meta-item-val { color: #f8fafc; font-weight: 600; display: flex; align-items: center; gap: 4px; }
-
-        .alert-action-side {
+        .alert-actions-col {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: flex-end;
-            min-width: 120px;
+            min-width: 110px;
         }
 
-        .badge-status-pill {
-            background-color: #070d18;
-            border: 1px solid #1e293b;
-            color: #64748b;
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-size: 0.62rem;
-            font-weight: 700;
-        }
-
-        .btn-alert-action {
-            background-color: #00d2ff;
-            border: none;
-            color: #070d18;
-            padding: 7px 14px;
-            border-radius: 6px;
-            font-size: 0.72rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-alert-action:hover {
-            opacity: 0.9;
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
-        }
-
-        .btn-alert-dark-sm {
-            background-color: #070d18;
-            border: 1px solid #1e293b;
-            color: #cbd5e1;
-            padding: 7px 14px;
-            border-radius: 6px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-alert-dark-sm:hover {
-            border-color: #00d2ff;
-            color: #00d2ff;
-        }
+        .read-state { opacity: 0.6; }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!-- Header -->
     <div class="page-header-row">
         <div>
-            <div class="page-title-text">Alerts & Notifications</div>
-            <div class="page-sub-text">Real-time monitoring of anomalies and threat detections.</div>
+            <div class="page-title">Alerts & Notifications</div>
+            <div style="font-size:0.75rem; color:#64748b; margin-top:4px;">Real-time monitoring of anomalies and threat detections.</div>
         </div>
+
         <div class="header-actions">
-            <button type="button" class="btn-action-dark" onclick="alert('📥 Exporting real-time alert log report...')">📥 Export Report</button>
-            <button type="button" class="btn-action-cyan" onclick="alert('✔✔ All pending notifications marked as read.')">✔✔ Mark All Read</button>
+            <button type="button" class="btn-outline" onclick="exportAlertsCSV()">📥 Export Report</button>
+            <button type="button" class="btn-cyan" id="btnMarkRead" onclick="markAllAlertsAsRead()">✓✓ Mark All Read</button>
         </div>
     </div>
 
-    <!-- KPI Cards Row -->
-    <div class="kpi-grid-header">
-        <!-- Card 1 -->
-        <div class="kpi-card" style="border-top: 3px solid #ef4444;">
-            <div class="kpi-title-row" style="color:#ef4444;">
-                <span>● CRITICAL ALERTS</span>
-            </div>
-            <div class="kpi-val-row">
-                <div class="kpi-num">12</div>
-                <div class="kpi-trend-tag" style="color:#ef4444;">📈 +3</div>
+    <!-- SUMMARY CARDS -->
+    <div class="summary-grid">
+        <div class="summary-card" style="border-top:3px solid #ef4444;">
+            <div style="font-size:0.65rem; font-weight:800; color:#ef4444;">• CRITICAL ALERTS</div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:8px;">
+                <span style="font-size:1.8rem; font-weight:800; color:#fff;" id="countCritical">12</span>
+                <span style="font-size:0.72rem; color:#f87171; font-weight:700;">↗ +3</span>
             </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="kpi-card" style="border-top: 3px solid #00d2ff;">
-            <div class="kpi-title-row" style="color:#00d2ff;">
-                <span>● HIGH ALERTS</span>
-            </div>
-            <div class="kpi-val-row">
-                <div class="kpi-num">34</div>
-                <div class="kpi-trend-tag" style="color:#00d2ff;">📉 -2</div>
+        <div class="summary-card" style="border-top:3px solid #00d2ff;">
+            <div style="font-size:0.65rem; font-weight:800; color:#00d2ff;">• HIGH ALERTS</div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:8px;">
+                <span style="font-size:1.8rem; font-weight:800; color:#fff;" id="countHigh">34</span>
+                <span style="font-size:0.72rem; color:#38bdf8; font-weight:700;">↘ -2</span>
             </div>
         </div>
 
-        <!-- Card 3 -->
-        <div class="kpi-card" style="border-top: 3px solid #64748b;">
-            <div class="kpi-title-row" style="color:#94a3b8;">
-                <span>● MEDIUM ALERTS</span>
-            </div>
-            <div class="kpi-val-row">
-                <div class="kpi-num">89</div>
-                <div class="kpi-trend-tag" style="color:#64748b;">—</div>
+        <div class="summary-card">
+            <div style="font-size:0.65rem; font-weight:800; color:#64748b;">• MEDIUM ALERTS</div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:8px;">
+                <span style="font-size:1.8rem; font-weight:800; color:#fff;">89</span>
+                <span style="font-size:0.72rem; color:#64748b; font-weight:700;">—</span>
             </div>
         </div>
 
-        <!-- Card 4 -->
-        <div class="kpi-card" style="border-top: 3px solid #10b981;">
-            <div class="kpi-title-row" style="color:#10b981;">
-                <span>✔ RESOLVED (24H)</span>
-            </div>
-            <div class="kpi-val-row">
-                <div class="kpi-num">142</div>
-                <div class="kpi-trend-tag" style="color:#10b981;">98% rate</div>
+        <div class="summary-card">
+            <div style="font-size:0.65rem; font-weight:800; color:#10b981;">✓ RESOLVED (24H)</div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:8px;">
+                <span style="font-size:1.8rem; font-weight:800; color:#fff;">142</span>
+                <span style="font-size:0.72rem; color:#10b981; font-weight:700;">98% rate</span>
             </div>
         </div>
     </div>
 
-    <!-- Filter Toolbar -->
-    <div class="filter-toolbar">
-        <span style="color:#64748b; font-size:0.8rem;">⚙️</span>
-
+    <!-- FILTER BAR -->
+    <div class="filter-bar-container">
         <div class="filter-group">
-            <span class="filter-label">Alert Type</span>
-            <select class="filter-select" id="ddlType">
-                <option>All Types</option>
-                <option>Vehicle Theft</option>
-                <option>Unauthorized Access</option>
-                <option>Perimeter Security</option>
+            <span class="filter-label">ALERT TYPE</span>
+            <select id="filterType" class="filter-select" onchange="applyAlertFilters()">
+                <option value="ALL">All Types</option>
+                <option value="VEHICLE">Vehicle Security</option>
+                <option value="DATABASE">Database / Network</option>
+                <option value="PERIMETER">Perimeter Threat</option>
             </select>
         </div>
 
         <div class="filter-group">
-            <span class="filter-label">Severity</span>
-            <select class="filter-select" id="ddlSeverity">
-                <option>All Levels</option>
-                <option>Critical</option>
-                <option>High</option>
-                <option>Medium</option>
+            <span class="filter-label">SEVERITY</span>
+            <select id="filterSeverity" class="filter-select" onchange="applyAlertFilters()">
+                <option value="ALL">All Levels</option>
+                <option value="CRITICAL">Critical</option>
+                <option value="HIGH">High</option>
+                <option value="MEDIUM">Medium</option>
             </select>
         </div>
 
         <div class="filter-group">
-            <span class="filter-label">District</span>
-            <select class="filter-select" id="ddlDistrict">
-                <option>All Districts</option>
-                <option>Sector 4</option>
-                <option>Central District</option>
-                <option>Industrial Perimeter</option>
+            <span class="filter-label">DISTRICT</span>
+            <select id="filterDistrict" class="filter-select" onchange="applyAlertFilters()">
+                <option value="ALL">All Districts</option>
+                <option value="Sector 4">Sector 4</option>
+                <option value="Central">Central</option>
+                <option value="Gate 7">Gate 7</option>
             </select>
         </div>
 
         <div class="filter-group">
-            <span class="filter-label">Status</span>
-            <select class="filter-select" id="ddlStatus">
-                <option>Open & Active</option>
-                <option>Investigating</option>
-                <option>Resolved</option>
+            <span class="filter-label">STATUS</span>
+            <select id="filterStatus" class="filter-select" onchange="applyAlertFilters()">
+                <option value="ALL">Open & Active</option>
+                <option value="Open">Open</option>
+                <option value="Investigating">Investigating</option>
+                <option value="Resolved">Resolved</option>
             </select>
         </div>
 
         <div class="filter-group">
-            <span class="filter-label">Date Range</span>
-            <input type="text" class="filter-select" value="10/15/2026" style="width:110px;" />
+            <span class="filter-label">DATE RANGE</span>
+            <input type="date" id="filterDate" class="filter-select" value="2026-10-15" onchange="applyAlertFilters()" />
         </div>
     </div>
 
-    <!-- Alert Cards Feed Stack -->
-    <div class="alert-stream-stack">
-        <!-- Alert Card 1: Critical -->
-        <div class="alert-card alert-card-critical">
-            <div class="alert-icon-box icon-box-critical">⚠️</div>
-            <div class="alert-main-body">
-                <div class="alert-header-row">
-                    <span class="badge-severity badge-sev-critical">CRITICAL</span>
-                    <span class="alert-time-text">⏱️ 10:42 AM (2m ago)</span>
+    <!-- ALERTS LIST CONTAINER -->
+    <div id="alertsContainer">
+        <!-- CRITICAL ALERT -->
+        <div class="alert-card critical" data-type="VEHICLE" data-severity="CRITICAL" data-district="Sector 4" data-status="Open">
+            <div class="alert-icon-box">⚠️</div>
+            <div class="alert-body">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span class="badge-sev critical">CRITICAL</span>
+                    <span style="font-size:0.7rem; color:#64748b;">⏱ 10:42 AM (2m ago)</span>
                 </div>
-                <div class="alert-title-text">Unusual increase in vehicle theft attempts</div>
-                <div class="alert-desc-text">
-                    AI analysis detected a 400% spike in forced entry attempts on smart-lock vehicles in Sector 4 over the last 15 minutes. Matches patterns from Syndicate Alpha.
-                </div>
-                <div class="alert-meta-bar">
-                    <div>
-                        <div class="meta-item-label">Location</div>
-                        <div class="meta-item-val">📍 Sector 4, Northern Perimeter</div>
-                    </div>
-                    <div>
-                        <div class="meta-item-label">Related Asset/Case</div>
-                        <div class="meta-item-val" style="color:#00d2ff;">📁 Case #902-V</div>
-                    </div>
+                <div class="alert-title">Unusual increase in vehicle theft attempts</div>
+                <div class="alert-desc">AI analysis detected a 400% spike in forced entry attempts on smart-lock vehicles in Sector 4 over the last 15 minutes. Matches patterns from Syndicate Alpha.</div>
+                <div class="alert-meta">
+                    <div>Location: <strong style="color:#cbd5e1;">📍 Sector 4, Northern Perimeter</strong></div>
+                    <div>Related Asset/Case: <strong style="color:#00d2ff;">📁 Case #902-V</strong></div>
                 </div>
             </div>
-            <div class="alert-action-side">
-                <span class="badge-status-pill">Open</span>
-                <button type="button" class="btn-alert-action" onclick="window.location.href='InvestigationWorkspace.aspx';">View Details</button>
+            <div class="alert-actions-col">
+                <span style="font-size:0.72rem; color:#cbd5e1; font-weight:700;">Open</span>
+                <button type="button" class="btn-cyan" style="padding:6px 12px; font-size:0.72rem;" onclick="viewAlertDetails('Unusual increase in vehicle theft attempts')">View Details</button>
             </div>
         </div>
 
-        <!-- Alert Card 2: High -->
-        <div class="alert-card alert-card-high">
-            <div class="alert-icon-box icon-box-high">🛡️</div>
-            <div class="alert-main-body">
-                <div class="alert-header-row">
-                    <span class="badge-severity badge-sev-high">HIGH</span>
-                    <span class="alert-time-text">⏱️ 09:15 AM (1h ago)</span>
+        <!-- HIGH ALERT -->
+        <div class="alert-card high" data-type="DATABASE" data-severity="HIGH" data-district="Central" data-status="Investigating">
+            <div class="alert-icon-box">🛡️</div>
+            <div class="alert-body">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span class="badge-sev high">HIGH</span>
+                    <span style="font-size:0.7rem; color:#64748b;">⏱ 09:15 AM (1h ago)</span>
                 </div>
-                <div class="alert-title-text">Unauthorized database access attempt</div>
-                <div class="alert-desc-text">
-                    Multiple failed authentication attempts originating from a masked IP targeting the Central Personnel Registry. Automated countermeasures active.
-                </div>
-                <div class="alert-meta-bar">
-                    <div>
-                        <div class="meta-item-label">Target System</div>
-                        <div class="meta-item-val">🖥️ Central Personnel Registry</div>
-                    </div>
-                    <div>
-                        <div class="meta-item-label">Source IP Trace</div>
-                        <div class="meta-item-val" style="font-family:monospace; color:#38bdf8;">192.168.x.x (Masked)</div>
-                    </div>
+                <div class="alert-title">Unauthorized database access attempt</div>
+                <div class="alert-desc">Multiple failed authentication attempts originating from a masked IP targeting the Central Personnel Registry. Automated countermeasures active.</div>
+                <div class="alert-meta">
+                    <div>Target System: <strong style="color:#cbd5e1;">🖥 Central Personnel Registry</strong></div>
+                    <div>Source IP Trace: <strong style="color:#00d2ff;">192.168.x.x (Masked)</strong></div>
                 </div>
             </div>
-            <div class="alert-action-side">
-                <span class="badge-status-pill">Investigating</span>
-                <button type="button" class="btn-alert-dark-sm" onclick="alert('🔒 Audit logs loaded for IP Trace #192.168.x.x')">Review Logs</button>
+            <div class="alert-actions-col">
+                <span style="font-size:0.72rem; color:#94a3b8; font-weight:700;">Investigating</span>
+                <button type="button" class="btn-outline" style="padding:6px 12px; font-size:0.72rem;" onclick="reviewLogs('AuditLogs.aspx')">Review Logs</button>
             </div>
         </div>
 
-        <!-- Alert Card 3: Medium -->
-        <div class="alert-card alert-card-medium">
-            <div class="alert-icon-box icon-box-medium">📦</div>
-            <div class="alert-main-body">
-                <div class="alert-header-row">
-                    <span class="badge-severity badge-sev-medium">MEDIUM</span>
-                    <span class="alert-time-text">⏱️ 04:30 AM (6h ago)</span>
+        <!-- MEDIUM ALERT -->
+        <div class="alert-card medium" data-type="PERIMETER" data-severity="MEDIUM" data-district="Gate 7" data-status="Resolved">
+            <div class="alert-icon-box">📦</div>
+            <div class="alert-body">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span class="badge-sev medium">MEDIUM</span>
+                    <span style="font-size:0.7rem; color:#64748b;">⏱ 04:30 AM (6h ago)</span>
                 </div>
-                <div class="alert-title-text">Suspicious package left near perimeter fence</div>
-                <div class="alert-desc-text">
-                    Drone surveillance spotted an unattended bag near Gate 7. Security dispatched. Cleared as non-threat (abandoned worker tools).
+                <div class="alert-title">Suspicious package left near perimeter fence</div>
+                <div class="alert-desc">Drone surveillance spotted an unattended bag near Gate 7. Security dispatched. Cleared as non-threat (abandoned worker tools).</div>
+                <div class="alert-meta">
+                    <div>Location: <strong style="color:#cbd5e1;">📍 Gate 7 Fence Outer Rim</strong></div>
+                    <div>Status Note: <strong style="color:#10b981;">Cleared by Security Patrol</strong></div>
                 </div>
             </div>
-            <div class="alert-action-side">
-                <span class="badge-status-pill">Resolved</span>
-                <button type="button" class="btn-alert-dark-sm" onclick="alert('📋 Incident clearance report loaded.')">View Report</button>
+            <div class="alert-actions-col">
+                <span style="font-size:0.72rem; color:#64748b; font-weight:700;">Resolved</span>
+                <button type="button" class="btn-outline" style="padding:6px 12px; font-size:0.72rem;" onclick="viewAlertDetails('Suspicious package left near perimeter fence')">View Report</button>
             </div>
         </div>
     </div>
+
+    <script>
+        function applyAlertFilters() {
+            const selectedType = document.getElementById('filterType').value;
+            const selectedSev = document.getElementById('filterSeverity').value;
+            const selectedDist = document.getElementById('filterDistrict').value;
+            const selectedStatus = document.getElementById('filterStatus').value;
+
+            const cards = document.querySelectorAll('.alert-card');
+
+            cards.forEach(card => {
+                const type = card.getAttribute('data-type');
+                const sev = card.getAttribute('data-severity');
+                const dist = card.getAttribute('data-district');
+                const status = card.getAttribute('data-status');
+
+                const matchType = (selectedType === 'ALL' || type === selectedType);
+                const matchSev = (selectedSev === 'ALL' || sev === selectedSev);
+                const matchDist = (selectedDist === 'ALL' || dist === selectedDist);
+                const matchStatus = (selectedStatus === 'ALL' || status === selectedStatus);
+
+                if (matchType && matchSev && matchDist && matchStatus) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function markAllAlertsAsRead() {
+            const cards = document.querySelectorAll('.alert-card');
+            cards.forEach(card => card.classList.add('read-state'));
+
+            document.getElementById('countCritical').innerText = '0';
+            document.getElementById('countHigh').innerText = '0';
+
+            const btn = document.getElementById('btnMarkRead');
+            btn.innerText = '✓ All Read';
+            btn.style.opacity = '0.6';
+        }
+
+        function reviewLogs(targetUrl) {
+            window.location.href = targetUrl;
+        }
+
+        function viewAlertDetails(title) {
+            alert("NETRA Intelligence Details for: " + title);
+        }
+
+        function exportAlertsCSV() {
+            let csv = ["Severity,Title,Description,Status"];
+            const visibleCards = document.querySelectorAll('.alert-card');
+
+            visibleCards.forEach(card => {
+                if (card.style.display !== 'none') {
+                    const sev = card.getAttribute('data-severity');
+                    const title = card.querySelector('.alert-title').innerText.replace(/"/g, '""');
+                    const desc = card.querySelector('.alert-desc').innerText.replace(/"/g, '""');
+                    const status = card.getAttribute('data-status');
+                    csv.push(`"${sev}","${title}","${desc}","${status}"`);
+                }
+            });
+
+            const blob = new Blob([csv.join('\n')], { type: 'text/csv' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'NETRA_Alerts_Report.csv';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
 </asp:Content>
