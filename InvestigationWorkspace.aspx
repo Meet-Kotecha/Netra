@@ -1,720 +1,530 @@
 ﻿<%@ Page Title="Investigation Workspace" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="InvestigationWorkspace.aspx.cs" Inherits="Netra.InvestigationWorkspace" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <!-- Leaflet GIS Map Support -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <style>
-        /* Breadcrumb Subhead */
-        .workspace-breadcrumb {
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.8px;
-            color: #64748b;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .workspace-breadcrumb span {
-            color: #00d2ff;
-        }
-
-        /* Top Case Header Bar */
-        .case-header-row {
+        .workspace-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             margin-bottom: 20px;
         }
 
-        .case-title {
-            font-size: 1.5rem;
+        .case-code-sub {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: #38bdf8;
+            letter-spacing: 0.8px;
+            margin-bottom: 4px;
+        }
+
+        .case-title-main {
+            font-size: 1.4rem;
             font-weight: 800;
             color: #ffffff;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
-        .case-meta-bar {
+        .case-meta-row {
             display: flex;
-            align-items: center;
             gap: 16px;
-            font-size: 0.78rem;
-            font-weight: 600;
-        }
-
-        .meta-active { color: #00d2ff; display: flex; align-items: center; gap: 5px; }
-        .meta-district { color: #cbd5e1; }
-        .meta-severity { color: #ef4444; }
-
-        .case-header-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .btn-action-outline {
-            background-color: #0b1320;
-            border: 1px solid #1e293b;
-            color: #cbd5e1;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-action-outline:hover {
-            border-color: #00d2ff;
-            color: #00d2ff;
-        }
-
-        .btn-action-cyan {
-            background-color: #00d2ff;
-            border: none;
-            color: #070d18;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-action-cyan:hover {
-            opacity: 0.9;
-            box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
-        }
-
-        /* Workspace 3-Column Top Grid */
-        .workspace-top-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 310px;
-            gap: 18px;
-            margin-bottom: 18px;
-        }
-
-        @media (max-width: 1250px) {
-            .workspace-top-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .ws-card {
-            background-color: #0b1320;
-            border: 1px solid #1e293b;
-            border-radius: 8px;
-            padding: 16px 18px;
-            height: 100%;
-        }
-
-        .ws-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 12px;
-        }
-
-        .ws-card-body {
-            font-size: 0.78rem;
-            color: #cbd5e1;
-            line-height: 1.5;
-        }
-
-        .victim-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 14px;
-        }
-
-        .victim-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 6px;
-            background-color: #12283e;
-            border: 1px solid #1e293b;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #38bdf8;
-            font-size: 1.1rem;
-        }
-
-        .victim-details {
-            display: grid;
-            grid-template-columns: 80px 1fr;
-            gap: 8px;
             font-size: 0.75rem;
-            margin-top: 8px;
-        }
-
-        .victim-label {
             color: #64748b;
-            font-weight: 600;
         }
 
-        .mini-map-container {
-            width: 100%;
-            height: 150px;
-            background-color: #060b14;
-            border: 1px solid #1e293b;
-            border-radius: 6px;
-            position: relative;
-            overflow: hidden;
-            background-image: 
-                radial-gradient(circle at 60% 50%, rgba(0, 210, 255, 0.25) 0%, transparent 40%),
-                linear-gradient(rgba(56, 189, 248, 0.12) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(56, 189, 248, 0.12) 1px, transparent 1px);
-            background-size: 100% 100%, 20px 20px, 20px 20px;
-        }
-
-        .mini-map-pin {
-            position: absolute;
-            top: 50%;
-            left: 60%;
-            transform: translate(-50%, -50%);
-            width: 10px;
-            height: 10px;
-            background-color: #00d2ff;
-            border-radius: 50%;
-            box-shadow: 0 0 12px #00d2ff, 0 0 20px #00d2ff;
-        }
-
-        .mo-card {
-            background-color: #0b1320;
-            border: 1px solid #1e293b;
-            border-radius: 8px;
-            padding: 14px 18px;
-            margin-bottom: 18px;
-        }
-
-        .mo-tags-row {
+        .action-btns-group {
             display: flex;
             gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 10px;
         }
 
-        .mo-tag {
-            background-color: #070d18;
+        .btn-workspace-dark {
+            background-color: #0b1320;
             border: 1px solid #1e293b;
             color: #cbd5e1;
-            padding: 6px 12px;
+            padding: 8px 16px;
             border-radius: 6px;
-            font-size: 0.72rem;
-            font-weight: 600;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 6px;
-        }
-
-        .workspace-mid-grid {
-            display: grid;
-            grid-template-columns: 1fr 310px;
-            gap: 18px;
-            margin-bottom: 18px;
-        }
-
-        @media (max-width: 1100px) {
-            .workspace-mid-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .notes-card {
-            background-color: #0b1320;
-            border: 1px solid #1e293b;
-            border-radius: 8px;
-            padding: 18px;
-        }
-
-        .note-item {
-            background-color: #070d18;
-            border: 1px solid #1e293b;
-            border-radius: 6px;
-            padding: 12px 14px;
-            margin-bottom: 12px;
-            display: flex;
-            gap: 12px;
-        }
-
-        .note-avatar {
-            width: 30px;
-            height: 30px;
-            border-radius: 4px;
-            background-color: #12283e;
-            color: #38bdf8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: 800;
-            flex-shrink: 0;
-        }
-
-        .note-content {
-            flex-grow: 1;
-        }
-
-        .note-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 4px;
-            font-size: 0.75rem;
-        }
-
-        .note-author {
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .note-time {
-            color: #64748b;
-            font-size: 0.68rem;
-        }
-
-        .note-text {
-            font-size: 0.75rem;
-            color: #cbd5e1;
-            line-height: 1.45;
-            margin-bottom: 8px;
-        }
-
-        .note-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background-color: #12283e;
-            color: #00d2ff;
-            border: 1px solid rgba(0, 210, 255, 0.3);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.65rem;
-            font-weight: 700;
-        }
-
-        .note-input-box {
-            background-color: #070d18;
-            border: 1px solid #1e293b;
-            border-radius: 6px;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 14px;
-        }
-
-        .note-input-box input {
-            background: none;
-            border: none;
-            color: #f8fafc;
-            font-size: 0.78rem;
-            flex-grow: 1;
-            outline: none;
-        }
-
-        .btn-send-note {
-            background-color: #12283e;
-            border: 1px solid #1e293b;
-            color: #00d2ff;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
             transition: all 0.2s ease;
         }
 
-        .btn-send-note:hover {
+        .btn-workspace-dark:hover {
+            border-color: #38bdf8;
+            color: #38bdf8;
+        }
+
+        .btn-workspace-cyan {
             background-color: #00d2ff;
             color: #070d18;
-        }
-
-        .sidebar-card {
-            background-color: #0b1320;
-            border: 1px solid #1e293b;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 18px;
-        }
-
-        .person-item {
-            background-color: #070d18;
-            border: 1px solid #1e293b;
+            border: none;
+            padding: 8px 18px;
             border-radius: 6px;
-            padding: 10px 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            transition: border-color 0.2s ease;
-        }
-
-        .person-item:hover {
-            border-color: #00d2ff;
-        }
-
-        .person-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background-color: #1e293b;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-size: 0.85rem;
-        }
-
-        .person-name {
             font-size: 0.78rem;
-            font-weight: 700;
-            color: #ffffff;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
         }
 
-        .person-sub {
-            font-size: 0.68rem;
-            color: #64748b;
+        .btn-workspace-cyan:hover {
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
         }
 
-        .timeline-list {
-            padding-left: 10px;
-            border-left: 2px solid #1e293b;
-            margin-top: 10px;
+        /* Split Main Layout */
+        .workspace-grid {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 20px;
+            margin-bottom: 20px;
         }
 
-        .timeline-item {
-            position: relative;
-            padding-left: 16px;
-            padding-bottom: 16px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -15px;
-            top: 2px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #00d2ff;
-            box-shadow: 0 0 8px #00d2ff;
-        }
-
-        .timeline-date {
-            font-size: 0.65rem;
-            color: #00d2ff;
-            font-weight: 700;
-        }
-
-        .timeline-text {
-            font-size: 0.72rem;
-            color: #cbd5e1;
-            font-weight: 600;
-        }
-
-        .evidence-card {
+        .glass-panel {
             background-color: #0b1320;
             border: 1px solid #1e293b;
             border-radius: 8px;
             padding: 18px;
+            margin-bottom: 20px;
         }
 
-        .evidence-tabs {
+        .panel-header-row {
             display: flex;
-            gap: 20px;
-            border-bottom: 1px solid #1a2536;
-            margin-bottom: 16px;
-            padding-bottom: 8px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
         }
 
-        .evidence-tab {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #64748b;
+        .panel-title {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .edit-icon-btn {
+            background: none;
+            border: none;
+            color: #38bdf8;
             cursor: pointer;
+            font-size: 0.85rem;
         }
 
-        .evidence-tab.active {
-            color: #00d2ff;
-            border-bottom: 2px solid #00d2ff;
-            padding-bottom: 6px;
+        .edit-textarea {
+            width: 100%;
+            height: 90px;
+            background-color: #070d18;
+            border: 1px solid #00d2ff;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            outline: none;
+            margin-bottom: 8px;
         }
 
-        .evidence-grid {
+        /* Map Container */
+        #locationMap {
+            width: 100%;
+            height: 170px;
+            border-radius: 6px;
+            border: 1px solid #1e293b;
+        }
+
+        /* Person Cards */
+        .person-card-item {
+            background-color: #070d18;
+            border: 1px solid #162234;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
             display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        .evidence-thumb {
-            width: 140px;
-            height: 100px;
+        .person-card-item:hover {
+            border-color: #00d2ff;
+            background-color: #0c182b;
+            transform: translateX(3px);
+        }
+
+        /* Evidence Gallery Grid */
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .evidence-card {
             background-color: #070d18;
             border: 1px solid #1e293b;
             border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .evidence-thumb img {
-            width: 100%;
-            height: 80px;
-            object-fit: cover;
-        }
-
-        .evidence-label {
-            font-size: 0.62rem;
-            font-weight: 700;
-            color: #cbd5e1;
-            padding: 4px 6px;
-            background-color: #0b1320;
+            padding: 8px;
             text-align: center;
+            position: relative;
         }
 
-        .evidence-add-card {
-            width: 140px;
-            height: 100px;
-            border: 1px dashed #1e293b;
+        .evidence-img {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 6px;
+        }
+
+        .add-evidence-box {
+            border: 2px dashed #1e293b;
             border-radius: 6px;
+            height: 114px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            cursor: pointer;
             color: #64748b;
             font-size: 0.72rem;
-            cursor: pointer;
+            font-weight: 700;
             transition: all 0.2s ease;
         }
 
-        .evidence-add-card:hover {
+        .add-evidence-box:hover {
             border-color: #00d2ff;
             color: #00d2ff;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.75);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .modal-box {
+            background-color: #0b1320;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            width: 450px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .modal-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .modal-input {
+            width: 100%;
             background-color: #070d18;
+            border: 1px solid #1e293b;
+            color: #fff;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            margin-bottom: 14px;
+            outline: none;
         }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!-- Breadcrumb -->
-    <div class="workspace-breadcrumb">
-        CASE INVESTIGATION WORKSPACE • <span>CR-2026-1024</span>
-    </div>
-
-    <!-- Case Title Header -->
-    <div class="case-header-row">
+    <!-- Workspace Top Header -->
+    <div class="workspace-header">
         <div>
-            <div class="case-title">Vehicle Theft Investigation</div>
-            <div class="case-meta-bar">
-                <span class="meta-active">● Status: Active</span>
-                <span class="meta-district">📍 District: Downtown</span>
-                <span class="meta-severity">⚠️ Severity: High</span>
+            <div class="case-code-sub">CASE INVESTIGATION WORKSPACE • CR-2026-1024</div>
+            <div class="case-title-main">Vehicle Theft Investigation</div>
+            <div class="case-meta-row">
+                <span>Status: <strong style="color:#38bdf8;">Active</strong></span>
+                <span>District: <strong style="color:#fff;">Downtown</strong></span>
+                <span>Severity: <strong style="color:#f87171;">High</strong></span>
             </div>
         </div>
-        <div class="case-header-actions">
-            <button type="button" class="btn-action-outline" onclick="alert('📝 Investigation note draft opened.')">📝 Add Investigation Note</button>
-            <button type="button" class="btn-action-cyan" onclick="alert('🔍 Running Neural Analysis on Case #CR-2026-1024...')">🔍 Analyze Case</button>
+
+        <div class="action-btns-group">
+            <button type="button" class="btn-workspace-dark" onclick="openNoteModal()">📝 Add Investigation Note</button>
+            <button type="button" class="btn-workspace-cyan" onclick="runCaseAnalysis()">🔍 Analyze Case</button>
         </div>
     </div>
 
-    <!-- Top Grid Section (Case Overview, Victim Info, Location Map) -->
-    <div class="workspace-top-grid">
-        <div class="ws-card">
-            <div class="ws-card-header">
-                <span>📋 Case Overview</span>
-                <span style="color:#64748b; font-size:0.8rem; cursor:pointer;" title="Edit Case Overview">✏️</span>
+    <!-- AI Analysis Report Box (Dynamically Rendered) -->
+    <div id="aiAnalysisResult" style="display:none; background:#0b1320; border:1px solid #00d2ff; padding:16px; border-radius:8px; margin-bottom:20px;">
+        <div style="font-size:0.85rem; font-weight:800; color:#00d2ff; margin-bottom:6px;">🤖 NEURAL INTELLIGENCE CASE ANALYSIS REPORT</div>
+        <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.5;">
+            • High correlation (89.4%) with Organized SUV Theft Ring pattern operating in Sector 4.<br />
+            • Primary M.O. identified: Signal Relay & Transponder Cloning between 02:00 - 04:00 AM.<br />
+            • Recommended Action: Deploy ALPR alerts for Interstate 94 Southbound exits.
+        </div>
+    </div>
+
+    <!-- Workspace Main Layout Grid -->
+    <div class="workspace-grid">
+        <div>
+            <!-- Case Overview Section with Inline Edit Pencil -->
+            <div class="glass-panel">
+                <div class="panel-header-row">
+                    <div class="panel-title">📋 Case Overview</div>
+                    <button type="button" class="edit-icon-btn" onclick="toggleEditOverview()" title="Edit Case Overview">✏️</button>
+                </div>
+
+                <div id="viewOverviewText" style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.5;">
+                    Organized vehicle theft ring suspected operating in the downtown commercial sector. Targets primarily high-end SUVs (2024+ models) utilizing signal relay attacks.
+                    <br /><br />
+                    Initial incident reported at Grand Plaza parking structure. Security footage under analysis. Connection suspected with previous CR-2026-0892 pattern.
+                </div>
+
+                <div id="editOverviewBox" style="display:none;">
+                    <textarea id="txtOverviewText" class="edit-textarea"></textarea>
+                    <button type="button" class="btn-workspace-cyan" style="padding:4px 12px; font-size:0.72rem;" onclick="saveOverviewText()">Save Changes</button>
+                </div>
             </div>
-            <div class="ws-card-body">
-                Organized vehicle theft ring suspected operating in the downtown commercial sector. Targets primarily high-end SUVs (2024+ models) utilizing signal relay attacks.<br/><br/>
-                Initial incident reported at Grand Plaza parking structure. Security footage under analysis. Connection suspected with previous CR-2026-0892 pattern.
+
+            <!-- Modus Operandi -->
+            <div class="glass-panel">
+                <div class="panel-title" style="margin-bottom:12px;">⚙️ Modus Operandi (M.O.)</div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <span style="background:#070d18; border:1px solid #1e293b; padding:6px 12px; border-radius:20px; font-size:0.72rem; color:#38bdf8;">▶ Signal Relay Attack</span>
+                    <span style="background:#070d18; border:1px solid #1e293b; padding:6px 12px; border-radius:20px; font-size:0.72rem; color:#facc15;">🌙 Night Operation (0200-0400)</span>
+                    <span style="background:#070d18; border:1px solid #1e293b; padding:6px 12px; border-radius:20px; font-size:0.72rem; color:#38bdf8;">🚘 High-End SUV Target</span>
+                    <span style="background:#070d18; border:1px solid #1e293b; padding:6px 12px; border-radius:20px; font-size:0.72rem; color:#64748b;">👥 Team of 2-3</span>
+                </div>
+            </div>
+
+            <!-- Investigation Notes with Filter Dropdown -->
+            <div class="glass-panel">
+                <div class="panel-header-row">
+                    <div class="panel-title">💬 Investigation Notes</div>
+                    <select id="ddlFilterNotes" style="background:#070d18; border:1px solid #1e293b; color:#cbd5e1; padding:4px 8px; border-radius:4px; font-size:0.72rem;" onchange="filterNotes()">
+                        <option value="all">FILTER: All Notes</option>
+                        <option value="analyst">Analyst Notes Only</option>
+                        <option value="sys">Automated System Logs</option>
+                    </select>
+                </div>
+
+                <div id="notesContainer">
+                    <div class="note-item note-type-analyst" style="background:#070d18; border:1px solid #162234; padding:12px; border-radius:6px; margin-bottom:10px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                            <span style="font-size:0.75rem; font-weight:800; color:#38bdf8;">Analyst Silva</span>
+                            <span style="font-size:0.68rem; color:#64748b;">Today, 09:14 AM</span>
+                        </div>
+                        <div style="font-size:0.75rem; color:#cbd5e1;">Reviewed CCTV from Grand Plaza exit gate. Spotted a dark sedan following the stolen SUV closely. Plates obscured, likely cloned.</div>
+                    </div>
+
+                    <div class="note-item note-type-sys" style="background:#070d18; border:1px solid #162234; padding:12px; border-radius:6px; margin-bottom:10px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                            <span style="font-size:0.75rem; font-weight:800; color:#facc15;">Automated ALPR Alert</span>
+                            <span style="font-size:0.68rem; color:#64748b;">Yesterday, 11:45 PM</span>
+                        </div>
+                        <div style="font-size:0.75rem; color:#cbd5e1;">Vehicle matching stolen description flagged on Interstate 94, heading South.</div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="ws-card">
-            <div class="ws-card-header">
-                <span>👤 Victim Information</span>
-            </div>
-            <div class="ws-card-body">
-                <div class="victim-row">
-                    <div class="victim-avatar">👤</div>
+        <!-- Right Column Sidebar Panel -->
+        <div>
+            <!-- Victim Information -->
+            <div class="glass-panel">
+                <div class="panel-title" style="margin-bottom:12px;">👤 Victim Information</div>
+                <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+                    <div style="width:36px; height:36px; border-radius:50%; background:#00d2ff; color:#070d18; font-weight:800; display:flex; align-items:center; justify-content:center;">JH</div>
                     <div>
-                        <div style="font-weight:800; color:#ffffff; font-size:0.85rem;">Jonathan Hayes</div>
-                        <div style="font-size:0.7rem; color:#64748b;">Corp Exec, Synthetix Inc.</div>
+                        <div style="font-size:0.82rem; font-weight:800; color:#fff;">Jonathan Hayes</div>
+                        <div style="font-size:0.68rem; color:#64748b;">Corp Exec, Synthetix Inc.</div>
                     </div>
                 </div>
-                <div class="victim-details">
-                    <span class="victim-label">Contact:</span>
-                    <span style="color:#e2e8f0;">+1 (555) 019-8372</span>
-                    <span class="victim-label">Property:</span>
-                    <span style="color:#e2e8f0;">2025 Obsidian QX-9</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="ws-card">
-            <div class="ws-card-header">
-                <span>📍 Incident Location</span>
-                <span style="font-size:0.65rem; color:#64748b;">Grand Plaza, Sector 4</span>
-            </div>
-            <div class="mini-map-container">
-                <div class="mini-map-pin" title="Grand Plaza Parking Structure"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modus Operandi Tags -->
-    <div class="mo-card">
-        <div style="font-size:0.85rem; font-weight:700; color:#ffffff; display:flex; align-items:center; gap:8px;">
-            ⚙️ Modus Operandi (M.O.)
-        </div>
-        <div class="mo-tags-row">
-            <div class="mo-tag">📡 Signal Relay Attack</div>
-            <div class="mo-tag">🌙 Night Operation (0200-0400)</div>
-            <div class="mo-tag">🚘 High-End SUV Target</div>
-            <div class="mo-tag">👥 Team of 2-3</div>
-        </div>
-    </div>
-
-    <!-- Middle Grid Section (Notes & Persons/Timeline) -->
-    <div class="workspace-mid-grid">
-        <div class="notes-card">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-                <div style="font-size:0.9rem; font-weight:700; color:#ffffff; display:flex; align-items:center; gap:8px;">
-                    💬 Investigation Notes
-                </div>
-                <div style="font-size:0.7rem; color:#64748b;">
-                    FILTER: <span style="color:#00d2ff; font-weight:700; cursor:pointer;">All Notes ▾</span>
-                </div>
+                <div style="font-size:0.72rem; color:#94a3b8;">Contact: +1 (555) 019-8372</div>
+                <div style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">Property: 2025 Obsidian QX-9</div>
             </div>
 
-            <div class="note-item">
-                <div class="note-avatar">AS</div>
-                <div class="note-content">
-                    <div class="note-header">
-                        <span class="note-author">Analyst Silva</span>
-                        <span class="note-time">Today, 09:14 AM</span>
-                    </div>
-                    <div class="note-text">
-                        Reviewed CCTV from Grand Plaza exit gate. Spotted a dark sedan following the stolen SUV closely. Plates obscured, likely cloned.
-                    </div>
-                    <div class="note-tag">📹 CCTV Log #442</div>
-                </div>
+            <!-- Incident Location Map -->
+            <div class="glass-panel">
+                <div class="panel-title" style="margin-bottom:10px;">📍 Incident Location</div>
+                <div id="locationMap"></div>
             </div>
 
-            <div class="note-item">
-                <div class="note-avatar" style="background-color:#1e293b; color:#94a3b8;">SYS</div>
-                <div class="note-content">
-                    <div class="note-header">
-                        <span class="note-author">Automated ALPR Alert</span>
-                        <span class="note-time">Yesterday, 11:45 PM</span>
-                    </div>
-                    <div class="note-text">
-                        Vehicle matching stolen description flagged on Interstate 94, heading South.
-                    </div>
-                </div>
-            </div>
-
-            <div class="note-input-box">
-                <input type="text" id="txtNewNote" placeholder="Add a new note or update..." />
-                <button type="button" class="btn-send-note" onclick="addNote()">➤</button>
-            </div>
-        </div>
-
-        <div>
-            <div class="sidebar-card">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                    <span style="font-size:0.85rem; font-weight:700; color:#ffffff;">👥 Persons of Interest</span>
-                    <span style="font-size:0.68rem; color:#00d2ff; font-weight:700;">2 Identified</span>
+            <!-- Persons of Interest with Direct Profile Routing -->
+            <div class="glass-panel">
+                <div class="panel-header-row">
+                    <div class="panel-title">👥 Persons of Interest</div>
+                    <span style="font-size:0.68rem; color:#38bdf8; font-weight:800;">2 Identified</span>
                 </div>
 
-                <div class="person-item" onclick="window.location.href='PersonsDirectory.aspx';">
-                    <div class="person-avatar">🧔</div>
-                    <div style="flex-grow:1;">
-                        <div class="person-name">Marcus Vane</div>
-                        <div class="person-sub">Alias: 'Router' - Known Modder</div>
+                <div class="person-card-item" onclick="window.location.href='PersonProfile.aspx?id=1';">
+                    <div>
+                        <div style="font-size:0.78rem; font-weight:800; color:#fff;">Marcus Vane</div>
+                        <div style="font-size:0.68rem; color:#64748b;">Alias: Router - Known Modder</div>
                     </div>
-                    <span style="color:#64748b;">›</span>
+                    <span style="color:#00d2ff;">›</span>
                 </div>
 
-                <div class="person-item">
-                    <div class="person-avatar">❓</div>
-                    <div style="flex-grow:1;">
-                        <div class="person-name">Unidentified Subject</div>
-                        <div class="person-sub">Spotted on CCTV cam #442</div>
+                <div class="person-card-item" onclick="window.location.href='PersonProfile.aspx?id=2';">
+                    <div>
+                        <div style="font-size:0.78rem; font-weight:800; color:#fff;">Unidentified Subject</div>
+                        <div style="font-size:0.68rem; color:#64748b;">Spotted on CCTV cam #442</div>
                     </div>
-                    <span style="color:#64748b;">›</span>
-                </div>
-            </div>
-
-            <div class="sidebar-card">
-                <div style="font-size:0.85rem; font-weight:700; color:#ffffff; margin-bottom:10px;">
-                    📈 Timeline
-                </div>
-
-                <div class="timeline-list">
-                    <div class="timeline-item">
-                        <div class="timeline-date">Today, 08:30 AM</div>
-                        <div class="timeline-text">Case Assigned to Unit</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">Yesterday, 11:45 PM</div>
-                        <div class="timeline-text">ALPR Hit (I-94 Southbound)</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">Yesterday, 03:15 AM</div>
-                        <div class="timeline-text">Incident Reported by Security</div>
-                    </div>
-                    <div class="timeline-item" style="padding-bottom:0;">
-                        <div class="timeline-date" style="color:#f43f5e;">Yesterday, 02:45 AM</div>
-                        <div class="timeline-text">Estimated Time of Theft</div>
-                    </div>
+                    <span style="color:#00d2ff;">›</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Evidence Gallery -->
-    <div class="evidence-card">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <div class="evidence-tabs">
-                <div class="evidence-tab active">Evidence Gallery</div>
-                <div class="evidence-tab">Related Cases</div>
+    <!-- Evidence Gallery Section with Upload Switcher -->
+    <div class="glass-panel">
+        <div class="panel-header-row">
+            <div style="display:flex; gap:16px;">
+                <span id="tabEvidence" class="panel-title" style="cursor:pointer; color:#00d2ff;" onclick="switchGalleryTab('evidence')">🖼️ Evidence Gallery</span>
+                <span id="tabRelated" class="panel-title" style="cursor:pointer; color:#64748b;" onclick="switchGalleryTab('related')">🔗 Related Cases</span>
             </div>
-            <button type="button" class="btn-action-outline" style="padding:4px 12px; font-size:0.7rem;" onclick="alert('📤 Evidence upload portal initialized.')">📤 UPLOAD</button>
+            <button type="button" class="btn-workspace-cyan" onclick="openUploadModal()">📤 Upload Evidence</button>
         </div>
 
-        <div class="evidence-grid">
-            <div class="evidence-thumb" onclick="alert('Viewing CCTV Frame IMG_8842.jpg')">
-                <img src="https://images.unsplash.com/photo-1508974239320-0a029497e820?w=300&auto=format&fit=crop&q=60" alt="CCTV Footage" />
-                <div class="evidence-label">IMG_8842.jpg</div>
+        <div id="galleryView" class="evidence-grid">
+            <div class="evidence-card">
+                <img src="Images/Meet.jpeg" class="evidence-img" alt="Evidence" />
+                <div style="font-size:0.68rem; color:#38bdf8; font-weight:700;">IMG_8842.JPG</div>
             </div>
 
-            <div class="evidence-thumb" onclick="alert('Viewing Damage Report PANEL_DAMAGE.png')">
-                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=300&auto=format&fit=crop&q=60" alt="Panel Damage" />
-                <div class="evidence-label">PANEL_DAMAGE.png</div>
-            </div>
-
-            <div class="evidence-add-card" onclick="alert('Select local files to attach as evidence...')">
-                <span style="font-size:1.2rem;">🖼️</span>
+            <div id="boxAddEvidence" class="add-evidence-box" onclick="openUploadModal()">
+                <span style="font-size:1.4rem;">🖼️</span>
                 <span>Add Evidence</span>
             </div>
         </div>
     </div>
 
-    <!-- Interactive Note Script -->
-    <script>
-        function addNote() {
-            const txt = document.getElementById("txtNewNote").value.trim();
-            if (txt === "") return;
+    <!-- Modal 1: Add Note -->
+    <div id="modalNote" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-title">📝 Add Investigation Note</div>
+            <textarea id="txtNewNote" class="modal-input" style="height:100px;" placeholder="Type your observation or CCTV finding..."></textarea>
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" class="btn-workspace-dark" onclick="closeNoteModal()">Cancel</button>
+                <button type="button" class="btn-workspace-cyan" onclick="submitNewNote()">Post Note</button>
+            </div>
+        </div>
+    </div>
 
-            alert("✅ Investigation note added successfully: " + txt);
-            document.getElementById("txtNewNote").value = "";
+    <!-- Modal 2: Upload Evidence File -->
+    <div id="modalUpload" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-title">📤 Evidence Upload Portal</div>
+            <asp:FileUpload ID="fileUploadEvidence" runat="server" CssClass="modal-input" />
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" class="btn-workspace-dark" onclick="closeUploadModal()">Cancel</button>
+                <button type="button" class="btn-workspace-cyan" onclick="uploadEvidenceLocal()">Upload Photo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Client Scripts -->
+    <script>
+        function runCaseAnalysis() {
+            document.getElementById('aiAnalysisResult').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        function toggleEditOverview() {
+            const currentText = document.getElementById('viewOverviewText').innerText;
+            document.getElementById('txtOverviewText').value = currentText;
+            document.getElementById('viewOverviewText').style.display = 'none';
+            document.getElementById('editOverviewBox').style.display = 'block';
+        }
+
+        function saveOverviewText() {
+            const updated = document.getElementById('txtOverviewText').value;
+            document.getElementById('viewOverviewText').innerText = updated;
+            document.getElementById('editOverviewBox').style.display = 'none';
+            document.getElementById('viewOverviewText').style.display = 'block';
+        }
+
+        function filterNotes() {
+            const filterVal = document.getElementById('ddlFilterNotes').value;
+            const analystNotes = document.querySelectorAll('.note-type-analyst');
+            const sysNotes = document.querySelectorAll('.note-type-sys');
+
+            if (filterVal === 'analyst') {
+                analystNotes.forEach(el => el.style.display = 'block');
+                sysNotes.forEach(el => el.style.display = 'none');
+            } else if (filterVal === 'sys') {
+                analystNotes.forEach(el => el.style.display = 'none');
+                sysNotes.forEach(el => el.style.display = 'block');
+            } else {
+                analystNotes.forEach(el => el.style.display = 'block');
+                sysNotes.forEach(el => el.style.display = 'block');
+            }
+        }
+
+        function openNoteModal() { document.getElementById('modalNote').style.display = 'flex'; }
+        function closeNoteModal() { document.getElementById('modalNote').style.display = 'none'; }
+
+        function submitNewNote() {
+            const noteContent = document.getElementById('txtNewNote').value;
+            if (!noteContent) return;
+
+            const container = document.getElementById('notesContainer');
+            const newHtml = `
+                <div class="note-item note-type-analyst" style="background:#070d18; border:1px solid #00d2ff; padding:12px; border-radius:6px; margin-bottom:10px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                        <span style="font-size:0.75rem; font-weight:800; color:#00d2ff;">Analyst (Meet Kotecha)</span>
+                        <span style="font-size:0.68rem; color:#64748b;">Just Now</span>
+                    </div>
+                    <div style="font-size:0.75rem; color:#cbd5e1;">${noteContent}</div>
+                </div>`;
+            container.insertAdjacentHTML('afterbegin', newHtml);
+            document.getElementById('txtNewNote').value = '';
+            closeNoteModal();
+        }
+
+        function openUploadModal() { document.getElementById('modalUpload').style.display = 'flex'; }
+        function closeUploadModal() { document.getElementById('modalUpload').style.display = 'none'; }
+
+        function uploadEvidenceLocal() {
+            const gallery = document.getElementById('galleryView');
+            const newCard = `
+                <div class="evidence-card">
+                    <img src="Images/Meet.jpeg" class="evidence-img" alt="Uploaded Evidence" />
+                    <div style="font-size:0.68rem; color:#38bdf8; font-weight:700;">EVID_NEW_FILE.JPG</div>
+                </div>`;
+            document.getElementById('boxAddEvidence').insertAdjacentHTML('beforebegin', newCard);
+            closeUploadModal();
+        }
+
+        function switchGalleryTab(tabName) {
+            if (tabName === 'related') {
+                document.getElementById('tabEvidence').style.color = '#64748b';
+                document.getElementById('tabRelated').style.color = '#00d2ff';
+            } else {
+                document.getElementById('tabEvidence').style.color = '#00d2ff';
+                document.getElementById('tabRelated').style.color = '#64748b';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Leaflet Map Initialization for Grand Plaza Sector 4
+            const map = L.map('locationMap', { zoomControl: false }).setView([12.9716, 77.5946], 13);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
+            L.circleMarker([12.9716, 77.5946], { color: '#00d2ff', radius: 8, fillOpacity: 0.8 }).addTo(map);
+        });
     </script>
 </asp:Content>
