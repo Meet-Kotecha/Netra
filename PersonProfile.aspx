@@ -24,6 +24,7 @@
             border: 2px solid #00d2ff;
             margin-bottom: 12px;
             background-color: #070d18;
+            display: block;
         }
 
         .badge-status {
@@ -116,7 +117,13 @@
         <!-- Left Sidebar Photo Card -->
         <div>
             <div class="glass-card" style="text-align: center;">
-                <asp:Image ID="imgPersonPhoto" runat="server" CssClass="profile-img-large" />
+                <asp:Image ID="imgPersonPhoto" runat="server" CssClass="profile-img-large" onerror="handleImageError(this);" />
+                
+                <div id="avatarFallback" style="display:none; width:100%; height:280px; border-radius:8px; border:2px solid #00d2ff; background:#070d18; align-items:center; justify-content:center; flex-direction:column; margin-bottom:12px;">
+                    <div style="font-size:3rem; color:#00d2ff;">👤</div>
+                    <div style="font-size:0.75rem; color:#64748b; font-weight:800; margin-top:6px;">PHOTO CLASSIFIED</div>
+                </div>
+
                 <div class="badge-status">• ACTIVE INVESTIGATION</div>
                 <div style="font-size: 0.72rem; color: #64748b;">ID: <asp:Label ID="lblPersonID" runat="server" Text="PR-1042-89"></asp:Label></div>
             </div>
@@ -175,4 +182,11 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function handleImageError(img) {
+            img.style.display = 'none';
+            document.getElementById('avatarFallback').style.display = 'flex';
+        }
+    </script>
 </asp:Content>
