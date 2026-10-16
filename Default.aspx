@@ -1,609 +1,471 @@
-﻿<%@ Page Title="Intelligence Dashboard" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Netra._Default" %>
+﻿<%@ Page Title="Intelligence Dashboard" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Netra.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <!-- Load Chart.js CDN for interactive charts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <style>
-        .page-header {
+        .page-header-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 22px;
-            width: 100%;
+            margin-bottom: 24px;
         }
 
-        .page-title h2 {
+        .page-title {
             font-size: 1.4rem;
-            font-weight: 700;
+            font-weight: 800;
             color: #ffffff;
             margin-bottom: 4px;
         }
 
-        .page-title p {
+        .page-sub-text {
+            font-size: 0.78rem;
             color: #64748b;
-            font-size: 0.8rem;
         }
 
-        .btn-export {
+        /* Export Button Styling */
+        .btn-export-cyan {
             background-color: #0b1320;
             border: 1px solid #1e293b;
-            color: #f8fafc;
+            color: #38bdf8;
             padding: 8px 16px;
             border-radius: 6px;
             font-size: 0.78rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
-            transition: all 0.25s ease;
+            gap: 8px;
+            transition: all 0.2s ease;
+            text-decoration: none;
         }
 
-        .btn-export:hover {
+        .btn-export-cyan:hover {
             border-color: #38bdf8;
-            color: #38bdf8;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
-            transform: translateY(-2px);
+            background-color: #12283e;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
         }
 
-        /* Metric Cards */
-        .kpi-grid {
+        /* Metric Cards Grid */
+        .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 22px;
-            width: 100%;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 24px;
         }
 
-        .kpi-card {
+        @media (max-width: 1100px) {
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .metric-card {
             background-color: #0b1320;
             border: 1px solid #1e293b;
             border-radius: 8px;
-            padding: 18px 20px;
-            width: 100%;
-            transition: all 0.25s ease;
+            padding: 18px;
             position: relative;
         }
 
-        .kpi-card:hover {
-            border-color: #00d2ff;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 210, 255, 0.15);
-        }
-
-        .kpi-header {
+        .metric-top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        .kpi-title {
-            font-size: 0.7rem;
-            font-weight: 700;
+        .metric-title {
+            font-size: 0.68rem;
+            font-weight: 800;
+            color: #64748b;
             letter-spacing: 0.8px;
-            color: #94a3b8;
             text-transform: uppercase;
         }
 
-        .kpi-icon {
-            color: #64748b;
-            font-size: 0.95rem;
-            transition: color 0.2s ease;
-        }
-
-        .kpi-card:hover .kpi-icon {
-            color: #00d2ff;
-        }
-
-        .kpi-value {
-            font-size: 1.85rem;
+        .metric-value {
+            font-size: 1.8rem;
             font-weight: 800;
             color: #ffffff;
-            line-height: 1.1;
             margin-bottom: 8px;
+            line-height: 1;
         }
 
-        .kpi-sub {
+        .metric-sub {
             font-size: 0.7rem;
+            color: #38bdf8;
             display: flex;
             align-items: center;
             gap: 4px;
         }
 
-        .sub-up { color: #38bdf8; }
-        .sub-warn { color: #f59e0b; }
-
-        /* Dashboard Panels */
-        .dashboard-grid {
+        /* Main Charts Section */
+        .charts-main-grid {
             display: grid;
-            grid-template-columns: 2.3fr 1fr;
+            grid-template-columns: 1fr 340px;
             gap: 20px;
-            width: 100%;
+            margin-bottom: 24px;
         }
 
-        @media (max-width: 1200px) {
-            .dashboard-grid {
+        @media (max-width: 1024px) {
+            .charts-main-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        .card-panel {
+        .glass-card {
             background-color: #0b1320;
             border: 1px solid #1e293b;
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 20px;
-            width: 100%;
-            transition: border-color 0.25s ease;
         }
 
-        .card-panel:hover {
-            border-color: #334155;
+        .glass-card:last-child {
+            margin-bottom: 0;
         }
 
-        .panel-header {
+        .card-header-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
-        .panel-title {
-            font-size: 0.92rem;
-            font-weight: 700;
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 800;
             color: #ffffff;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .filter-select {
-            background-color: #070d18;
-            border: 1px solid #1e293b;
-            color: #94a3b8;
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            outline: none;
-            cursor: pointer;
-            transition: border-color 0.2s ease;
-        }
-
-        .filter-select:hover {
-            border-color: #00d2ff;
-        }
-
-        /* Canvas Chart Containers */
-        .chart-box {
-            position: relative;
-            width: 100%;
-            height: 240px;
-        }
-
-        .bottom-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            .bottom-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .donut-wrapper {
-            position: relative;
-            height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .donut-center-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            pointer-events: none;
-        }
-
-        .donut-center-text span {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: #ffffff;
-            display: block;
-            line-height: 1;
-        }
-
-        .donut-center-text small {
-            font-size: 0.65rem;
-            color: #64748b;
-        }
-
-        /* High Risk Table Highlights */
-        .risk-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .risk-table th {
-            text-align: left;
+        /* View All Link */
+        .link-view-all {
+            color: #38bdf8;
             font-size: 0.72rem;
-            color: #64748b;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #1e293b;
-            font-weight: 600;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.2s ease;
         }
 
-        .risk-table tr {
-            transition: background-color 0.15s ease;
+        .link-view-all:hover {
+            color: #00d2ff;
+            text-decoration: underline;
         }
 
-        .risk-table tbody tr:hover {
-            background-color: #121e30;
-        }
-
-        .risk-table td {
-            padding: 10px 8px;
-            border-bottom: 1px solid #141f30;
-            font-size: 0.8rem;
-        }
-
-        .risk-score {
-            font-weight: 800;
-            text-align: right;
-        }
-
-        .score-critical { color: #ef4444; }
-        .score-medium { color: #eab308; }
-        .score-normal { color: #38bdf8; }
-
-        /* Alert Feed Hover Items */
-        .alert-item {
-            background-color: #070d18;
-            border: 1px solid #1e293b;
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 10px;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .alert-item:hover {
-            border-color: #00d2ff;
-            transform: translateX(4px);
-            box-shadow: -3px 0 0 #00d2ff;
-        }
-
-        .alert-item h5 {
+        /* High Risk Table */
+        .risk-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #162234;
             font-size: 0.78rem;
+        }
+
+        .risk-row:last-child {
+            border-bottom: none;
+        }
+
+        .risk-score-high {
+            color: #f87171;
+            font-weight: 800;
+        }
+
+        .risk-score-medium {
+            color: #facc15;
+            font-weight: 800;
+        }
+
+        .risk-score-low {
+            color: #38bdf8;
+            font-weight: 800;
+        }
+
+        /* Recent Alerts List */
+        .alert-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #162234;
+        }
+
+        .alert-item:last-child {
+            border-bottom: none;
+        }
+
+        .alert-item-title {
+            font-size: 0.78rem;
+            font-weight: 800;
             color: #ffffff;
             margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
-        .alert-item p {
-            font-size: 0.7rem;
+        .alert-item-sub {
+            font-size: 0.68rem;
             color: #64748b;
             display: flex;
             justify-content: space-between;
+        }
+
+        /* Bottom Charts Subgrid */
+        .charts-sub-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .charts-sub-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!-- Top Header Bar -->
-    <div class="page-header">
-        <div class="page-title">
-            <h2>Intelligence Dashboard</h2>
-            <p>Real-time threat assessment and case analytics overview.</p>
-        </div>
-        <button type="button" class="btn-export">📥 Export Report</button>
-    </div>
-
-    <!-- Interactive Metric Cards -->
-    <div class="kpi-grid">
-        <div class="kpi-card">
-            <div class="kpi-header">
-                <span class="kpi-title">TOTAL CASES</span>
-                <span class="kpi-icon">📁</span>
-            </div>
-            <div class="kpi-value">14,208</div>
-            <div class="kpi-sub sub-up">📈 +2.4% from last month</div>
-        </div>
-
-        <div class="kpi-card">
-            <div class="kpi-header">
-                <span class="kpi-title">ACTIVE CASES</span>
-                <span class="kpi-icon">⚡</span>
-            </div>
-            <div class="kpi-value">1,842</div>
-            <div class="kpi-sub sub-up">📈 +12 new today</div>
-        </div>
-
-        <div class="kpi-card">
-            <div class="kpi-header">
-                <span class="kpi-title">HIGH-RISK AREAS</span>
-                <span class="kpi-icon">⚠️</span>
-            </div>
-            <div class="kpi-value">12</div>
-            <div class="kpi-sub sub-warn">📈 3 elevated in 24h</div>
-        </div>
-
-        <div class="kpi-card">
-            <div class="kpi-header">
-                <span class="kpi-title">ACTIVE ALERTS</span>
-                <span class="kpi-icon">📢</span>
-            </div>
-            <div class="kpi-value">34</div>
-            <div class="kpi-sub" style="color:#64748b;">⏱️ 8 pending review</div>
-        </div>
-    </div>
-
-    <!-- Main Interactive Dashboard Grid -->
-    <div class="dashboard-grid">
-        <!-- Left Column -->
+    <!-- Header with Functional Export Button -->
+    <div class="page-header-row">
         <div>
-            <!-- Line Chart Section -->
-            <div class="card-panel">
-                <div class="panel-header">
-                    <div class="panel-title">📈 Crime Trend Analysis (YTD)</div>
-                    <select id="ddlDistrictFilter" class="filter-select" onchange="updateLineChart()">
-                        <option value="All">All Districts</option>
-                        <option value="Sector 7G">Sector 7G</option>
-                        <option value="Industrial Park North">Industrial Park North</option>
-                        <option value="Downtown Metro">Downtown Metro</option>
-                    </select>
-                </div>
-                <div class="chart-box">
-                    <canvas id="lineChart"></canvas>
-                </div>
+            <div class="page-title">Intelligence Dashboard</div>
+            <div class="page-sub-text">Real-time threat assessment and case analytics overview.</div>
+        </div>
+        <button type="button" class="btn-export-cyan" onclick="exportDashboardReport()">
+            <span>📥</span> Export Report
+        </button>
+    </div>
+
+    <!-- Metrics Cards Grid -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-top-row">
+                <span class="metric-title">TOTAL CASES</span>
+                <span>📁</span>
             </div>
+            <div class="metric-value">14,208</div>
+            <div class="metric-sub">📈 +2.4% from last month</div>
+        </div>
 
-            <!-- Bottom Row Charts -->
-            <div class="bottom-grid">
-                <!-- Donut Chart -->
-                <div class="card-panel" style="margin-bottom:0;">
-                    <div class="panel-header">
-                        <div class="panel-title">Distribution by Type</div>
-                    </div>
-                    <div class="donut-wrapper">
-                        <canvas id="donutChart"></canvas>
-                        <div class="donut-center-text">
-                            <span id="lblDonutTotal">1,842</span>
-                            <small>Active</small>
-                        </div>
-                    </div>
-                </div>
+        <div class="metric-card">
+            <div class="metric-top-row">
+                <span class="metric-title">ACTIVE CASES</span>
+                <span>⚡</span>
+            </div>
+            <div class="metric-value">1,842</div>
+            <div class="metric-sub">📌 +12 new today</div>
+        </div>
 
-                <!-- Bar Chart -->
-                <div class="card-panel" style="margin-bottom:0;">
-                    <div class="panel-header">
-                        <div class="panel-title">District Comparison</div>
-                    </div>
-                    <div class="chart-box" style="height:180px;">
-                        <canvas id="barChart"></canvas>
-                    </div>
-                </div>
+        <div class="metric-card">
+            <div class="metric-top-row">
+                <span class="metric-title">HIGH-RISK AREAS</span>
+                <span>⚠️</span>
+            </div>
+            <div class="metric-value">12</div>
+            <div class="metric-sub" style="color:#f87171;">📌 3 elevated in 24h</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-top-row">
+                <span class="metric-title">ACTIVE ALERTS</span>
+                <span>📢</span>
+            </div>
+            <div class="metric-value">34</div>
+            <div class="metric-sub" style="color:#facc15;">👁️ 8 pending review</div>
+        </div>
+    </div>
+
+    <!-- Charts Split Row -->
+    <div class="charts-main-grid">
+        <!-- Left Column: YTD Crime Trend -->
+        <div class="glass-card">
+            <div class="card-header-row">
+                <div class="card-title">📈 Crime Trend Analysis (YTD)</div>
+                <select style="background:#070d18; border:1px solid #1e293b; color:#cbd5e1; padding:4px 8px; border-radius:4px; font-size:0.75rem;">
+                    <option>All Districts</option>
+                    <option>Bengaluru Urban</option>
+                    <option>Bengaluru Rural</option>
+                </select>
+            </div>
+            <div style="height: 260px;">
+                <canvas id="trendChart"></canvas>
             </div>
         </div>
 
-        <!-- Right Side Panel -->
+        <!-- Right Column: High Risk & Alerts -->
         <div>
-            <!-- High Risk Areas Table -->
-            <div class="card-panel">
-                <div class="panel-header">
-                    <div class="panel-title">🛡️ High-Risk Areas</div>
+            <!-- High Risk Areas -->
+            <div class="glass-card">
+                <div class="card-header-row">
+                    <div class="card-title">🛡️ High-Risk Areas</div>
+                    <span style="font-size:0.68rem; color:#64748b;">Risk Score</span>
                 </div>
-                <table class="risk-table">
-                    <thead>
-                        <tr>
-                            <th>Location</th>
-                            <th style="text-align:right;">Risk Score</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>🔴 Sector 7G</td>
-                            <td class="risk-score score-critical">94.2</td>
-                        </tr>
-                        <tr>
-                            <td>🔴 Industrial Park North</td>
-                            <td class="risk-score score-critical">88.7</td>
-                        </tr>
-                        <tr>
-                            <td>🟡 Downtown Metro</td>
-                            <td class="risk-score score-medium">76.4</td>
-                        </tr>
-                        <tr>
-                            <td>🟡 Port Authority Zone</td>
-                            <td class="risk-score score-medium">72.1</td>
-                        </tr>
-                        <tr>
-                            <td>🔵 Residential Block C</td>
-                            <td class="risk-score score-normal">45.0</td>
-                        </tr>
-                    </tbody>
-                </table>
+
+                <div class="risk-row">
+                    <span>🔴 Sector 7G</span>
+                    <span class="risk-score-high">94.2</span>
+                </div>
+                <div class="risk-row">
+                    <span>🔴 Industrial Park North</span>
+                    <span class="risk-score-high">88.7</span>
+                </div>
+                <div class="risk-row">
+                    <span>🟡 Downtown Metro</span>
+                    <span class="risk-score-medium">76.4</span>
+                </div>
+                <div class="risk-row">
+                    <span>🟡 Port Authority Zone</span>
+                    <span class="risk-score-medium">72.1</span>
+                </div>
+                <div class="risk-row">
+                    <span>🔵 Residential Block C</span>
+                    <span class="risk-score-low">45.0</span>
+                </div>
             </div>
 
-            <!-- Recent Alerts -->
-            <div class="card-panel">
-                <div class="panel-header">
-                    <div class="panel-title">🔔 Recent Alerts</div>
-                    <a href="#" style="color:#00d2ff; font-size:0.75rem; text-decoration:none;">View All</a>
+            <!-- Recent Alerts with Functional View All Link -->
+            <div class="glass-card">
+                <div class="card-header-row">
+                    <div class="card-title">🔔 Recent Alerts</div>
+                    <a href="Alerts.aspx" class="link-view-all">View All</a>
                 </div>
 
                 <div class="alert-item">
-                    <h5>❗ Anomalous Data Transfer Detected</h5>
-                    <p><span>Node: SVR-092</span> <span>2 mins ago</span></p>
+                    <div class="alert-item-title">❗ Anomalous Data Transfer Detected</div>
+                    <div class="alert-item-sub">
+                        <span>Node: SVR-092</span>
+                        <span>2 mins ago</span>
+                    </div>
                 </div>
 
                 <div class="alert-item">
-                    <h5>👁️ Suspicious Vehicle Movement</h5>
-                    <p><span>Cam: DT-Cam-04</span> <span>15 mins ago</span></p>
-                </div>
-
-                <div class="alert-item">
-                    <h5>ℹ️ System Update Completed</h5>
-                    <p><span>Mainframe</span> <span>1 hour ago</span></p>
+                    <div class="alert-item-title">🚗 Suspicious Vehicle Movement</div>
+                    <div class="alert-item-sub">
+                        <span>Sector 4, Downtown</span>
+                        <span>14 mins ago</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Chart.js Initialization Script -->
+    <!-- Bottom Charts Subgrid -->
+    <div class="charts-sub-grid">
+        <div class="glass-card">
+            <div class="card-title" style="margin-bottom:14px;">📊 Distribution by Type</div>
+            <div style="height: 200px;">
+                <canvas id="typeChart"></canvas>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title" style="margin-bottom:14px;">🏛️ District Comparison</div>
+            <div style="height: 200px;">
+                <canvas id="districtChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard JavaScript Engine -->
     <script>
-        let lineChartInstance, donutChartInstance, barChartInstance;
+        // Export Report CSV Generator
+        function exportDashboardReport() {
+            const csvRows = [
+                ["NETRA INTELLIGENCE DASHBOARD SUMMARY REPORT"],
+                ["Generated At", new Date().toISOString()],
+                [],
+                ["Metric", "Value"],
+                ["Total Cases", "14208"],
+                ["Active Cases", "1842"],
+                ["High-Risk Areas", "12"],
+                ["Active Alerts", "34"],
+                [],
+                ["High-Risk Area", "Risk Score"],
+                ["Sector 7G", "94.2"],
+                ["Industrial Park North", "88.7"],
+                ["Downtown Metro", "76.4"],
+                ["Port Authority Zone", "72.1"],
+                ["Residential Block C", "45.0"]
+            ];
 
-        const lineDataSets = {
-            "All": [800, 920, 1100, 950, 1400, 1200, 1650, 1450, 1850, 1100, 600, 950],
-            "Sector 7G": [300, 450, 520, 480, 600, 580, 720, 690, 810, 500, 310, 420],
-            "Industrial Park North": [200, 280, 310, 270, 420, 390, 510, 480, 590, 380, 180, 290],
-            "Downtown Metro": [300, 190, 270, 200, 360, 230, 420, 280, 450, 220, 110, 240]
-        };
+            const csvContent = "data:text/csv;charset=utf-8," + csvRows.map(e => e.join(",")).join("\n");
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "NETRA_Dashboard_Report.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            // 1. Line Chart
-            const ctxLine = document.getElementById('lineChart').getContext('2d');
-            const lineGradient = ctxLine.createLinearGradient(0, 0, 0, 240);
-            lineGradient.addColorStop(0, 'rgba(0, 210, 255, 0.35)');
-            lineGradient.addColorStop(1, 'rgba(0, 210, 255, 0.0)');
-
-            lineChartInstance = new Chart(ctxLine, {
+        // Render Dashboard Charts
+        window.addEventListener('DOMContentLoaded', () => {
+            // Trend Line Chart
+            const ctxTrend = document.getElementById('trendChart').getContext('2d');
+            new Chart(ctxTrend, {
                 type: 'line',
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
-                        label: 'Incidents Reported',
-                        data: lineDataSets["All"],
+                        label: 'Incidents',
+                        data: [800, 950, 1100, 900, 1400, 1250, 1700, 1500, 1900, 1100, 600, 1000],
                         borderColor: '#00d2ff',
+                        backgroundColor: 'rgba(0, 210, 255, 0.1)',
                         borderWidth: 3,
-                        backgroundColor: lineGradient,
-                        fill: true,
                         tension: 0.4,
-                        pointBackgroundColor: '#00d2ff',
-                        pointBorderColor: '#0b1320',
-                        pointBorderWidth: 2,
-                        pointRadius: 4,
-                        pointHoverRadius: 7,
-                        pointHoverBackgroundColor: '#ffffff',
-                        pointHoverBorderColor: '#00d2ff'
+                        fill: true
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: '#070d18',
-                            borderColor: '#00d2ff',
-                            borderWidth: 1,
-                            titleColor: '#ffffff',
-                            bodyColor: '#38bdf8',
-                            displayColors: false
-                        }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: '#64748b', font: { size: 10 } }
-                        },
-                        y: {
-                            grid: { color: '#1e293b' },
-                            ticks: { color: '#64748b', font: { size: 10 } }
-                        }
+                        x: { grid: { color: '#1a2536' }, ticks: { color: '#64748b' } },
+                        y: { grid: { color: '#1a2536' }, ticks: { color: '#64748b' } }
                     }
                 }
             });
 
-            // 2. Donut Chart
-            const ctxDonut = document.getElementById('donutChart').getContext('2d');
-            donutChartInstance = new Chart(ctxDonut, {
+            // Donut Chart
+            const ctxType = document.getElementById('typeChart').getContext('2d');
+            new Chart(ctxType, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Cyber (42%)', 'Financial (35%)', 'Narcotics (15%)', 'Other (8%)'],
+                    labels: ['Cybercrime', 'Vehicle Theft', 'Financial Fraud', 'Narcotics'],
                     datasets: [{
-                        data: [773, 645, 276, 148],
-                        backgroundColor: ['#00d2ff', '#38bdf8', '#0284c7', '#334155'],
-                        borderColor: '#0b1320',
-                        borderWidth: 3,
-                        hoverOffset: 6
+                        data: [40, 25, 20, 15],
+                        backgroundColor: ['#00d2ff', '#3b82f6', '#facc15', '#ef4444'],
+                        borderWidth: 0
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    cutout: '72%',
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: { color: '#94a3b8', font: { size: 10 }, boxWidth: 10 }
-                        },
-                        tooltip: {
-                            backgroundColor: '#070d18',
-                            borderColor: '#00d2ff',
-                            borderWidth: 1,
-                            titleColor: '#ffffff',
-                            bodyColor: '#38bdf8'
-                        }
-                    }
+                    plugins: { legend: { position: 'right', labels: { color: '#cbd5e1' } } }
                 }
             });
 
-            // 3. Bar Chart
-            const ctxBar = document.getElementById('barChart').getContext('2d');
-            barChartInstance = new Chart(ctxBar, {
+            // Bar Chart
+            const ctxDistrict = document.getElementById('districtChart').getContext('2d');
+            new Chart(ctxDistrict, {
                 type: 'bar',
                 data: {
-                    labels: ['D1', 'D2', 'D3', 'D4', 'D5'],
+                    labels: ['Bengaluru Urban', 'Bengaluru Rural', 'Mysuru', 'Mangaluru'],
                     datasets: [{
-                        label: 'Cases',
-                        data: [420, 680, 950, 510, 310],
-                        backgroundColor: ['#1e293b', '#1e293b', '#00d2ff', '#1e293b', '#1e293b'],
-                        borderRadius: 4,
-                        hoverBackgroundColor: '#38bdf8'
+                        data: [1200, 850, 600, 400],
+                        backgroundColor: '#00d2ff',
+                        borderRadius: 4
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: '#070d18',
-                            borderColor: '#00d2ff',
-                            borderWidth: 1,
-                            titleColor: '#ffffff',
-                            bodyColor: '#38bdf8',
-                            displayColors: false
-                        }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: '#64748b', font: { size: 10 } }
-                        },
-                        y: {
-                            display: false
-                        }
+                        x: { grid: { display: false }, ticks: { color: '#64748b' } },
+                        y: { grid: { color: '#1a2536' }, ticks: { color: '#64748b' } }
                     }
                 }
             });
         });
-
-        function updateLineChart() {
-            const selected = document.getElementById("ddlDistrictFilter").value;
-            lineChartInstance.data.datasets[0].data = lineDataSets[selected] || lineDataSets["All"];
-            lineChartInstance.update();
-        }
     </script>
 </asp:Content>
