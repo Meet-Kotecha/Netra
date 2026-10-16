@@ -60,7 +60,7 @@ namespace Netra
                     lblCase2Desc.Text = "GIS Map & Analytics Subsystem Sync";
                     break;
 
-                default: // Keval Goswami (id=1 or default)
+                default: // Keval Goswami
                     lblFullName.Text = "Keval Goswami";
                     lblPersonType.Text = "SUSPECT / PERSON OF INTEREST";
                     lblPersonID.Text = "PR-1042-89";
