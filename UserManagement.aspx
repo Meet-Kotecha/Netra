@@ -2,11 +2,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        /* Header Bar */
         .page-header-row {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             margin-bottom: 20px;
         }
 
@@ -14,572 +13,378 @@
             font-size: 1.4rem;
             font-weight: 800;
             color: #ffffff;
-            margin-bottom: 4px;
         }
 
-        .page-sub-text {
-            font-size: 0.78rem;
-            color: #64748b;
-        }
-
-        .btn-add-user {
-            background-color: #38bdf8;
-            border: none;
+        .btn-cyan {
+            background-color: #00d2ff;
             color: #070d18;
+            border: none;
             padding: 9px 18px;
             border-radius: 6px;
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             font-weight: 800;
             cursor: pointer;
-            display: flex;
+            transition: all 0.2s ease;
+            display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: all 0.2s ease;
         }
 
-        .btn-add-user:hover {
-            background-color: #00d2ff;
+        .btn-cyan:hover {
             box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
         }
 
-        /* Search & Filter Controls Bar */
-        .filter-controls-card {
+        .btn-outline {
+            background-color: #0b1320;
+            border: 1px solid #1e293b;
+            color: #cbd5e1;
+            padding: 9px 16px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-bar-container {
             background-color: #0b1320;
             border: 1px solid #1e293b;
             border-radius: 8px;
-            padding: 12px 16px;
+            padding: 14px 18px;
             margin-bottom: 20px;
             display: grid;
             grid-template-columns: 1fr 140px 140px 140px;
             gap: 12px;
+            align-items: center;
         }
 
-        @media (max-width: 900px) {
-            .filter-controls-card {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .search-input-wrap {
-            position: relative;
-        }
-
-        .search-input-wrap input {
-            width: 100%;
+        .search-input {
             background-color: #070d18;
             border: 1px solid #1e293b;
             border-radius: 6px;
-            padding: 8px 12px 8px 32px;
+            padding: 9px 14px;
             color: #ffffff;
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             outline: none;
-        }
-
-        .search-input-wrap input:focus {
-            border-color: #38bdf8;
-        }
-
-        .search-icon-inside {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #64748b;
-            font-size: 0.75rem;
+            width: 100%;
         }
 
         .filter-select {
             background-color: #070d18;
             border: 1px solid #1e293b;
             border-radius: 6px;
-            padding: 8px 12px;
-            color: #cbd5e1;
-            font-size: 0.75rem;
+            padding: 9px 12px;
+            color: #ffffff;
+            font-size: 0.78rem;
             outline: none;
             cursor: pointer;
         }
 
-        .filter-select:focus {
-            border-color: #38bdf8;
-        }
-
-        /* User Table Panel */
-        .table-container-card {
+        .glass-panel {
             background-color: #0b1320;
             border: 1px solid #1e293b;
             border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 20px;
+            padding: 20px;
         }
 
         .user-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.78rem;
         }
 
         .user-table th {
-            text-align: left;
-            padding: 12px 18px;
             background-color: #070d18;
-            color: #64748b;
-            font-weight: 800;
+            padding: 12px 14px;
             font-size: 0.65rem;
-            letter-spacing: 0.8px;
+            font-weight: 800;
+            color: #64748b;
             text-transform: uppercase;
+            text-align: left;
             border-bottom: 1px solid #1e293b;
         }
 
         .user-table td {
-            padding: 14px 18px;
-            border-bottom: 1px solid #162234;
+            padding: 14px;
+            font-size: 0.78rem;
             color: #cbd5e1;
+            border-bottom: 1px solid #1e293b;
             vertical-align: middle;
-        }
-
-        .user-table tr:hover {
-            background-color: rgba(18, 40, 62, 0.4);
-        }
-
-        .user-info-cell {
-            display: flex;
-            align-items: center;
-            gap: 12px;
         }
 
         .user-avatar {
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background-color: #12283e;
-            border: 1px solid #1e293b;
-            color: #38bdf8;
+            background-color: #00d2ff;
+            color: #070d18;
+            font-weight: 800;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.72rem;
-            font-weight: 800;
-            overflow: hidden;
         }
 
-        .user-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .user-name {
-            font-weight: 800;
-            color: #ffffff;
-            font-size: 0.82rem;
-        }
-
-        /* Role Badges */
-        .role-badge-admin {
-            background-color: rgba(6, 182, 212, 0.15);
-            border: 1px solid rgba(6, 182, 212, 0.4);
-            color: #38bdf8;
+        .badge-role {
+            background: rgba(0, 210, 255, 0.15);
+            color: #00d2ff;
+            border: 1px solid rgba(0, 210, 255, 0.3);
             font-size: 0.65rem;
-            font-weight: 700;
+            font-weight: 800;
             padding: 3px 8px;
             border-radius: 4px;
         }
 
-        .role-badge-dark {
-            background-color: #070d18;
-            border: 1px solid #1e293b;
-            color: #94a3b8;
-            font-size: 0.65rem;
+        .badge-status-active {
+            color: #10b981;
             font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 4px;
-        }
-
-        /* Status Dot Indicator */
-        .status-active {
-            color: #38bdf8;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .status-suspended {
-            color: #f87171;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Pagination Footer */
-        .table-footer-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 18px;
-            background-color: #070d18;
-            border-top: 1px solid #1e293b;
-            font-size: 0.72rem;
-            color: #64748b;
-        }
-
-        .pagination-wrap {
-            display: flex;
-            gap: 4px;
-        }
-
-        .page-btn {
-            background-color: #0b1320;
-            border: 1px solid #1e293b;
-            color: #64748b;
-            width: 26px;
-            height: 26px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 0.72rem;
-            font-weight: 700;
-        }
-
-        .page-btn.active {
-            background-color: #12283e;
-            border-color: #38bdf8;
-            color: #38bdf8;
-        }
-
-        .page-btn:hover {
-            color: #ffffff;
-            border-color: #38bdf8;
+            font-size: 0.75rem;
         }
 
         /* Modal Overlay */
         .modal-overlay {
-            display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(7, 13, 24, 0.85);
-            backdrop-filter: blur(4px);
-            z-index: 999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: none;
             align-items: center;
             justify-content: center;
+            z-index: 9999;
         }
 
-        .modal-card {
+        .modal-box {
             background-color: #0b1320;
             border: 1px solid #1e293b;
-            border-radius: 10px;
-            width: 480px;
-            max-width: 90%;
-            padding: 24px;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            width: 440px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
-            border-bottom: 1px solid #1e293b;
-            padding-bottom: 12px;
-        }
-
-        .modal-title {
-            font-size: 1.1rem;
+        .modal-label {
+            font-size: 0.65rem;
             font-weight: 800;
-            color: #ffffff;
-        }
-
-        .btn-modal-close {
-            background: none;
-            border: none;
             color: #64748b;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .btn-modal-close:hover {
-            color: #ef4444;
-        }
-
-        .form-group {
-            margin-bottom: 14px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: #94a3b8;
-            margin-bottom: 6px;
             text-transform: uppercase;
+            margin-bottom: 4px;
+            display: block;
         }
 
-        .form-input, .form-select {
-            width: 100%;
+        .modal-input {
             background-color: #070d18;
             border: 1px solid #1e293b;
             border-radius: 6px;
-            padding: 9px 12px;
+            padding: 8px 12px;
             color: #ffffff;
             font-size: 0.8rem;
+            width: 100%;
+            margin-bottom: 12px;
             outline: none;
-        }
-
-        .form-input:focus, .form-select:focus {
-            border-color: #38bdf8;
-        }
-
-        .modal-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 20px;
-            border-top: 1px solid #1e293b;
-            padding-top: 14px;
-        }
-
-        .btn-cancel {
-            background-color: #070d18;
-            border: 1px solid #1e293b;
-            color: #cbd5e1;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .btn-create {
-            background-color: #38bdf8;
-            border: none;
-            color: #070d18;
-            padding: 8px 18px;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 800;
-            cursor: pointer;
-        }
-
-        .btn-create:hover {
-            background-color: #00d2ff;
         }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!-- Top Header -->
     <div class="page-header-row">
         <div>
             <div class="page-title">User Management</div>
-            <div class="page-sub-text">Manage platform access, assign roles, and monitor active intelligence personnel.</div>
+            <div style="font-size:0.75rem; color:#64748b; margin-top:4px;">Manage platform access, assign roles, and monitor active intelligence personnel.</div>
         </div>
-        <button type="button" class="btn-add-user" onclick="openAddUserModal()">
-            👤+ Add User
-        </button>
+
+        <button type="button" class="btn-cyan" onclick="openAddUserModal()">👤+ Add User</button>
     </div>
 
-    <!-- Filter & Search Controls Bar -->
-    <div class="filter-controls-card">
-        <div class="search-input-wrap">
-            <span class="search-icon-inside">🔍</span>
-            <input type="text" placeholder="Search by name or email..." />
-        </div>
-        <select class="filter-select">
-            <option value="All">Role: All</option>
+    <!-- SEARCH AND FILTERS -->
+    <div class="filter-bar-container">
+        <input type="text" id="txtSearchUser" class="search-input" placeholder="🔍 Search by name or email..." onkeyup="filterUserList()" />
+
+        <select id="ddlRole" class="filter-select" onchange="filterUserList()">
+            <option value="ALL">Role: All</option>
             <option value="Administrator">Administrator</option>
             <option value="Analyst">Analyst</option>
             <option value="Investigator">Investigator</option>
         </select>
-        <select class="filter-select">
-            <option value="All">Dept: All</option>
+
+        <select id="ddlDept" class="filter-select" onchange="filterUserList()">
+            <option value="ALL">Dept: All</option>
+            <option value="Neural Unit">Neural Unit</option>
             <option value="Cyber Division">Cyber Division</option>
-            <option value="Field Intelligence">Field Intelligence</option>
-            <option value="Digital Forensics">Digital Forensics</option>
         </select>
-        <select class="filter-select">
-            <option value="All">Status: All</option>
+
+        <select id="ddlStatus" class="filter-select" onchange="filterUserList()">
+            <option value="ALL">Status: All</option>
             <option value="Active">Active</option>
             <option value="Suspended">Suspended</option>
         </select>
     </div>
 
-    <!-- Personnel Data Table -->
-    <div class="table-container-card">
-        <table class="user-table" id="userTable">
+    <!-- USER LIST PANEL -->
+    <div class="glass-panel">
+        <table class="user-table" id="tblUsers">
             <thead>
                 <tr>
-                    <th style="width:220px;">USER</th>
-                    <th style="width:200px;">EMAIL</th>
-                    <th style="width:140px;">ROLE</th>
+                    <th>USER</th>
+                    <th>EMAIL</th>
+                    <th>ROLE</th>
                     <th>DEPARTMENT</th>
-                    <th style="width:120px;">STATUS</th>
-                    <th style="width:140px;">LAST LOGIN</th>
-                    <th style="width:80px; text-align:right;">ACTIONS</th>
+                    <th>STATUS</th>
+                    <th>LAST LOGIN</th>
+                    <th style="text-align:right;">ACTIONS</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Row 1: Marcus Vance -->
-                <tr>
+            <tbody id="userTableBody">
+                <tr class="user-row" data-role="Administrator" data-dept="Neural Unit" data-status="Active">
                     <td>
-                        <div class="user-info-cell">
-                            <div class="user-avatar">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60" alt="Marcus Vance" />
-                            </div>
-                            <span class="user-name">Marcus Vance</span>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <div class="user-avatar">MK</div>
+                            <span style="font-weight:800; color:#fff;" class="usr-name">Meet Kotecha</span>
                         </div>
                     </td>
-                    <td style="color:#94a3b8; font-family:monospace;">m.vance@netra.gov</td>
-                    <td><span class="role-badge-admin">Administrator</span></td>
-                    <td>Cyber Division</td>
-                    <td><span class="status-active">● Active</span></td>
-                    <td style="color:#94a3b8;">2 mins ago</td>
+                    <td class="usr-email" style="color:#00d2ff; font-weight:700;">meet8kotecha@gmail.com</td>
+                    <td><span class="badge-role">Administrator</span></td>
+                    <td>Neural Unit</td>
+                    <td><span class="badge-status-active">• Active</span></td>
+                    <td style="color:#64748b;">Just Now</td>
                     <td style="text-align:right;">
-                        <button type="button" style="background:none; border:none; color:#64748b; cursor:pointer;" onclick="alert('Managing Marcus Vance permissions...')">⚙️</button>
-                    </td>
-                </tr>
-
-                <!-- Row 2: Sarah Chen -->
-                <tr>
-                    <td>
-                        <div class="user-info-cell">
-                            <div class="user-avatar">
-                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=60" alt="Sarah Chen" />
-                            </div>
-                            <span class="user-name">Sarah Chen</span>
-                        </div>
-                    </td>
-                    <td style="color:#94a3b8; font-family:monospace;">s.chen@netra.gov</td>
-                    <td><span class="role-badge-dark">Analyst</span></td>
-                    <td>Field Intelligence</td>
-                    <td><span class="status-active">● Active</span></td>
-                    <td style="color:#94a3b8;">4 hrs ago</td>
-                    <td style="text-align:right;">
-                        <button type="button" style="background:none; border:none; color:#64748b; cursor:pointer;" onclick="alert('Managing Sarah Chen permissions...')">⚙️</button>
-                    </td>
-                </tr>
-
-                <!-- Row 3: Jameson Reed -->
-                <tr>
-                    <td>
-                        <div class="user-info-cell">
-                            <div class="user-avatar" style="background-color:#070d18; color:#64748b;">JR</div>
-                            <span class="user-name">Jameson Reed</span>
-                        </div>
-                    </td>
-                    <td style="color:#94a3b8; font-family:monospace;">j.reed@netra.gov</td>
-                    <td><span class="role-badge-dark">Investigator</span></td>
-                    <td>Digital Forensics</td>
-                    <td><span class="status-suspended">● Suspended</span></td>
-                    <td style="color:#94a3b8;">Oct 12, 2023</td>
-                    <td style="text-align:right;">
-                        <button type="button" style="background:none; border:none; color:#64748b; cursor:pointer;" onclick="alert('Managing Jameson Reed permissions...')">⚙️</button>
+                        <button type="button" style="background:none; border:none; color:#64748b; cursor:pointer;" onclick="alert('User Settings for Meet Kotecha')">⚙️</button>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <!-- Footer Stats & Pagination -->
-        <div class="table-footer-bar">
-            <div>Showing 1 to 3 of 42 entries</div>
-            <div class="pagination-wrap">
-                <button type="button" class="page-btn">‹</button>
-                <button type="button" class="page-btn active">1</button>
-                <button type="button" class="page-btn">2</button>
-                <button type="button" class="page-btn">3</button>
-                <button type="button" class="page-btn">›</button>
+        <div style="display:flex; justify-style:space-between; justify-content:space-between; align-items:center; margin-top:16px; font-size:0.72rem; color:#64748b;">
+            <div id="lblEntryCount">Showing 1 to 1 of 1 entries</div>
+            <div style="display:flex; gap:4px;">
+                <button type="button" class="btn-outline" style="padding:4px 8px; font-size:0.7rem;" disabled>‹</button>
+                <button type="button" class="btn-cyan" style="padding:4px 8px; font-size:0.7rem;">1</button>
+                <button type="button" class="btn-outline" style="padding:4px 8px; font-size:0.7rem;" disabled>›</button>
             </div>
         </div>
     </div>
 
     <!-- Add User Modal -->
-    <div class="modal-overlay" id="addUserModal">
-        <div class="modal-card">
-            <div class="modal-header">
-                <div class="modal-title">👤 Add New Personnel User</div>
-                <button type="button" class="btn-modal-close" onclick="closeAddUserModal()">✕</button>
-            </div>
+    <div id="modalAddUser" class="modal-overlay">
+        <div class="modal-box">
+            <div style="font-size:1rem; font-weight:800; color:#fff; margin-bottom:16px;">👤 Add Personnel User</div>
 
-            <div class="form-group">
-                <label class="form-label">Full Name</label>
-                <input type="text" id="modalUserName" class="form-input" placeholder="e.g. Alex Mercer" />
-            </div>
+            <label class="modal-label">Full Name</label>
+            <input type="text" id="newUserName" class="modal-input" placeholder="e.g. Rohan Siddhpura" />
 
-            <div class="form-group">
-                <label class="form-label">Official Email</label>
-                <input type="email" id="modalUserEmail" class="form-input" placeholder="a.mercer@netra.gov" />
-            </div>
+            <label class="modal-label">Email Address</label>
+            <input type="email" id="newUserEmail" class="modal-input" placeholder="e.g. rohan@netra.gov" />
 
-            <div class="form-group">
-                <label class="form-label">Assigned Role</label>
-                <select id="modalUserRole" class="form-select">
-                    <option value="Administrator">Administrator</option>
-                    <option value="Analyst">Analyst</option>
-                    <option value="Investigator">Investigator</option>
-                </select>
-            </div>
+            <label class="modal-label">Role</label>
+            <select id="newUserRole" class="modal-input">
+                <option value="Analyst">Analyst</option>
+                <option value="Investigator">Investigator</option>
+                <option value="Administrator">Administrator</option>
+            </select>
 
-            <div class="form-group">
-                <label class="form-label">Department</label>
-                <select id="modalUserDept" class="form-select">
-                    <option value="Cyber Division">Cyber Division</option>
-                    <option value="Field Intelligence">Field Intelligence</option>
-                    <option value="Digital Forensics">Digital Forensics</option>
-                    <option value="Tactical Operations">Tactical Operations</option>
-                </select>
-            </div>
+            <label class="modal-label">Department</label>
+            <select id="newUserDept" class="modal-input">
+                <option value="Field Intelligence">Field Intelligence</option>
+                <option value="Cyber Division">Cyber Division</option>
+                <option value="Digital Forensics">Digital Forensics</option>
+            </select>
 
-            <div class="modal-actions">
-                <button type="button" class="btn-cancel" onclick="closeAddUserModal()">Cancel</button>
-                <button type="button" class="btn-create" onclick="submitNewUser()">Create Personnel Account ▶</button>
+            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:10px;">
+                <button type="button" class="btn-outline" onclick="closeAddUserModal()">Cancel</button>
+                <button type="button" class="btn-cyan" onclick="saveNewUser()">Create Account</button>
             </div>
         </div>
     </div>
 
     <script>
         function openAddUserModal() {
-            document.getElementById("addUserModal").style.display = "flex";
+            document.getElementById('modalAddUser').style.display = 'flex';
         }
 
         function closeAddUserModal() {
-            document.getElementById("addUserModal").style.display = "none";
+            document.getElementById('modalAddUser').style.display = 'none';
         }
 
-        function submitNewUser() {
-            const name = document.getElementById("modalUserName").value.trim() || "New Officer";
-            const email = document.getElementById("modalUserEmail").value.trim() || "officer@netra.gov";
-            const role = document.getElementById("modalUserRole").value;
-            const dept = document.getElementById("modalUserDept").value;
+        function saveNewUser() {
+            const name = document.getElementById('newUserName').value.trim();
+            const email = document.getElementById('newUserEmail').value.trim();
+            const role = document.getElementById('newUserRole').value;
+            const dept = document.getElementById('newUserDept').value;
 
-            const tbody = document.querySelector("#userTable tbody");
-            const initials = name.split(" ").map(n => n[0]).join("").toUpperCase().substring(0, 2);
+            if (!name || !email) {
+                alert('Please enter both name and email.');
+                return;
+            }
 
-            const newRow = `
-                <tr>
-                    <td>
-                        <div class="user-info-cell">
-                            <div class="user-avatar" style="background-color:#12283e; color:#00d2ff;">${initials}</div>
-                            <span class="user-name">${name}</span>
-                        </div>
-                    </td>
-                    <td style="color:#94a3b8; font-family:monospace;">${email}</td>
-                    <td><span class="${role === 'Administrator' ? 'role-badge-admin' : 'role-badge-dark'}">${role}</span></td>
-                    <td>${dept}</td>
-                    <td><span class="status-active">● Active</span></td>
-                    <td style="color:#94a3b8;">Just now</td>
-                    <td style="text-align:right;">
-                        <button type="button" style="background:none; border:none; color:#64748b; cursor:pointer;" onclick="alert('Managing ${name} permissions...')">⚙️</button>
-                    </td>
-                </tr>`;
+            const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
 
-            tbody.insertAdjacentHTML('afterbegin', newRow);
+            const tbody = document.getElementById('userTableBody');
+            const tr = document.createElement('tr');
+            tr.className = 'user-row';
+            tr.setAttribute('data-role', role);
+            tr.setAttribute('data-dept', dept);
+            tr.setAttribute('data-status', 'Active');
+
+            tr.innerHTML = `
+                <td>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <div class="user-avatar">${initials}</div>
+                        <span style="font-weight:800; color:#fff;" class="usr-name">${name}</span>
+                    </div>
+                </td>
+                <td class="usr-email" style="color:#00d2ff; font-weight:700;">${email}</td>
+                <td><span class="badge-role">${role}</span></td>
+                <td>${dept}</td>
+                <td><span class="badge-status-active">• Active</span></td>
+                <td style="color:#64748b;">Just Now</td>
+                <td style="text-align:right;">
+                    <button type="button" style="background:none; border:none; color:#64748b; cursor:pointer;" onclick="alert('User Settings for ${name}')">⚙️</button>
+                </td>
+            `;
+
+            tbody.appendChild(tr);
             closeAddUserModal();
-            alert("✅ Personnel account created for " + name);
+
+            // Reset inputs
+            document.getElementById('newUserName').value = '';
+            document.getElementById('newUserEmail').value = '';
+
+            updateCount();
+        }
+
+        function filterUserList() {
+            const searchVal = document.getElementById('txtSearchUser').value.toLowerCase();
+            const selectedRole = document.getElementById('ddlRole').value;
+            const selectedDept = document.getElementById('ddlDept').value;
+            const selectedStatus = document.getElementById('ddlStatus').value;
+
+            const rows = document.querySelectorAll('.user-row');
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const name = row.querySelector('.usr-name').innerText.toLowerCase();
+                const email = row.querySelector('.usr-email').innerText.toLowerCase();
+                const role = row.getAttribute('data-role');
+                const dept = row.getAttribute('data-dept');
+                const status = row.getAttribute('data-status');
+
+                const matchesSearch = name.includes(searchVal) || email.includes(searchVal);
+                const matchesRole = (selectedRole === 'ALL' || role === selectedRole);
+                const matchesDept = (selectedDept === 'ALL' || dept === selectedDept);
+                const matchesStatus = (selectedStatus === 'ALL' || status === selectedStatus);
+
+                if (matchesSearch && matchesRole && matchesDept && matchesStatus) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            document.getElementById('lblEntryCount').innerText = `Showing 1 to ${visibleCount} of ${visibleCount} entries`;
+        }
+
+        function updateCount() {
+            const visibleCount = document.querySelectorAll('.user-row').length;
+            document.getElementById('lblEntryCount').innerText = `Showing 1 to ${visibleCount} of ${visibleCount} entries`;
         }
     </script>
 </asp:Content>
