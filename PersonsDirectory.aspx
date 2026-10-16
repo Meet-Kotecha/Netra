@@ -111,6 +111,20 @@
             border: 1px solid #00d2ff;
         }
 
+        .person-avatar-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            background: #12283e;
+            color: #00d2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            border: 1px solid #00d2ff;
+        }
+
         .type-badge {
             font-size: 0.65rem;
             font-weight: 800;
@@ -185,7 +199,8 @@
                 <tr class="person-row" data-name="digvijaysinh vaghela" data-type="SUSPECT">
                     <td>
                         <div class="person-profile-cell">
-                            <img src="images/digvijaysinh.jpg" class="person-thumb" alt="Digvijaysinh Vaghela" onerror="this.src='Images/Meet.jpeg';" />
+                            <img src="Images/Digvijay.jpeg" class="person-thumb" alt="Digvijaysinh Vaghela" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                            <div class="person-avatar-box" style="display:none;">DV</div>
                             <div>
                                 <div style="font-weight: 800; color: #fff;">Digvijaysinh Vaghela</div>
                                 <div style="font-size: 0.68rem; color: #64748b;">DOB: 2002-09-14</div>
@@ -204,7 +219,8 @@
                 <tr class="person-row" data-name="rohan siddhpura" data-type="POI">
                     <td>
                         <div class="person-profile-cell">
-                            <img src="images/rohan.jpg" class="person-thumb" alt="Rohan Siddhpura" onerror="this.src='Images/Meet.jpeg';" />
+                            <img src="Images/Rohan.jpeg" class="person-thumb" alt="Rohan Siddhpura" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                            <div class="person-avatar-box" style="display:none;">RS</div>
                             <div>
                                 <div style="font-weight: 800; color: #fff;">Rohan Siddhpura</div>
                                 <div style="font-size: 0.68rem; color: #64748b;">DOB: 2001-03-22</div>
@@ -223,7 +239,8 @@
                 <tr class="person-row" data-name="meet kotecha" data-type="POI">
                     <td>
                         <div class="person-profile-cell">
-                            <img src="images/meet.jpeg" class="person-thumb" alt="Meet Kotecha" onerror="this.src='Images/Meet.jpeg';" />
+                            <img src="Images/Meet.jpeg" class="person-thumb" alt="Meet Kotecha" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                            <div class="person-avatar-box" style="display:none;">MK</div>
                             <div>
                                 <div style="font-weight: 800; color: #fff;">Meet Kotecha</div>
                                 <div style="font-size: 0.68rem; color: #64748b;">DOB: 2003-11-05</div>
@@ -242,7 +259,8 @@
                 <tr class="person-row" data-name="keval goswami" data-type="SUSPECT">
                     <td>
                         <div class="person-profile-cell">
-                            <img src="images/keval.jpg" class="person-thumb" alt="Keval Goswami" onerror="this.src='Images/Meet.jpeg';" />
+                            <img src="Images/Keval.jpeg" class="person-thumb" alt="Keval Goswami" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                            <div class="person-avatar-box" style="display:none;">KG</div>
                             <div>
                                 <div style="font-weight: 800; color: #fff;">Keval Goswami</div>
                                 <div style="font-size: 0.68rem; color: #64748b;">DOB: 2006-06-06</div>

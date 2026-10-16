@@ -101,6 +101,20 @@
             border: 1px solid #1e293b;
         }
 
+        .candidate-avatar-box {
+            width: 80px;
+            height: 95px;
+            border-radius: 6px;
+            background: #12283e;
+            color: #00d2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            border: 1px solid #00d2ff;
+        }
+
         .confidence-badge {
             position: absolute;
             top: 12px;
@@ -174,7 +188,7 @@
                 
                 <div style="position:relative;">
                     <span style="position:absolute; top:8px; left:8px; background:rgba(7,13,24,0.8); border:1px solid #1e293b; color:#38bdf8; font-size:0.6rem; font-weight:800; padding:2px 6px; border-radius:4px;">SRC: EXT-CAM-89</span>
-                    <img id="imgPreview" src="images/meet.jpeg" class="preview-box" alt="EXT-CAM-89 Frame" onerror="this.src='Images/Meet.jpeg';" />
+                    <img id="imgPreview" src="Images/Meet.jpeg" class="preview-box" alt="EXT-CAM-89 Frame" />
                 </div>
 
                 <button type="button" class="btn-search-cyan">
@@ -208,7 +222,8 @@
                 <div class="matches-grid">
                     <!-- Digvijaysinh Vaghela -->
                     <div class="candidate-card">
-                        <img src="images/digvijaysinh.jpg" class="candidate-thumb" alt="Digvijaysinh Vaghela" onerror="this.src='Images/Meet.jpeg';" />
+                        <img src="Images/Digvijay.jpeg" class="candidate-thumb" alt="Digvijaysinh Vaghela" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="candidate-avatar-box" style="display:none;">DV</div>
                         <div>
                             <div class="confidence-badge">✓ 98%</div>
                             <div class="candidate-name">Digvijaysinh Vaghela</div>
@@ -224,7 +239,8 @@
 
                     <!-- Rohan Siddhpura -->
                     <div class="candidate-card">
-                        <img src="images/rohan.jpg" class="candidate-thumb" alt="Rohan Siddhpura" onerror="this.src='Images/Meet.jpeg';" />
+                        <img src="Images/Rohan.jpeg" class="candidate-thumb" alt="Rohan Siddhpura" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="candidate-avatar-box" style="display:none;">RS</div>
                         <div>
                             <div class="confidence-badge" style="border-color:#38bdf8; color:#38bdf8;">91%</div>
                             <div class="candidate-name">Rohan Siddhpura</div>
@@ -240,7 +256,8 @@
 
                     <!-- Meet Kotecha -->
                     <div class="candidate-card">
-                        <img src="images/meet.jpeg" class="candidate-thumb" alt="Meet Kotecha" onerror="this.src='Images/Meet.jpeg';" />
+                        <img src="Images/Meet.jpeg" class="candidate-thumb" alt="Meet Kotecha" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="candidate-avatar-box" style="display:none;">MK</div>
                         <div>
                             <div class="confidence-badge" style="border-color:#38bdf8; color:#38bdf8;">88%</div>
                             <div class="candidate-name">Meet Kotecha</div>
@@ -256,7 +273,8 @@
 
                     <!-- Keval Goswami -->
                     <div class="candidate-card">
-                        <img src="images/keval.jpg" class="candidate-thumb" alt="Keval Goswami" onerror="this.src='Images/Meet.jpeg';" />
+                        <img src="Images/Keval.jpeg" class="candidate-thumb" alt="Keval Goswami" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="candidate-avatar-box" style="display:none;">KG</div>
                         <div>
                             <div class="confidence-badge" style="border-color:#38bdf8; color:#38bdf8;">85%</div>
                             <div class="candidate-name">Keval Goswami</div>
