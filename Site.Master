@@ -319,7 +319,7 @@
                     <!-- Shield Icon routes directly to Security Settings page -->
                     <a href="SecuritySettings.aspx" class="icon-btn" title="Security Settings">🛡️</a>
                     <div class="user-profile" onclick="window.location.href='Settings.aspx';">
-                        <div class="avatar" title="Rohan Siddhpura">RS</div>
+                        <div class="avatar" title="<%= Session["UserName"] != null ? Session["UserName"].ToString() : "Meet Kotecha" %>"><%= HeaderInitials %></div>
                     </div>
                 </div>
             </header>

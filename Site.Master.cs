@@ -4,8 +4,20 @@ namespace Netra
 {
     public partial class Site : System.Web.UI.MasterPage
     {
+        public string HeaderInitials { get; set; } = "MK";
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserInitials"] != null)
+            {
+                HeaderInitials = Session["UserInitials"].ToString();
+            }
+            else
+            {
+                Session["UserName"] = "Meet Kotecha";
+                Session["UserInitials"] = "MK";
+            }
+
             SetActiveMenu();
         }
 

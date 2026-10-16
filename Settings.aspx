@@ -2,344 +2,190 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .page-header-row {
-            margin-bottom: 24px;
-        }
-
-        .page-title {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 4px;
-        }
-
-        .page-sub-text {
-            font-size: 0.78rem;
-            color: #64748b;
-        }
-
-        /* 2-Column Split Settings Layout */
-        .settings-grid {
+        .settings-container {
             display: grid;
-            grid-template-columns: 240px 1fr;
-            gap: 20px;
-            align-items: start;
+            grid-template-columns: 220px 1fr;
+            gap: 24px;
         }
 
-        @media (max-width: 900px) {
-            .settings-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .settings-nav-card {
+        .settings-menu {
             background-color: #0b1320;
             border: 1px solid #1e293b;
             border-radius: 8px;
-            padding: 10px;
+            padding: 12px;
         }
 
-        .settings-nav-item {
+        .menu-btn {
             display: flex;
             align-items: center;
             gap: 10px;
+            width: 100%;
             padding: 10px 14px;
-            color: #94a3b8;
-            font-size: 0.78rem;
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 0.82rem;
             font-weight: 600;
             border-radius: 6px;
             cursor: pointer;
+            text-align: left;
             margin-bottom: 4px;
-            transition: all 0.2s ease;
-            text-decoration: none;
         }
 
-        .settings-nav-item:hover {
+        .menu-btn.active {
             background-color: #12283e;
-            color: #38bdf8;
+            color: #00d2ff;
         }
 
-        .settings-nav-item.active {
-            background-color: #12283e;
-            color: #38bdf8;
-            font-weight: 700;
-            border-left: 3px solid #38bdf8;
-        }
-
-        .settings-content-card {
+        .settings-card {
             background-color: #0b1320;
             border: 1px solid #1e293b;
             border-radius: 8px;
             padding: 24px;
         }
 
-        .panel-section-header {
-            font-size: 0.95rem;
+        .card-header-title {
+            font-size: 1rem;
             font-weight: 800;
             color: #ffffff;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 8px;
-            border-bottom: 1px solid #1e293b;
-            padding-bottom: 14px;
         }
 
-        .avatar-upload-row {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            margin-bottom: 24px;
-        }
-
-        .avatar-preview-box {
-            width: 70px;
-            height: 70px;
-            border-radius: 8px;
-            background-color: #070d18;
-            border: 1px solid #1e293b;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .avatar-preview-box img {
-            width: 100%;
-            height: 100%;
+        .profile-img-preview {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
             object-fit: cover;
+            border: 2px solid #00d2ff;
         }
 
-        .avatar-text-lbl {
-            font-size: 0.8rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 4px;
-        }
-
-        .avatar-sub-lbl {
-            font-size: 0.68rem;
-            color: #64748b;
-            margin-bottom: 10px;
-        }
-
-        .avatar-btn-row {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-upload-cyan {
-            background-color: #00d2ff;
-            border: none;
-            color: #070d18;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 0.72rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-upload-cyan:hover {
-            opacity: 0.9;
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
-        }
-
-        .btn-remove-outline {
-            background-color: #070d18;
-            border: 1px solid #1e293b;
-            color: #cbd5e1;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-remove-outline:hover {
-            border-color: #ef4444;
-            color: #ef4444;
-        }
-
-        .form-fields-grid {
+        .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-            margin-bottom: 24px;
+            margin-top: 20px;
         }
 
-        @media (max-width: 768px) {
-            .form-fields-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .field-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .field-label {
-            font-size: 0.62rem;
+        .form-group label {
+            display: block;
+            font-size: 0.68rem;
             font-weight: 800;
             color: #64748b;
             letter-spacing: 0.8px;
             text-transform: uppercase;
+            margin-bottom: 6px;
         }
 
         .form-input {
+            width: 100%;
             background-color: #070d18;
             border: 1px solid #1e293b;
             border-radius: 6px;
-            padding: 10px 12px;
+            padding: 9px 12px;
             color: #ffffff;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             outline: none;
-            transition: border-color 0.2s ease;
         }
 
         .form-input:focus {
-            border-color: #38bdf8;
+            border-color: #00d2ff;
         }
 
-        .form-input.readonly {
-            background-color: #09121f;
-            color: #64748b;
-            border-color: #1a2536;
-            cursor: not-allowed;
-        }
-
-        .panel-footer-actions {
-            display: flex;
-            justify-content: flex-end;
-            border-top: 1px solid #1e293b;
-            padding-top: 18px;
-        }
-
-        .btn-save-cyan {
+        .btn-cyan {
             background-color: #00d2ff;
-            border: none;
             color: #070d18;
-            padding: 10px 22px;
+            border: none;
+            padding: 10px 20px;
             border-radius: 6px;
-            font-size: 0.78rem;
+            font-size: 0.82rem;
             font-weight: 800;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s ease;
+            transition: opacity 0.2s ease;
         }
 
-        .btn-save-cyan:hover {
+        .btn-cyan:hover {
             opacity: 0.9;
-            box-shadow: 0 0 14px rgba(0, 210, 255, 0.4);
         }
+
+        .alert-msg {
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .alert-success { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid #22c55e; }
+        .alert-error { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid #ef4444; }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!-- Page Header -->
-    <div class="page-header-row">
-        <div class="page-title">Settings</div>
-        <div class="page-sub-text">Manage your account, preferences and application settings.</div>
+    <div style="margin-bottom: 20px;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; color: #fff;">Settings</h2>
+        <span style="font-size: 0.78rem; color: #64748b;">Manage your account, preferences, and profile settings.</span>
     </div>
 
-    <!-- Main Split Settings Grid -->
-    <div class="settings-grid">
-        <!-- Left Navigation Panel -->
-        <div class="settings-nav-card">
-            <a href="Settings.aspx" class="settings-nav-item active">
-                <span>👤</span> Profile
-            </a>
-            <a href="SecuritySettings.aspx" class="settings-nav-item">
-                <span>🛡️</span> Security
-            </a>
-            <a href="NotificationSettings.aspx" class="settings-nav-item">
-                <span>🔔</span> Notifications
-            </a>
-            <a href="AppearanceSettings.aspx" class="settings-nav-item">
-                <span>🎨</span> Appearance
-            </a>
-            <a href="SystemPreferences.aspx" class="settings-nav-item">
-                <span>💻</span> System Preferences
-            </a>
+    <asp:Label ID="lblStatus" runat="server" Visible="false"></asp:Label>
+
+    <div class="settings-container">
+        <!-- Left Submenu -->
+        <div class="settings-menu">
+            <button type="button" class="menu-btn active">👤 Profile</button>
+            <button type="button" class="menu-btn" onclick="window.location.href='SecuritySettings.aspx';">🛡️ Security</button>
+            <button type="button" class="menu-btn" onclick="window.location.href='NotificationSettings.aspx';">🔔 Notifications</button>
+            <button type="button" class="menu-btn" onclick="window.location.href='AppearanceSettings.aspx';">🎨 Appearance</button>
         </div>
 
-        <!-- Right Content Panel -->
-        <div class="settings-content-card">
-            <div class="panel-section-header">
-                <span>👤 Profile Information</span>
-            </div>
+        <!-- Right Content Card -->
+        <div class="settings-card">
+            <div class="card-header-title">👤 Profile Information</div>
 
-            <!-- Profile Picture Section -->
-            <div class="avatar-upload-row">
-                <div class="avatar-preview-box">
-                    <img id="imgAvatarPreview" src="Images/Digvijay.jpeg" alt="Alex Silva Profile" onerror="this.src='Images/Rohan.jpeg';" />
-                </div>
+            <!-- Profile Image Section -->
+            <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+                <asp:Image ID="imgProfile" runat="server" ImageUrl="~/Images/Meet.jpeg" CssClass="profile-img-preview" />
                 <div>
-                    <div class="avatar-text-lbl">Profile Picture</div>
-                    <div class="avatar-sub-lbl">JPG, GIF or PNG. Max size of 800K.</div>
+                    <label style="display:block; font-size: 0.78rem; font-weight: 700; color: #fff; margin-bottom: 4px;">Profile Picture</label>
+                    <span style="display:block; font-size: 0.68rem; color: #64748b; margin-bottom: 10px;">JPG, PNG or GIF. Max size 2MB.</span>
                     
-                    <asp:FileUpload ID="fileUploadAvatar" runat="server" Style="display:none;" onchange="previewNewAvatar(this)" />
-                    <div class="avatar-btn-row">
-                        <button type="button" class="btn-upload-cyan" onclick="document.getElementById('<%= fileUploadAvatar.ClientID %>').click();">Upload New</button>
-                        <button type="button" class="btn-remove-outline" onclick="removeAvatar()">Remove</button>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <asp:FileUpload ID="fileUploadPicture" runat="server" Style="display:none;" onchange="this.form.submit();" />
+                        <button type="button" class="btn-cyan" onclick="document.getElementById('<%= fileUploadPicture.ClientID %>').click();">Upload New</button>
+                        <asp:Button ID="btnRemovePic" runat="server" Text="Remove" OnClick="btnRemovePic_Click" Style="background:#1e293b; color:#cbd5e1; border:none; padding:10px 16px; border-radius:6px; font-size:0.82rem; font-weight:700; cursor:pointer;" />
                     </div>
                 </div>
             </div>
 
-            <!-- Form Fields Grid -->
-            <div class="form-fields-grid">
-                <div class="field-group">
-                    <label class="field-label">FULL NAME</label>
-                    <asp:TextBox ID="txtFullName" runat="server" CssClass="form-input" Text="Alex Silva"></asp:TextBox>
+            <!-- Form Inputs -->
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <asp:TextBox ID="txtFullName" runat="server" CssClass="form-input" Text="Meet Kotecha"></asp:TextBox>
                 </div>
 
-                <div class="field-group">
-                    <label class="field-label">EMAIL ADDRESS</label>
-                    <asp:TextBox ID="txtEmailAddress" runat="server" CssClass="form-input" Text="analyst@netra.gov"></asp:TextBox>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-input" Text="mkotecha581@rku.ac.in"></asp:TextBox>
                 </div>
 
-                <div class="field-group">
-                    <label class="field-label">ROLE</label>
-                    <input type="text" class="form-input readonly" value="Intelligence Analyst" readonly="readonly" />
+                <div class="form-group">
+                    <label>Role</label>
+                    <asp:TextBox ID="txtRole" runat="server" CssClass="form-input" Text="Intelligence Analyst" ReadOnly="true" Style="opacity:0.6;"></asp:TextBox>
                 </div>
 
-                <div class="field-group">
-                    <label class="field-label">DEPARTMENT</label>
-                    <input type="text" class="form-input readonly" value="Crime Intelligence Unit" readonly="readonly" />
+                <div class="form-group">
+                    <label>Department</label>
+                    <asp:TextBox ID="txtDepartment" runat="server" CssClass="form-input" Text="Crime Intelligence Unit"></asp:TextBox>
                 </div>
             </div>
 
-            <!-- Save Action Button -->
-            <div class="panel-footer-actions">
-                <button type="button" class="btn-save-cyan" onclick="saveSettings()">
-                    💾 Save Changes
-                </button>
+            <div style="display: flex; justify-content: flex-end; margin-top: 24px;">
+                <asp:Button ID="btnSaveChanges" runat="server" Text="💾 Save Changes" OnClick="btnSaveChanges_Click" CssClass="btn-cyan" />
             </div>
         </div>
     </div>
-
-    <!-- Client Script -->
-    <script>
-        function previewNewAvatar(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById("imgAvatarPreview").src = e.target.result;
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function removeAvatar() {
-            document.getElementById("imgAvatarPreview").src = "Images/Rohan.jpeg";
-            alert("Avatar reset to default.");
-        }
-
-        function saveSettings() {
-            alert("✅ Profile settings updated successfully.");
-        }
-    </script>
 </asp:Content>
