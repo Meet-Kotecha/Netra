@@ -117,7 +117,7 @@
         <!-- Left Sidebar Photo Card -->
         <div>
             <div class="glass-card" style="text-align: center;">
-                <img id="imgPersonPhoto" runat="server" class="profile-img-large" alt="Person Profile" />
+                <asp:Image ID="imgPersonPhoto" runat="server" CssClass="profile-img-large" AlternateText="Person Profile" />
                 <div class="badge-status">• ACTIVE INVESTIGATION</div>
                 <div style="font-size: 0.72rem; color: #64748b;">ID: <asp:Label ID="lblPersonID" runat="server" Text="PR-1042-89"></asp:Label></div>
             </div>

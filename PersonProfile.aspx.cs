@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Web.UI;
 
 namespace Netra
@@ -25,7 +26,7 @@ namespace Netra
                     lblDOB.Text = "14-09-2002 (24 yrs)";
                     lblNationalID.Text = "DXB - 99182";
                     lblAlias.Text = "Vaghela / Sector 4 Contact";
-                    imgPersonPhoto.Src = "Images/Digvijay.jpeg";
+                    SetProfileImage("~/Images/Digvijay.jpeg");
                     lblCase1ID.Text = "OP - 2023 - A9";
                     lblCase1Desc.Text = "Industrial Security Subversion & Asset Hijack";
                     lblCase2ID.Text = "CR - 2024 - 102";
@@ -39,7 +40,7 @@ namespace Netra
                     lblDOB.Text = "22-03-2001 (25 yrs)";
                     lblNationalID.Text = "DE - 772109";
                     lblAlias.Text = "Alpha / Transit Node";
-                    imgPersonPhoto.Src = "Images/Rohan.jpeg";
+                    SetProfileImage("~/Images/Rohan.jpeg");
                     lblCase1ID.Text = "CS - 2023 - 08A";
                     lblCase1Desc.Text = "International Data Relay Surveillance";
                     lblCase2ID.Text = "CS - 2022 - 19B";
@@ -53,7 +54,7 @@ namespace Netra
                     lblDOB.Text = "05-11-2003 (23 yrs)";
                     lblNationalID.Text = "IND - 442100";
                     lblAlias.Text = "MK / Netra Core";
-                    imgPersonPhoto.Src = "Images/Meet.jpeg";
+                    SetProfileImage("~/Images/Meet.jpeg");
                     lblCase1ID.Text = "NETRA - DEV - 01";
                     lblCase1Desc.Text = "Neural Intelligence Unit Lead Engineer";
                     lblCase2ID.Text = "OP - 2026 - SEC";
@@ -67,12 +68,26 @@ namespace Netra
                     lblDOB.Text = "06-06-2006 (20 yrs)";
                     lblNationalID.Text = "X99 - 101";
                     lblAlias.Text = "JD / Ghost";
-                    imgPersonPhoto.Src = "Images/Keval.jpeg";
+                    SetProfileImage("~/Images/Keval.jpeg");
                     lblCase1ID.Text = "OP - 2023 - A9";
                     lblCase1Desc.Text = "Financial Syndicate Subversion";
                     lblCase2ID.Text = "OP - 2022 - C4";
                     lblCase2Desc.Text = "Cross-Border Smuggling Ring";
                     break;
+            }
+        }
+
+        private void SetProfileImage(string virtualPath)
+        {
+            string physicalPath = Server.MapPath(virtualPath);
+            if (File.Exists(physicalPath))
+            {
+                imgPersonPhoto.ImageUrl = ResolveClientUrl(virtualPath);
+            }
+            else
+            {
+                // Fallback to Meet.jpeg if specific file isn't found physically
+                imgPersonPhoto.ImageUrl = ResolveClientUrl("~/Images/Meet.jpeg");
             }
         }
     }
