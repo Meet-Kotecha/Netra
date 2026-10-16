@@ -111,20 +111,6 @@
             border: 1px solid #00d2ff;
         }
 
-        .person-avatar-box {
-            width: 40px;
-            height: 40px;
-            border-radius: 6px;
-            background: #12283e;
-            color: #00d2ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.85rem;
-            border: 1px solid #00d2ff;
-        }
-
         .type-badge {
             font-size: 0.65rem;
             font-weight: 800;
@@ -157,13 +143,34 @@
             align-items: center;
             gap: 4px;
         }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .modal-box {
+            background-color: #0b1320;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            width: 450px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-header-row">
         <div class="page-title">Persons & Suspects</div>
-        <button type="button" class="btn-cyan">+ Add Person</button>
+        <button type="button" class="btn-cyan" onclick="openAddPersonModal()">+ Add Person</button>
     </div>
 
     <div class="filter-bar">
@@ -195,12 +202,11 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- 1. Digvijaysinh Vaghela -->
+                <!-- Digvijaysinh Vaghela -->
                 <tr class="person-row" data-name="digvijaysinh vaghela" data-type="SUSPECT">
                     <td>
                         <div class="person-profile-cell">
-                            <img src="Images/Digvijay.jpeg" class="person-thumb" alt="Digvijaysinh Vaghela" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="person-avatar-box" style="display:none;">DV</div>
+                            <img src="Images/digvijaysinh.jpg" class="person-thumb" alt="Digvijaysinh Vaghela" onerror="this.src='Images/Meet.jpeg';" />
                             <div>
                                 <div style="font-weight: 800; color: #fff;">Digvijaysinh Vaghela</div>
                                 <div style="font-size: 0.68rem; color: #64748b;">DOB: 2002-09-14</div>
@@ -215,12 +221,11 @@
                     <td><a href="PersonProfile.aspx?id=101" class="btn-view-link">View →</a></td>
                 </tr>
 
-                <!-- 2. Rohan Siddhpura -->
+                <!-- Rohan Siddhpura -->
                 <tr class="person-row" data-name="rohan siddhpura" data-type="POI">
                     <td>
                         <div class="person-profile-cell">
-                            <img src="Images/Rohan.jpeg" class="person-thumb" alt="Rohan Siddhpura" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="person-avatar-box" style="display:none;">RS</div>
+                            <img src="Images/rohan.jpg" class="person-thumb" alt="Rohan Siddhpura" onerror="this.src='Images/Meet.jpeg';" />
                             <div>
                                 <div style="font-weight: 800; color: #fff;">Rohan Siddhpura</div>
                                 <div style="font-size: 0.68rem; color: #64748b;">DOB: 2001-03-22</div>
@@ -235,12 +240,11 @@
                     <td><a href="PersonProfile.aspx?id=102" class="btn-view-link">View →</a></td>
                 </tr>
 
-                <!-- 3. Meet Kotecha -->
+                <!-- Meet Kotecha -->
                 <tr class="person-row" data-name="meet kotecha" data-type="POI">
                     <td>
                         <div class="person-profile-cell">
-                            <img src="Images/Meet.jpeg" class="person-thumb" alt="Meet Kotecha" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="person-avatar-box" style="display:none;">MK</div>
+                            <img src="Images/Meet.jpeg" class="person-thumb" alt="Meet Kotecha" />
                             <div>
                                 <div style="font-weight: 800; color: #fff;">Meet Kotecha</div>
                                 <div style="font-size: 0.68rem; color: #64748b;">DOB: 2003-11-05</div>
@@ -255,12 +259,11 @@
                     <td><a href="PersonProfile.aspx?id=103" class="btn-view-link">View →</a></td>
                 </tr>
 
-                <!-- 4. Keval Goswami -->
+                <!-- Keval Goswami -->
                 <tr class="person-row" data-name="keval goswami" data-type="SUSPECT">
                     <td>
                         <div class="person-profile-cell">
-                            <img src="Images/Keval.jpeg" class="person-thumb" alt="Keval Goswami" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                            <div class="person-avatar-box" style="display:none;">KG</div>
+                            <img src="Images/keval.jpg" class="person-thumb" alt="Keval Goswami" onerror="this.src='Images/Meet.jpeg';" />
                             <div>
                                 <div style="font-weight: 800; color: #fff;">Keval Goswami</div>
                                 <div style="font-size: 0.68rem; color: #64748b;">DOB: 2006-06-06</div>
@@ -279,6 +282,27 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <!-- Modal for Add Person -->
+    <div id="modalAddPerson" class="modal-overlay">
+        <div class="modal-box">
+            <div style="font-size:1.1rem; font-weight:800; color:#fff; margin-bottom:14px;">➕ Add Person Record</div>
+            
+            <label style="font-size:0.68rem; font-weight:800; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Full Name</label>
+            <input type="text" id="txtNewName" class="filter-input" style="width:100%; margin-bottom:12px;" placeholder="e.g. Alex Mercer" />
+
+            <label style="font-size:0.68rem; font-weight:800; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Person Type</label>
+            <select id="ddlType" class="filter-select" style="width:100%; margin-bottom:16px;">
+                <option value="SUSPECT">Suspect</option>
+                <option value="POI">POI</option>
+            </select>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" style="background:#070d18; border:1px solid #1e293b; color:#cbd5e1; padding:8px 16px; border-radius:6px; cursor:pointer;" onclick="closeAddPersonModal()">Cancel</button>
+                <button type="button" class="btn-cyan" onclick="saveNewPerson()">Save Entity</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -300,6 +324,44 @@
                     row.style.display = 'none';
                 }
             });
+        }
+
+        function openAddPersonModal() {
+            document.getElementById('modalAddPerson').style.display = 'flex';
+        }
+
+        function closeAddPersonModal() {
+            document.getElementById('modalAddPerson').style.display = 'none';
+        }
+
+        function saveNewPerson() {
+            const name = document.getElementById('txtNewName').value;
+            const type = document.getElementById('ddlType').value;
+            if (!name) return;
+
+            const table = document.querySelector('#tblPersons tbody');
+            const newRow = `
+                <tr class="person-row" data-name="${name.toLowerCase()}" data-type="${type}">
+                    <td>
+                        <div class="person-profile-cell">
+                            <img src="Images/Meet.jpeg" class="person-thumb" />
+                            <div>
+                                <div style="font-weight: 800; color: #fff;">${name}</div>
+                                <div style="font-size: 0.68rem; color: #64748b;">DOB: Pending</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="font-weight: 700; color: #38bdf8;">PR-NEW-99</td>
+                    <td><span class="type-badge ${type === 'SUSPECT' ? 'badge-suspect' : 'badge-poi'}">${type}</span></td>
+                    <td><span class="case-tag">#NEW-01</span></td>
+                    <td>📍 Sector Investigation</td>
+                    <td style="font-size: 0.72rem; color: #64748b;">Just Now</td>
+                    <td><a href="PersonProfile.aspx?id=new" class="btn-view-link">View →</a></td>
+                </tr>`;
+
+            table.insertAdjacentHTML('afterbegin', newRow);
+            document.getElementById('txtNewName').value = '';
+            closeAddPersonModal();
         }
     </script>
 </asp:Content>
