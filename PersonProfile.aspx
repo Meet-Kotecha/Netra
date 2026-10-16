@@ -18,11 +18,12 @@
 
         .profile-img-large {
             width: 100%;
-            height: 260px;
+            height: 280px;
             object-fit: cover;
             border-radius: 8px;
             border: 2px solid #00d2ff;
             margin-bottom: 12px;
+            background-color: #070d18;
         }
 
         .badge-status {
@@ -31,11 +32,12 @@
             border: 1px solid #ef4444;
             font-size: 0.7rem;
             font-weight: 800;
-            padding: 4px 10px;
+            padding: 6px 10px;
             border-radius: 4px;
             text-align: center;
             display: block;
             margin-bottom: 10px;
+            letter-spacing: 0.8px;
         }
 
         .profile-name {
@@ -106,15 +108,15 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 12px;">
-        <a href="PersonsDirectory.aspx" style="color:#00d2ff; text-decoration:none;">← Back to Persons Directory</a>
+    <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 14px;">
+        <a href="PersonsDirectory.aspx" style="color:#00d2ff; text-decoration:none; font-weight:700;">← Back to Persons Directory</a>
     </div>
 
     <div class="profile-container">
         <!-- Left Sidebar Photo Card -->
         <div>
             <div class="glass-card" style="text-align: center;">
-                <asp:Image ID="imgPersonPhoto" runat="server" CssClass="profile-img-large" ImageUrl="~/Images/Meet.jpeg" />
+                <asp:Image ID="imgPersonPhoto" runat="server" CssClass="profile-img-large" />
                 <div class="badge-status">• ACTIVE INVESTIGATION</div>
                 <div style="font-size: 0.72rem; color: #64748b;">ID: <asp:Label ID="lblPersonID" runat="server" Text="PR-1042-89"></asp:Label></div>
             </div>

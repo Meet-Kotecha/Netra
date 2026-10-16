@@ -25,7 +25,7 @@ namespace Netra
                     lblDOB.Text = "14-09-2002 (24 yrs)";
                     lblNationalID.Text = "DXB - 99182";
                     lblAlias.Text = "Vaghela / Sector 4 Contact";
-                    imgPersonPhoto.ImageUrl = "~/Images/digvijaysinh.jpg";
+                    imgPersonPhoto.ImageUrl = "Images/Digvijay.jpeg";
                     lblCase1ID.Text = "OP - 2023 - A9";
                     lblCase1Desc.Text = "Industrial Security Subversion & Asset Hijack";
                     lblCase2ID.Text = "CR - 2024 - 102";
@@ -39,7 +39,7 @@ namespace Netra
                     lblDOB.Text = "22-03-2001 (25 yrs)";
                     lblNationalID.Text = "DE - 772109";
                     lblAlias.Text = "Alpha / Transit Node";
-                    imgPersonPhoto.ImageUrl = "~/Images/rohan.jpg";
+                    imgPersonPhoto.ImageUrl = "Images/Rohan.jpeg";
                     lblCase1ID.Text = "CS - 2023 - 08A";
                     lblCase1Desc.Text = "International Data Relay Surveillance";
                     lblCase2ID.Text = "CS - 2022 - 19B";
@@ -53,21 +53,21 @@ namespace Netra
                     lblDOB.Text = "05-11-2003 (23 yrs)";
                     lblNationalID.Text = "IND - 442100";
                     lblAlias.Text = "MK / Netra Core";
-                    imgPersonPhoto.ImageUrl = "~/Images/Meet.jpeg";
+                    imgPersonPhoto.ImageUrl = "Images/Meet.jpeg";
                     lblCase1ID.Text = "NETRA - DEV - 01";
                     lblCase1Desc.Text = "Neural Intelligence Unit Lead Engineer";
                     lblCase2ID.Text = "OP - 2026 - SEC";
                     lblCase2Desc.Text = "GIS Map & Analytics Subsystem Sync";
                     break;
 
-                default: // Default Keval Goswami
+                default: // Keval Goswami (id=1 or default)
                     lblFullName.Text = "Keval Goswami";
                     lblPersonType.Text = "SUSPECT / PERSON OF INTEREST";
                     lblPersonID.Text = "PR-1042-89";
                     lblDOB.Text = "06-06-2006 (20 yrs)";
                     lblNationalID.Text = "X99 - 101";
                     lblAlias.Text = "JD / Ghost";
-                    imgPersonPhoto.ImageUrl = "~/Images/keval.jpg";
+                    imgPersonPhoto.ImageUrl = "Images/Keval.jpeg";
                     lblCase1ID.Text = "OP - 2023 - A9";
                     lblCase1Desc.Text = "Financial Syndicate Subversion";
                     lblCase2ID.Text = "OP - 2022 - C4";
