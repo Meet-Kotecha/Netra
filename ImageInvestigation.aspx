@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Image Investigation" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ImageInvestigation.aspx.cs" Inherits="Netra.ImageInvestigation" %>
+﻿<%@ Page Title="Image-Assisted Investigation" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ImageInvestigation.aspx.cs" Inherits="Netra.ImageInvestigation" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -33,7 +33,6 @@
             align-items: center;
         }
 
-        /* Drag and Drop Zone */
         .drop-zone {
             border: 2px dashed #1e293b;
             border-radius: 8px;
@@ -77,11 +76,6 @@
             transition: all 0.2s ease;
         }
 
-        .btn-search-cyan:hover {
-            box-shadow: 0 0 16px rgba(0, 210, 255, 0.4);
-        }
-
-        /* Candidate Matches Grid */
         .matches-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -97,12 +91,6 @@
             grid-template-columns: 80px 1fr;
             gap: 14px;
             position: relative;
-            transition: all 0.2s ease;
-        }
-
-        .candidate-card:hover {
-            border-color: #00d2ff;
-            background-color: #0b182d;
         }
 
         .candidate-thumb {
@@ -136,7 +124,7 @@
         .candidate-meta {
             font-size: 0.68rem;
             color: #64748b;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .candidate-actions {
@@ -158,25 +146,6 @@
             cursor: pointer;
             text-align: center;
             text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .btn-candidate:hover {
-            border-color: #00d2ff;
-            color: #00d2ff;
-        }
-
-        .param-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.72rem;
-            color: #64748b;
-            margin-bottom: 6px;
-        }
-
-        .param-val {
-            color: #cbd5e1;
-            font-weight: 700;
         }
     </style>
 </asp:Content>
@@ -199,27 +168,29 @@
                     <div style="font-size: 0.65rem; color: #64748b;">Supported formats: JPG, PNG, TIFF (Max 20MB)</div>
                 </div>
 
-                <asp:FileUpload ID="fileUploadSubject" runat="server" Style="display:none;" onchange="previewSelectedImage(this)" />
+                <asp:FileUpload ID="fileUploadSubject" runat="server" Style="display:none;" />
 
                 <div style="font-size: 0.65rem; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 8px;">OR PREVIEW CURRENT</div>
                 
-                <img id="imgPreview" src="Images/Meet.jpeg" class="preview-box" alt="Subject Preview" />
+                <div style="position:relative;">
+                    <span style="position:absolute; top:8px; left:8px; background:rgba(7,13,24,0.8); border:1px solid #1e293b; color:#38bdf8; font-size:0.6rem; font-weight:800; padding:2px 6px; border-radius:4px;">SRC: EXT-CAM-89</span>
+                    <img id="imgPreview" src="Images/Meet.jpeg" class="preview-box" alt="EXT-CAM-89 Frame" />
+                </div>
 
-                <button type="button" class="btn-search-cyan" onclick="triggerFacialMatch()">
+                <button type="button" class="btn-search-cyan">
                     <span>🔍</span> Search Potential Matches
                 </button>
             </div>
 
-            <!-- Search Parameters -->
             <div class="glass-card">
                 <div class="card-title">SEARCH PARAMETERS</div>
-                <div class="param-row">
+                <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:#64748b; margin-bottom:6px;">
                     <span>Confidence Threshold</span>
-                    <span class="param-val" style="color:#00d2ff;">85%</span>
+                    <span style="color:#00d2ff; font-weight:700;">85%</span>
                 </div>
-                <div class="param-row">
+                <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:#64748b;">
                     <span>Database Scope</span>
-                    <span class="param-val">Global Records</span>
+                    <span style="color:#cbd5e1; font-weight:700;">Global Records</span>
                 </div>
             </div>
         </div>
@@ -235,7 +206,6 @@
                 </div>
 
                 <div class="matches-grid">
-                    <!-- Candidate 1: Digvijaysinh Vaghela -->
                     <div class="candidate-card">
                         <img src="Images/Meet.jpeg" class="candidate-thumb" alt="Digvijaysinh Vaghela" />
                         <div>
@@ -247,11 +217,10 @@
                         </div>
                         <div class="candidate-actions">
                             <a href="PersonProfile.aspx?id=101" class="btn-candidate">View Profile</a>
-                            <button type="button" class="btn-candidate" onclick="alert('Case linked to Digvijaysinh Vaghela')">Link Case</button>
+                            <button type="button" class="btn-candidate">Link Case</button>
                         </div>
                     </div>
 
-                    <!-- Candidate 2: Rohan Siddhpura -->
                     <div class="candidate-card">
                         <img src="Images/Meet.jpeg" class="candidate-thumb" alt="Rohan Siddhpura" />
                         <div>
@@ -263,11 +232,10 @@
                         </div>
                         <div class="candidate-actions">
                             <a href="PersonProfile.aspx?id=102" class="btn-candidate">View Profile</a>
-                            <button type="button" class="btn-candidate" onclick="alert('Case linked to Rohan Siddhpura')">Link Case</button>
+                            <button type="button" class="btn-candidate">Link Case</button>
                         </div>
                     </div>
 
-                    <!-- Candidate 3: Meet Kotecha -->
                     <div class="candidate-card">
                         <img src="Images/Meet.jpeg" class="candidate-thumb" alt="Meet Kotecha" />
                         <div>
@@ -279,11 +247,10 @@
                         </div>
                         <div class="candidate-actions">
                             <a href="PersonProfile.aspx?id=103" class="btn-candidate">View Profile</a>
-                            <button type="button" class="btn-candidate" onclick="alert('Case linked to Meet Kotecha')">Link Case</button>
+                            <button type="button" class="btn-candidate">Link Case</button>
                         </div>
                     </div>
 
-                    <!-- Candidate 4: Keval Goswami -->
                     <div class="candidate-card">
                         <img src="Images/Meet.jpeg" class="candidate-thumb" alt="Keval Goswami" />
                         <div>
@@ -295,36 +262,11 @@
                         </div>
                         <div class="candidate-actions">
                             <a href="PersonProfile.aspx?id=1" class="btn-candidate">View Profile</a>
-                            <button type="button" class="btn-candidate" onclick="alert('Case linked to Keval Goswami')">Link Case</button>
+                            <button type="button" class="btn-candidate">Link Case</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Disclaimer Banner -->
-            <div style="background: rgba(11, 19, 32, 0.8); border: 1px solid #1e293b; border-radius: 6px; padding: 10px 16px; font-size: 0.7rem; color: #64748b; display: flex; align-items: center; gap: 8px;">
-                <span>ℹ️</span> Image matching provides potential matches for investigative assistance and requires human verification. Automated results are not definitive proof of identity.
-            </div>
         </div>
     </div>
-
-    <script>
-        function previewSelectedImage(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('imgPreview').src = e.target.result;
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function triggerFacialMatch() {
-            const btn = event.currentTarget;
-            btn.innerHTML = '<span>⏳</span> Scanning Database...';
-            setTimeout(() => {
-                btn.innerHTML = '<span>🔍</span> Search Potential Matches';
-            }, 800);
-        }
-    </script>
 </asp:Content>
