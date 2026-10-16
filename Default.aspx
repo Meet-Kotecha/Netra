@@ -22,7 +22,6 @@
             color: #64748b;
         }
 
-        /* Export Button Styling */
         .btn-export-cyan {
             background-color: #0b1320;
             border: 1px solid #1e293b;
@@ -45,7 +44,6 @@
             box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
         }
 
-        /* Metric Cards Grid */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -98,7 +96,6 @@
             gap: 4px;
         }
 
-        /* Main Charts Section */
         .charts-main-grid {
             display: grid;
             grid-template-columns: 1fr 340px;
@@ -140,7 +137,6 @@
             gap: 8px;
         }
 
-        /* View All Link */
         .link-view-all {
             color: #38bdf8;
             font-size: 0.72rem;
@@ -154,7 +150,6 @@
             text-decoration: underline;
         }
 
-        /* High Risk Table */
         .risk-row {
             display: flex;
             justify-content: space-between;
@@ -168,22 +163,10 @@
             border-bottom: none;
         }
 
-        .risk-score-high {
-            color: #f87171;
-            font-weight: 800;
-        }
+        .risk-score-high { color: #f87171; font-weight: 800; }
+        .risk-score-medium { color: #facc15; font-weight: 800; }
+        .risk-score-low { color: #38bdf8; font-weight: 800; }
 
-        .risk-score-medium {
-            color: #facc15;
-            font-weight: 800;
-        }
-
-        .risk-score-low {
-            color: #38bdf8;
-            font-weight: 800;
-        }
-
-        /* Recent Alerts List */
         .alert-item {
             padding: 10px 0;
             border-bottom: 1px solid #162234;
@@ -207,7 +190,6 @@
             justify-content: space-between;
         }
 
-        /* Bottom Charts Subgrid */
         .charts-sub-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -223,7 +205,6 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!-- Header with Functional Export Button -->
     <div class="page-header-row">
         <div>
             <div class="page-title">Intelligence Dashboard</div>
@@ -234,7 +215,7 @@
         </button>
     </div>
 
-    <!-- Metrics Cards Grid -->
+    <!-- Metrics Grid -->
     <div class="metrics-grid">
         <div class="metric-card">
             <div class="metric-top-row">
@@ -273,16 +254,15 @@
         </div>
     </div>
 
-    <!-- Charts Split Row -->
+    <!-- Main Charts Section -->
     <div class="charts-main-grid">
-        <!-- Left Column: YTD Crime Trend -->
         <div class="glass-card">
             <div class="card-header-row">
                 <div class="card-title">📈 Crime Trend Analysis (YTD)</div>
-                <select style="background:#070d18; border:1px solid #1e293b; color:#cbd5e1; padding:4px 8px; border-radius:4px; font-size:0.75rem;">
-                    <option>All Districts</option>
-                    <option>Bengaluru Urban</option>
-                    <option>Bengaluru Rural</option>
+                <select id="ddlDistrictFilter" onchange="updateTrendChart(this.value)" style="background:#070d18; border:1px solid #1e293b; color:#cbd5e1; padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">
+                    <option value="all">All Districts</option>
+                    <option value="urban">Bengaluru Urban</option>
+                    <option value="rural">Bengaluru Rural</option>
                 </select>
             </div>
             <div style="height: 260px;">
@@ -290,9 +270,7 @@
             </div>
         </div>
 
-        <!-- Right Column: High Risk & Alerts -->
         <div>
-            <!-- High Risk Areas -->
             <div class="glass-card">
                 <div class="card-header-row">
                     <div class="card-title">🛡️ High-Risk Areas</div>
@@ -321,7 +299,6 @@
                 </div>
             </div>
 
-            <!-- Recent Alerts with Functional View All Link -->
             <div class="glass-card">
                 <div class="card-header-row">
                     <div class="card-title">🔔 Recent Alerts</div>
@@ -347,7 +324,6 @@
         </div>
     </div>
 
-    <!-- Bottom Charts Subgrid -->
     <div class="charts-sub-grid">
         <div class="glass-card">
             <div class="card-title" style="margin-bottom:14px;">📊 Distribution by Type</div>
@@ -364,9 +340,22 @@
         </div>
     </div>
 
-    <!-- Dashboard JavaScript Engine -->
     <script>
-        // Export Report CSV Generator
+        let trendChartInstance = null;
+
+        const trendDatasets = {
+            all: [800, 950, 1100, 900, 1400, 1250, 1700, 1500, 1900, 1100, 600, 1000],
+            urban: [500, 620, 750, 580, 920, 810, 1150, 980, 1280, 720, 410, 680],
+            rural: [300, 330, 350, 320, 480, 440, 550, 520, 620, 380, 190, 320]
+        };
+
+        function updateTrendChart(filterKey) {
+            if (trendChartInstance) {
+                trendChartInstance.data.datasets[0].data = trendDatasets[filterKey] || trendDatasets.all;
+                trendChartInstance.update();
+            }
+        }
+
         function exportDashboardReport() {
             const csvRows = [
                 ["NETRA INTELLIGENCE DASHBOARD SUMMARY REPORT"],
@@ -396,17 +385,15 @@
             document.body.removeChild(link);
         }
 
-        // Render Dashboard Charts
         window.addEventListener('DOMContentLoaded', () => {
-            // Trend Line Chart
             const ctxTrend = document.getElementById('trendChart').getContext('2d');
-            new Chart(ctxTrend, {
+            trendChartInstance = new Chart(ctxTrend, {
                 type: 'line',
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
                         label: 'Incidents',
-                        data: [800, 950, 1100, 900, 1400, 1250, 1700, 1500, 1900, 1100, 600, 1000],
+                        data: trendDatasets.all,
                         borderColor: '#00d2ff',
                         backgroundColor: 'rgba(0, 210, 255, 0.1)',
                         borderWidth: 3,
@@ -425,7 +412,6 @@
                 }
             });
 
-            // Donut Chart
             const ctxType = document.getElementById('typeChart').getContext('2d');
             new Chart(ctxType, {
                 type: 'doughnut',
@@ -444,7 +430,6 @@
                 }
             });
 
-            // Bar Chart
             const ctxDistrict = document.getElementById('districtChart').getContext('2d');
             new Chart(ctxDistrict, {
                 type: 'bar',

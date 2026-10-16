@@ -169,6 +169,15 @@
     <Content Include="AIAssistant.aspx" />
     <Content Include="Reports.aspx" />
     <Content Include="BulkDataImport.aspx" />
+    <Content Include="NetraDB_Schema.sql" />
+    <Content Include="UserManagement.aspx" />
+    <Content Include="AuditLogs.aspx" />
+    <Content Include="Settings.aspx" />
+    <Content Include="SecuritySettings.aspx" />
+    <Content Include="NotificationSettings.aspx" />
+    <Content Include="AppearanceSettings.aspx" />
+    <Content Include="SystemPreferences.aspx" />
+    <Content Include="Support.aspx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -363,6 +372,62 @@
     </Compile>
     <Compile Include="BulkDataImport.aspx.designer.cs">
       <DependentUpon>BulkDataImport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagement.aspx.cs">
+      <DependentUpon>UserManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserManagement.aspx.designer.cs">
+      <DependentUpon>UserManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AuditLogs.aspx.cs">
+      <DependentUpon>AuditLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AuditLogs.aspx.designer.cs">
+      <DependentUpon>AuditLogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.aspx.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings.aspx.designer.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SecuritySettings.aspx.cs">
+      <DependentUpon>SecuritySettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecuritySettings.aspx.designer.cs">
+      <DependentUpon>SecuritySettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationSettings.aspx.cs">
+      <DependentUpon>NotificationSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotificationSettings.aspx.designer.cs">
+      <DependentUpon>NotificationSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AppearanceSettings.aspx.cs">
+      <DependentUpon>AppearanceSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppearanceSettings.aspx.designer.cs">
+      <DependentUpon>AppearanceSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemPreferences.aspx.cs">
+      <DependentUpon>SystemPreferences.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemPreferences.aspx.designer.cs">
+      <DependentUpon>SystemPreferences.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Support.aspx.cs">
+      <DependentUpon>Support.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Support.aspx.designer.cs">
+      <DependentUpon>Support.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
