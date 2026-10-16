@@ -7,62 +7,54 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            width: 100%;
         }
 
-        .page-title h2 {
-            font-size: 1.35rem;
-            font-weight: 700;
+        .page-title {
+            font-size: 1.4rem;
+            font-weight: 800;
             color: #ffffff;
         }
 
-        .btn-add-person {
+        .btn-cyan {
             background-color: #00d2ff;
-            background: linear-gradient(135deg, #00d2ff 0%, #00a8cc 100%);
             color: #070d18;
             border: none;
-            padding: 8px 18px;
+            padding: 9px 18px;
             border-radius: 6px;
-            font-size: 0.82rem;
-            font-weight: 700;
+            font-size: 0.8rem;
+            font-weight: 800;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.25s ease;
-            text-decoration: none;
+            transition: all 0.2s ease;
         }
 
-        .btn-add-person:hover {
-            opacity: 0.9;
-            box-shadow: 0 0 14px rgba(0, 210, 255, 0.4);
+        .btn-cyan:hover {
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
         }
 
-        /* Filter Toolbar */
-        .filter-toolbar {
+        /* Filter Controls Bar */
+        .filter-bar {
             background-color: #0b1320;
             border: 1px solid #1e293b;
             border-radius: 8px;
             padding: 14px 18px;
             margin-bottom: 20px;
             display: flex;
-            gap: 12px;
+            gap: 14px;
             align-items: center;
         }
 
-        .search-box-input {
+        .filter-input {
             background-color: #070d18;
             border: 1px solid #1e293b;
             border-radius: 6px;
-            padding: 8px 12px 8px 34px;
-            color: #f8fafc;
-            font-size: 0.8rem;
-            width: 280px;
+            padding: 8px 12px;
+            color: #ffffff;
+            font-size: 0.78rem;
             outline: none;
-            transition: border-color 0.2s ease;
+            width: 260px;
         }
 
-        .search-box-input:focus {
+        .filter-input:focus {
             border-color: #00d2ff;
         }
 
@@ -71,226 +63,165 @@
             border: 1px solid #1e293b;
             border-radius: 6px;
             padding: 8px 12px;
-            color: #f8fafc;
-            font-size: 0.8rem;
+            color: #cbd5e1;
+            font-size: 0.78rem;
             outline: none;
-            min-width: 160px;
             cursor: pointer;
         }
 
-        .filter-select:focus {
-            border-color: #00d2ff;
-        }
-
-        /* Data Table Card */
-        .table-card {
+        /* Table Design */
+        .directory-table-container {
             background-color: #0b1320;
             border: 1px solid #1e293b;
             border-radius: 8px;
             overflow: hidden;
-            width: 100%;
+            margin-bottom: 20px;
         }
 
-        .persons-table {
+        .directory-table {
             width: 100%;
             border-collapse: collapse;
+            text-align: left;
         }
 
-        .persons-table th {
-            text-align: left;
-            font-size: 0.68rem;
-            font-weight: 700;
-            letter-spacing: 0.8px;
+        .directory-table th {
+            background-color: #070d18;
+            border-bottom: 1px solid #1e293b;
+            padding: 12px 18px;
+            font-size: 0.65rem;
+            font-weight: 800;
             color: #64748b;
+            letter-spacing: 0.8px;
             text-transform: uppercase;
+        }
+
+        .directory-table td {
             padding: 14px 18px;
             border-bottom: 1px solid #1e293b;
-            background-color: #0b1320;
-        }
-
-        .persons-table td {
-            padding: 14px 18px;
-            border-bottom: 1px solid #141f30;
             font-size: 0.78rem;
             color: #cbd5e1;
             vertical-align: middle;
         }
 
-        .persons-table tbody tr {
-            transition: background-color 0.15s ease;
+        .directory-table tr:hover {
+            background-color: rgba(18, 40, 62, 0.4);
         }
 
-        .persons-table tbody tr:hover {
-            background-color: #121e30;
-        }
-
-        /* Profile Cell */
-        .profile-cell {
+        .person-profile-cell {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .profile-avatar {
-            width: 38px;
-            height: 38px;
+        .person-thumb {
+            width: 40px;
+            height: 40px;
             border-radius: 6px;
-            background-color: #12283e;
-            border: 1px solid #1e293b;
             object-fit: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #38bdf8;
-            font-size: 0.9rem;
-            font-weight: 700;
+            border: 1px solid #00d2ff;
         }
 
-        .profile-name {
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .profile-name a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.15s ease;
-        }
-
-        .profile-name a:hover {
-            color: #00d2ff;
-        }
-
-        .profile-dob {
-            font-size: 0.68rem;
-            color: #64748b;
-            margin-top: 2px;
-        }
-
-        /* Type Badges */
-        .badge-type {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 4px;
+        .type-badge {
             font-size: 0.65rem;
             font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
             letter-spacing: 0.5px;
-            text-transform: uppercase;
+            display: inline-block;
         }
 
-        .type-suspect {
-            background-color: rgba(239, 68, 68, 0.15);
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        .type-poi {
-            background-color: rgba(0, 210, 255, 0.15);
-            color: #00d2ff;
-            border: 1px solid rgba(0, 210, 255, 0.3);
-        }
-
-        .type-witness {
-            background-color: rgba(148, 163, 184, 0.15);
-            color: #94a3b8;
-            border: 1px solid rgba(148, 163, 184, 0.3);
-        }
-
-        /* Case Tags */
-        .case-tag-list {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
+        .badge-suspect { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-poi { background: rgba(0, 210, 255, 0.15); color: #38bdf8; border: 1px solid rgba(0, 210, 255, 0.3); }
+        .badge-witness { background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.3); }
 
         .case-tag {
-            background-color: #070d18;
+            background: #070d18;
             border: 1px solid #1e293b;
             color: #94a3b8;
-            padding: 2px 7px;
-            border-radius: 4px;
             font-size: 0.68rem;
-            font-family: monospace;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 4px;
+            display: inline-block;
         }
 
-        /* Table Footer */
-        .table-footer {
-            padding: 14px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #1e293b;
-            font-size: 0.75rem;
-            color: #64748b;
-        }
-
-        .pagination-controls {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .page-btn {
-            background: none;
-            border: none;
-            color: #64748b;
-            cursor: pointer;
-            font-size: 0.85rem;
-        }
-
-        .page-btn:hover {
+        .btn-view-link {
             color: #00d2ff;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        .disclaimer-banner {
-            margin-top: 18px;
-            background-color: rgba(11, 19, 32, 0.5);
+        .btn-view-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Notice Banner */
+        .security-notice {
+            background: rgba(11, 19, 32, 0.8);
             border: 1px solid #1e293b;
             border-radius: 6px;
-            padding: 10px 14px;
-            font-size: 0.7rem;
+            padding: 10px 16px;
+            font-size: 0.72rem;
             color: #64748b;
             display: flex;
             align-items: center;
             gap: 8px;
         }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .modal-box {
+            background-color: #0b1320;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            width: 480px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!-- Header -->
     <div class="page-header-row">
-        <div class="page-title">
-            <h2>Persons & Suspects</h2>
-        </div>
-        <a href="PersonProfile.aspx" class="btn-add-person">+ Add Person</a>
+        <div class="page-title">Persons & Suspects</div>
+        <button type="button" class="btn-cyan" onclick="openAddPersonModal()">+ Add Person</button>
     </div>
 
-    <!-- Filter Bar -->
-    <div class="filter-toolbar">
-        <div style="position: relative;">
-            <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 0.8rem;">🔍</span>
-            <input type="text" id="txtSearchPersons" class="search-box-input" placeholder="Filter by Name, ID..." onkeyup="filterPersonsTable()" />
-        </div>
-
-        <select id="ddlTypeFilter" class="filter-select" onchange="filterPersonsTable()">
-            <option value="">All Person Types</option>
+    <!-- Filter Control Toolbar -->
+    <div class="filter-bar">
+        <input type="text" id="txtSearchQuery" class="filter-input" placeholder="🔍 Filter by Name, ID..." onkeyup="filterDirectoryTable()" />
+        
+        <select id="ddlPersonType" class="filter-select" onchange="filterDirectoryTable()">
+            <option value="all">All Person Types</option>
             <option value="SUSPECT">Suspect</option>
-            <option value="POI">POI (Person of Interest)</option>
+            <option value="POI">POI</option>
             <option value="WITNESS">Witness</option>
         </select>
 
-        <select id="ddlStatusFilter" class="filter-select" onchange="filterPersonsTable()">
-            <option value="">All Statuses</option>
-            <option value="Active">Active</option>
-            <option value="Archived">Archived</option>
+        <select id="ddlStatus" class="filter-select" onchange="filterDirectoryTable()">
+            <option value="all">All Statuses</option>
+            <option value="active">Active Investigation</option>
+            <option value="closed">Closed / Archived</option>
         </select>
     </div>
 
-    <!-- Persons Table -->
-    <div class="table-card">
-        <table class="persons-table" id="tblPersons">
+    <!-- Directory Data Table -->
+    <div class="directory-table-container">
+        <table class="directory-table" id="tblPersons">
             <thead>
                 <tr>
                     <th>PROFILE</th>
@@ -303,157 +234,177 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Person 1 -->
-                <tr class="person-row">
+                <!-- Row 1: Keval Goswami -->
+                <tr class="person-row" data-name="keval goswami" data-type="SUSPECT">
                     <td>
-                        <div class="profile-cell">
-                            <div class="profile-avatar">🧔</div>
+                        <div class="person-profile-cell">
+                            <img src="Images/Meet.jpeg" class="person-thumb" alt="Keval Goswami" />
                             <div>
-                                <div class="profile-name col-name">
-                                    <a href="PersonProfile.aspx">Keval Goswami</a>
-                                </div>
-                                <div class="profile-dob">DOB: 2006-06-06</div>
+                                <div style="font-weight: 800; color: #fff;">Keval Goswami</div>
+                                <div style="font-size: 0.68rem; color: #64748b;">DOB: 2006-06-06</div>
                             </div>
                         </div>
                     </td>
-                    <td class="col-id" style="font-family: monospace; color:#38bdf8;">PR-1042-89</td>
-                    <td class="col-type"><span class="badge-type type-suspect">SUSPECT</span></td>
+                    <td style="font-weight: 700; color: #38bdf8;">PR-1042-89</td>
+                    <td><span class="type-badge badge-suspect">SUSPECT</span></td>
                     <td>
-                        <div class="case-tag-list">
-                            <span class="case-tag">#OP-2023-A9</span>
-                            <span class="case-tag">#OP-2022-C4</span>
-                        </div>
+                        <span class="case-tag">#OP-2023-A9</span>
+                        <span class="case-tag">#OP-2022-C4</span>
                     </td>
-                    <td style="font-size:0.72rem; color:#cbd5e1;">📍 Safehouse Alpha; Sector 4</td>
-                    <td style="font-size:0.72rem; color:#64748b;">2023-10-24 14:32Z</td>
-                    <td><a href="PersonProfile.aspx" style="color:#00d2ff; text-decoration:none; font-weight:700;">View ➔</a></td>
+                    <td>📍 Safehouse Alpha; Sector 4</td>
+                    <td style="font-size: 0.72rem; color: #64748b;">2026-10-14 14:32Z</td>
+                    <td><a href="PersonProfile.aspx?id=1" class="btn-view-link">View →</a></td>
                 </tr>
 
-                <!-- Person 2 -->
-                <tr class="person-row">
+                <!-- Row 2: Dmitri Volkov -->
+                <tr class="person-row" data-name="dmitri volkov" data-type="SUSPECT">
                     <td>
-                        <div class="profile-cell">
-                            <div class="profile-avatar">🧔</div>
+                        <div class="person-profile-cell">
+                            <div style="width:40px; height:40px; border-radius:6px; background:#12283e; color:#00d2ff; display:flex; align-items:center; justify-content:center; font-weight:800;">DV</div>
                             <div>
-                                <div class="profile-name col-name">
-                                    <a href="PersonProfile.aspx">Volkov, Dmitri</a>
-                                </div>
-                                <div class="profile-dob">DOB: 1982-04-12</div>
+                                <div style="font-weight: 800; color: #fff;">Volkov, Dmitri</div>
+                                <div style="font-size: 0.68rem; color: #64748b;">DOB: 1982-04-12</div>
                             </div>
                         </div>
                     </td>
-                    <td class="col-id" style="font-family: monospace; color:#38bdf8;">PR-892-441-A</td>
-                    <td class="col-type"><span class="badge-type type-suspect">SUSPECT</span></td>
+                    <td style="font-weight: 700; color: #38bdf8;">PR-892-441-A</td>
+                    <td><span class="type-badge badge-suspect">SUSPECT</span></td>
                     <td>
-                        <div class="case-tag-list">
-                            <span class="case-tag">#CS-2023-08A</span>
-                            <span class="case-tag">#CS-2022-19B</span>
-                        </div>
+                        <span class="case-tag">#CS-2023-08A</span>
+                        <span class="case-tag">#CS-2022-19B</span>
                     </td>
-                    <td style="font-size:0.72rem; color:#cbd5e1;">📍 Prague, CZ; Vienna, AT</td>
-                    <td style="font-size:0.72rem; color:#64748b;">2023-10-24 14:32Z</td>
-                    <td><a href="PersonProfile.aspx" style="color:#00d2ff; text-decoration:none; font-weight:700;">View ➔</a></td>
+                    <td>📍 Prague, CZ; Vienna, AT</td>
+                    <td style="font-size: 0.72rem; color: #64748b;">2026-10-12 11:15Z</td>
+                    <td><a href="PersonProfile.aspx?id=2" class="btn-view-link">View →</a></td>
                 </tr>
 
-                <!-- Person 3 -->
-                <tr class="person-row">
+                <!-- Row 3: Unknown (Ghost) -->
+                <tr class="person-row" data-name="unknown ghost" data-type="POI">
                     <td>
-                        <div class="profile-cell">
-                            <div class="profile-avatar" style="background-color:#1e293b; color:#94a3b8;">❓</div>
+                        <div class="person-profile-cell">
+                            <div style="width:40px; height:40px; border-radius:6px; background:#1e293b; color:#cbd5e1; display:flex; align-items:center; justify-content:center; font-weight:800;">?</div>
                             <div>
-                                <div class="profile-name col-name">
-                                    <a href="PersonProfile.aspx">Unknown (Alias: 'Ghost')</a>
-                                </div>
-                                <div class="profile-dob">DOB: Unknown</div>
+                                <div style="font-weight: 800; color: #fff;">Unknown (Alias: 'Ghost')</div>
+                                <div style="font-size: 0.68rem; color: #64748b;">DOB: Unknown</div>
                             </div>
                         </div>
                     </td>
-                    <td class="col-id" style="font-family: monospace; color:#38bdf8;">PR-U99-102-X</td>
-                    <td class="col-type"><span class="badge-type type-poi">POI</span></td>
-                    <td>
-                        <div class="case-tag-list">
-                            <span class="case-tag">#CS-2023-08A</span>
-                        </div>
-                    </td>
-                    <td style="font-size:0.72rem; color:#cbd5e1;">📍 Digital Footprint Only</td>
-                    <td style="font-size:0.72rem; color:#64748b;">2023-10-22 09:15Z</td>
-                    <td><a href="PersonProfile.aspx" style="color:#00d2ff; text-decoration:none; font-weight:700;">View ➔</a></td>
+                    <td style="font-weight: 700; color: #38bdf8;">PR-U99-102-X</td>
+                    <td><span class="type-badge badge-poi">POI</span></td>
+                    <td><span class="case-tag">#CS-2023-08A</span></td>
+                    <td>📍 Digital Footprint Only</td>
+                    <td style="font-size: 0.72rem; color: #64748b;">2026-10-10 09:15Z</td>
+                    <td><a href="PersonProfile.aspx?id=3" class="btn-view-link">View →</a></td>
                 </tr>
 
-                <!-- Person 4 -->
-                <tr class="person-row">
+                <!-- Row 4: Elena Chen -->
+                <tr class="person-row" data-name="elena chen" data-type="WITNESS">
                     <td>
-                        <div class="profile-cell">
-                            <div class="profile-avatar">👩</div>
+                        <div class="person-profile-cell">
+                            <div style="width:40px; height:40px; border-radius:6px; background:#12283e; color:#facc15; display:flex; align-items:center; justify-content:center; font-weight:800;">EC</div>
                             <div>
-                                <div class="profile-name col-name">
-                                    <a href="PersonProfile.aspx">Chen, Elena</a>
-                                </div>
-                                <div class="profile-dob">DOB: 1990-11-03</div>
+                                <div style="font-weight: 800; color: #fff;">Chen, Elena</div>
+                                <div style="font-size: 0.68rem; color: #64748b;">DOB: 1990-11-03</div>
                             </div>
                         </div>
                     </td>
-                    <td class="col-id" style="font-family: monospace; color:#38bdf8;">PR-112-998-C</td>
-                    <td class="col-type"><span class="badge-type type-witness">WITNESS</span></td>
-                    <td>
-                        <div class="case-tag-list">
-                            <span class="case-tag">#CS-2023-14D</span>
-                        </div>
-                    </td>
-                    <td style="font-size:0.72rem; color:#cbd5e1;">📍 London, UK</td>
-                    <td style="font-size:0.72rem; color:#64748b;">2023-10-20 11:45Z</td>
-                    <td><a href="PersonProfile.aspx" style="color:#00d2ff; text-decoration:none; font-weight:700;">View ➔</a></td>
-                </tr>
-
-                <tr id="trNoPersons" style="display:none;">
-                    <td colspan="7" style="text-align:center; padding:25px; color:#64748b;">⚠️ No entities matched your search parameters.</td>
+                    <td style="font-weight: 700; color: #38bdf8;">PR-112-998-C</td>
+                    <td><span class="type-badge badge-witness">WITNESS</span></td>
+                    <td><span class="case-tag">#CS-2023-14D</span></td>
+                    <td>📍 London, UK</td>
+                    <td style="font-size: 0.72rem; color: #64748b;">2026-10-08 11:45Z</td>
+                    <td><a href="PersonProfile.aspx?id=4" class="btn-view-link">View →</a></td>
                 </tr>
             </tbody>
         </table>
+    </div>
 
-        <!-- Table Footer -->
-        <div class="table-footer">
-            <span id="lblEntityCounter">Showing 1-4 of 1,248 Entities</span>
-            <div class="pagination-controls">
-                <button type="button" class="page-btn">❮</button>
-                <span style="color:#f8fafc; font-weight:600;">Page 1 of 312</span>
-                <button type="button" class="page-btn">❯</button>
+    <!-- Security Information Footer -->
+    <div class="security-notice">
+        <span>ℹ️</span> Association with a case does not by itself establish criminal responsibility. All data is classified and subject to strict operational security protocols.
+    </div>
+
+    <!-- Add Person Modal -->
+    <div id="modalAddPerson" class="modal-overlay">
+        <div class="modal-box">
+            <div style="font-size:1.1rem; font-weight:800; color:#fff; margin-bottom:14px;">➕ Add Person / Suspect Record</div>
+            
+            <label style="font-size:0.68rem; font-weight:800; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Full Name</label>
+            <input type="text" id="txtNewPersonName" class="filter-input" style="width:100%; margin-bottom:12px;" placeholder="e.g., Marcus Vane" />
+
+            <label style="font-size:0.68rem; font-weight:800; color:#64748b; text-transform:uppercase; display:block; margin-bottom:4px;">Person Type</label>
+            <select id="ddlNewPersonType" class="filter-select" style="width:100%; margin-bottom:16px;">
+                <option value="SUSPECT">Suspect</option>
+                <option value="POI">Person of Interest (POI)</option>
+                <option value="WITNESS">Witness</option>
+            </select>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" style="background:#070d18; border:1px solid #1e293b; color:#cbd5e1; padding:8px 16px; border-radius:6px; font-weight:700; cursor:pointer;" onclick="closeAddPersonModal()">Cancel</button>
+                <button type="button" class="btn-cyan" onclick="saveNewPersonRecord()">Save Entity</button>
             </div>
         </div>
     </div>
 
-    <!-- Security Notice -->
-    <div class="disclaimer-banner">
-        <span>ℹ️ Association with a case does not by itself establish criminal responsibility. All data is classified and subject to strict operational security protocols.</span>
-    </div>
-
-    <!-- Filtering Script -->
     <script>
-        function filterPersonsTable() {
-            const searchVal = document.getElementById("txtSearchPersons").value.toLowerCase().trim();
-            const typeVal = document.getElementById("ddlTypeFilter").value.toLowerCase();
-
-            const rows = document.querySelectorAll(".person-row");
-            let visibleCount = 0;
+        function filterDirectoryTable() {
+            const query = document.getElementById('txtSearchQuery').value.toLowerCase();
+            const selectedType = document.getElementById('ddlPersonType').value;
+            const rows = document.querySelectorAll('.person-row');
 
             rows.forEach(row => {
-                const name = row.querySelector(".col-name").innerText.toLowerCase();
-                const id = row.querySelector(".col-id").innerText.toLowerCase();
-                const type = row.querySelector(".col-type").innerText.toLowerCase();
+                const name = row.getAttribute('data-name');
+                const type = row.getAttribute('data-type');
 
-                const matchesSearch = (searchVal === "" || name.includes(searchVal) || id.includes(searchVal));
-                const matchesType = (typeVal === "" || type.includes(typeVal));
+                const matchesQuery = name.includes(query);
+                const matchesType = (selectedType === 'all' || type === selectedType);
 
-                if (matchesSearch && matchesType) {
-                    row.style.display = "";
-                    visibleCount++;
+                if (matchesQuery && matchesType) {
+                    row.style.display = '';
                 } else {
-                    row.style.display = "none";
+                    row.style.display = 'none';
                 }
             });
+        }
 
-            document.getElementById("trNoPersons").style.display = (visibleCount === 0) ? "" : "none";
-            document.getElementById("lblEntityCounter").innerText = `Showing 1-${visibleCount} of 1,248 Entities`;
+        function openAddPersonModal() {
+            document.getElementById('modalAddPerson').style.display = 'flex';
+        }
+
+        function closeAddPersonModal() {
+            document.getElementById('modalAddPerson').style.display = 'none';
+        }
+
+        function saveNewPersonRecord() {
+            const name = document.getElementById('txtNewPersonName').value;
+            const type = document.getElementById('ddlNewPersonType').value;
+            if (!name) return;
+
+            const tableBody = document.querySelector('#tblPersons tbody');
+            const badgeClass = type === 'SUSPECT' ? 'badge-suspect' : (type === 'POI' ? 'badge-poi' : 'badge-witness');
+
+            const newRowHtml = `
+                <tr class="person-row" data-name="${name.toLowerCase()}" data-type="${type}">
+                    <td>
+                        <div class="person-profile-cell">
+                            <div style="width:40px; height:40px; border-radius:6px; background:#12283e; color:#00d2ff; display:flex; align-items:center; justify-content:center; font-weight:800;">${name.substring(0, 2).toUpperCase()}</div>
+                            <div>
+                                <div style="font-weight: 800; color: #fff;">${name}</div>
+                                <div style="font-size: 0.68rem; color: #64748b;">DOB: Pending Verification</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="font-weight: 700; color: #38bdf8;">PR-${Math.floor(100 + Math.random() * 900)}-NEW</td>
+                    <td><span class="type-badge ${badgeClass}">${type}</span></td>
+                    <td><span class="case-tag">#NEW-CASE</span></td>
+                    <td>📍 Sector 4 Investigation</td>
+                    <td style="font-size: 0.72rem; color: #64748b;">Just Now</td>
+                    <td><a href="PersonProfile.aspx?id=new" class="btn-view-link">View →</a></td>
+                </tr>`;
+
+            tableBody.insertAdjacentHTML('afterbegin', newRowHtml);
+            document.getElementById('txtNewPersonName').value = '';
+            closeAddPersonModal();
         }
     </script>
 </asp:Content>
